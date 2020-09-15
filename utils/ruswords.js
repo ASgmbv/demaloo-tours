@@ -19,3 +19,14 @@ export function yearsRus(years) {
   if (a === 2 || a === 3 || a === 4) return "года";
   return "лет";
 }
+
+export function toursRus(tours) {
+  if (tours === 11 || tours === 12 || tours === 13 || tours === 14) {
+    return "туров";
+  }
+
+  let a = tours % 10;
+  if (a === 1) return "тур";
+  if (a === 2 || a === 3 || a === 4) return "тура";
+  return "туров";
+}

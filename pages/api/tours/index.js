@@ -1,17 +1,67 @@
 import { connectToDatabase } from "../../../utils/mongodb";
 import { ObjectId } from "mongodb";
+import { categoriesMap } from "../../../utils/data";
 
-export async function getAllTours() {
-  // aggregate
+export async function getAllTours(
+  currentDate,
+  duration = 1,
+  categories = "",
+  sortBy = "price"
+) {
   const { db } = await connectToDatabase();
-  // const tours = [];
-  // let cursor = db.collection("tours").find({});
-  // await cursor.forEach(function (doc) {
-  //   tours.push(doc);
-  // });
+
   let tours = await db
     .collection("tours")
     .aggregate([
+      {
+        $match: {
+          $expr: {
+            $gte: [
+              {
+                $dateFromString: {
+                  dateString: {
+                    $arrayElemAt: ["$dates", 0],
+                  },
+                },
+              },
+              {
+                $dateFromString: {
+                  dateString: currentDate,
+                },
+              },
+            ],
+          },
+        },
+      },
+      {
+        $match: {
+          $expr: {
+            $gte: ["$duration", Number(duration)],
+          },
+        },
+      },
+      {
+        $match: {
+          $expr: {
+            $in: [
+              true,
+              {
+                $map: {
+                  input: "$categories",
+                  in: {
+                    $in: [
+                      "$$this",
+                      categories === ""
+                        ? [...Array(categoriesMap.length).keys()]
+                        : categories.split(",").map((item) => Number(item)),
+                    ],
+                  },
+                },
+              },
+            ],
+          },
+        },
+      },
       {
         $lookup: {
           from: "companies",
@@ -38,6 +88,11 @@ export async function getAllTours() {
       {
         $unwind: "$organizer",
       },
+      {
+        $sort: {
+          [sortBy]: 1,
+        },
+      },
     ])
     .toArray();
 
@@ -46,6 +101,7 @@ export async function getAllTours() {
 
 export async function getTour(id) {
   const { db } = await connectToDatabase();
+
   let tour = await db
     .collection("tours")
     .aggregate([
@@ -87,9 +143,16 @@ export async function getTour(id) {
 }
 
 export default async (req, res) => {
+  console.log("query:", req.query);
+  const query = req.query;
   if (req.method === "GET") {
     try {
-      const tours = await getData();
+      const tours = await getAllTours(
+        query.currentDate,
+        query.duration,
+        query.categories,
+        query.sortBy
+      );
       res.status(200).json(tours);
     } catch (error) {
       res.status(500).send("error");

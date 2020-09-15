@@ -25,10 +25,13 @@ import {
   Center,
   Link as ChakraLink,
   Grid,
+  Skeleton,
 } from "@chakra-ui/core";
 
 import Carousel from "../components/Carousel";
 import { daysRus } from "../utils/ruswords";
+import { useState } from "react";
+import { categoriesMap, monthsMap } from "../utils/data";
 
 const TourCard = ({
   name,
@@ -40,17 +43,30 @@ const TourCard = ({
   distance,
   transportation,
   price,
+  days = [],
+  dates,
 }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  let places = [];
+  days.map(({ locations }) => {
+    places = places.concat(locations.map(({ name }) => name));
+  });
+
+  const closestDate = new Date(dates[0]);
+
   return (
     <Box
       sx={{
         borderRadius: "16px",
         p: [2, 4],
-        boxShadow:
-          "rgba(0, 0, 0, 0.08) 0px 1pt 4pt, rgba(0, 0, 0, 0.08) 0px 2pt 4pt",
         border: "1px solid",
-        borderColor: "gray.100",
+        borderColor: "gray.300",
         overflow: "hidden",
+        ":hover": {
+          boxShadow:
+            "rgba(0, 0, 0, 0.08) 0px 1pt 4pt, rgba(0, 0, 0, 0.08) 0px 2pt 4pt",
+        },
       }}
     >
       <Flex flexDirection={["column", null, "row"]}>
@@ -60,7 +76,19 @@ const TourCard = ({
           ratio={[3 / 2, 4 / 3]}
           sx={{ alignSelf: "center" }}
         >
-          <Image src={image} objectFit="cover" borderRadius={["lg", "md"]} />
+          <Skeleton isLoaded={imageLoaded}>
+            <Image
+              alt={name}
+              src={image}
+              objectFit="cover"
+              align="center"
+              onLoad={() => {
+                setImageLoaded(true);
+              }}
+              borderRadius={["lg", "md"]}
+              sx={{ height: "100%", width: "100%" }}
+            />
+          </Skeleton>
         </AspectRatio>
         <Flex sx={{ ml: [0, null, 4], mt: [3, null, 0], flex: 1 }}>
           <Stack
@@ -90,11 +118,18 @@ const TourCard = ({
                 {organizer?.name}
               </Text>
             </Flex>
-            <Text>Chuy - Batken - Osh</Text>
+            <Badge
+              variant="outline"
+              colorScheme="green"
+              sx={{ width: "fit-content" }}
+            >
+              {`${closestDate.getDate()} ${monthsMap[closestDate.getMonth()]}`}
+            </Badge>
+            <Text sx={{ fontSize: ["sm"] }}>{places.join(" - ")}</Text>
             <Wrap>
               {categories.map((category, index) => (
                 <Tag variant="solid" colorScheme="teal" size="sm" key={index}>
-                  {category}
+                  {categoriesMap[category]}
                 </Tag>
               ))}
               {duration === undefined ? null : (
@@ -120,7 +155,7 @@ const TourCard = ({
             </Wrap>
           </Stack>
           <Text sx={{ fontWeight: "bold", fontSize: ["lg", "xl"] }}>
-            {price}
+            {`${price} сом`}
           </Text>
         </Flex>
       </Flex>

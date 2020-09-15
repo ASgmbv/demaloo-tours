@@ -5,7 +5,12 @@ import { virtualize } from "react-swipeable-views-utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 const Virtualize = virtualize(SwipeableViews);
 
-const Carousel = ({ photos = [], ratio = 3 / 2, width = "100%" }) => {
+const Carousel = ({
+  photos = [],
+  ratio = 3 / 2,
+  width = "100%",
+  name = "demaloo tours image",
+}) => {
   const [active, setActive] = useState(0);
   function mod(n, m) {
     const q = n % m;
@@ -18,6 +23,7 @@ const Carousel = ({ photos = [], ratio = 3 / 2, width = "100%" }) => {
 
     return (
       <Image
+        alt={name}
         src={image}
         key={key}
         boxSize="100%"

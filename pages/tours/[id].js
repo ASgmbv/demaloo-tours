@@ -48,6 +48,7 @@ import Header from "../../components/Header";
 // server
 // import { getAllTours } from "../api/tours/index";
 import { daysRus } from "../../utils/ruswords";
+import { categoriesMap, monthsMap } from "../../utils/data";
 
 const Main = ({
   name,
@@ -69,6 +70,7 @@ const Main = ({
 }) => {
   // const TourPage = ({ tour }) => {
   const buttonVariant = useBreakpointValue({ base: "md", sm: "lg" });
+  const router = useRouter();
 
   return (
     <>
@@ -108,7 +110,7 @@ const Main = ({
             spacing={["6", null, null, "16"]}
           >
             <Flex sx={{ flex: 1, alignItems: "center" }}>
-              <Carousel photos={photos} />
+              <Carousel photos={photos} name={name} />
             </Flex>
             <Flex
               sx={{
@@ -125,7 +127,7 @@ const Main = ({
                       key={index}
                       size="lg"
                     >
-                      {category}
+                      {categoriesMap[category]}
                     </Tag>
                   ))}
                   {duration === undefined ? null : (
@@ -250,13 +252,19 @@ const Main = ({
         >
           <List sx={{ d: "flex", overflow: "hidden" }}>
             <ListItem>
-              <Link href="/#about-tour">
+              <Link
+                href={router.pathname}
+                as={`${router?.query?.id}/#about-tour`}
+              >
                 <ChakraLink sx={{ fontSize: ["lg", "xl"] }}>О Туре</ChakraLink>
               </Link>
             </ListItem>
 
             <ListItem>
-              <Link href="/#days-description">
+              <Link
+                href={router.pathname}
+                as={`${router?.query?.id}/#days-description`}
+              >
                 <ChakraLink sx={{ fontSize: ["lg", "xl"], ml: 4 }}>
                   Дни
                 </ChakraLink>
@@ -264,7 +272,10 @@ const Main = ({
             </ListItem>
 
             <ListItem>
-              <Link href="/#coming-dates">
+              <Link
+                href={router.pathname}
+                as={`${router?.query?.id}/#coming-dates`}
+              >
                 <ChakraLink sx={{ fontSize: ["lg", "xl"], ml: 4 }}>
                   Даты
                 </ChakraLink>
@@ -272,7 +283,7 @@ const Main = ({
             </ListItem>
 
             <ListItem>
-              <Link href="/#guides">
+              <Link href={router.pathname} as={`${router?.query?.id}/#guides`}>
                 <ChakraLink sx={{ ml: 4, fontSize: ["lg", "xl"] }}>
                   Гиды
                 </ChakraLink>
@@ -495,16 +506,19 @@ const Main = ({
               Даты
             </Heading>
             <List spacing="4">
-              {dates.map((date, index) => (
-                <ListItem key={index} sx={{ fontSize: ["md", "lg"] }}>
-                  <ListIcon
-                    as={CalendarIcon}
-                    color="teal.500"
-                    sx={{ verticalAlign: "middle" }}
-                  />
-                  {date}
-                </ListItem>
-              ))}
+              {dates.map((date, index) => {
+                const dateObj = new Date(date);
+                return (
+                  <ListItem key={index} sx={{ fontSize: ["md", "lg"] }}>
+                    <ListIcon
+                      as={CalendarIcon}
+                      color="teal.500"
+                      sx={{ verticalAlign: "middle" }}
+                    />
+                    {`${dateObj.getDate()} ${monthsMap[dateObj.getMonth()]}`}
+                  </ListItem>
+                );
+              })}
             </List>
           </Flex>
         </Container>

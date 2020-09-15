@@ -77,7 +77,12 @@ export default function Home() {
         >
           <Heading
             as="h1"
-            sx={{ mb: 4, color: "white", fontSize: ["2xl", "4xl"] }}
+            sx={{
+              mb: 4,
+              color: "white",
+              fontSize: ["2xl", "4xl"],
+              textAlign: "center",
+            }}
           >
             Путешествуйте с нами!
           </Heading>
@@ -95,12 +100,7 @@ export default function Home() {
             Быстрый поиск туров по всему Кыргызстану
           </Heading>
           <Link href="/search" passHref>
-            <Button
-              // onClick={() => router.push("/search")}
-              as="a"
-              bg="#20C4CE"
-              color="white"
-            >
+            <Button as="a" colorScheme="teal">
               Поиск
             </Button>
           </Link>

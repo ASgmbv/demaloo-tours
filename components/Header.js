@@ -30,7 +30,11 @@ const Header = () => {
         >
           <Link href="/" passHref>
             <ChakraLink>
-              <Image src="/logo.png" objectFit="contain" width="150px" />
+              <Image
+                src="/logo.png"
+                objectFit="contain"
+                width={["100px", "130px"]}
+              />
             </ChakraLink>
           </Link>
         </Flex>
