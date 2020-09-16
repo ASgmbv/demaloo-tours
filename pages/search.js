@@ -35,14 +35,16 @@ import {
   MenuItem,
   Skeleton,
   SkeletonText,
+  Collapse,
 } from "@chakra-ui/core";
 import Link from "next/link";
 import TourCard from "../components/TourCard";
 import Header from "../components/Header";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, SearchIcon } from "@chakra-ui/icons";
 import { daysRus } from "../utils/ruswords";
 import { categoriesMap, sortingMap } from "../utils/data";
 import { FaSortAmountDownAlt } from "react-icons/fa";
+import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { toursRus } from "../utils/ruswords";
 
@@ -50,6 +52,8 @@ import { toursRus } from "../utils/ruswords";
 // TODO add the number of listings on the search page
 // TODO show something when empty
 // TODO sorting closest
+// TODO add carousel
+// TODO add url query
 
 const SearchPage = () => {
   const [filters, setFilters] = React.useState({
@@ -94,185 +98,158 @@ const SearchPage = () => {
     <>
       <Header />
       <Box as="main">
-        <Container as="main" maxW="lg" width="100%">
-          <Flex sx={{ width: "100%", justifyContent: "center" }}>
-            <Flex
-              sx={{
-                flexDirection: "column",
-                alignItems: "center",
-                maxW: "614px",
-                width: "100%",
-              }}
-            >
-              <Flex
-                sx={{
-                  flexDirection: "column",
-                  width: "100%",
-                  borderBottom: "1px solid",
-                  borderColor: "gray.300",
-                  py: "20px",
-                  mb: 4,
-                }}
-              >
-                {/* Filters */}
-                <Flex sx={{ flexDirection: "column", mb: 4 }}>
-                  <Text sx={{ mb: 2, color: "gray.500" }}>Фильтры</Text>
-                  <Flex>
-                    <Menu>
-                      <MenuButton
-                        as={Button}
-                        colorScheme="blue"
-                        variant="outline"
-                        size="sm"
-                        borderRadius="lg"
+        <Container as="main" maxW="lg" width="100%" centerContent>
+          <Flex
+            sx={{
+              flexDirection: "column",
+              alignItems: "center",
+              maxW: "614px",
+              width: "100%",
+              mt: 4,
+            }}
+          >
+            {/* Filters */}
+            <Stack spacing="4" sx={{ width: "100%" }}>
+              <Text sx={{ color: "gray.500" }}>Фильтры</Text>
+
+              <Menu closeOnSelect={false}>
+                <MenuButton
+                  as={Button}
+                  colorScheme="blue"
+                  variant="outline"
+                  size="sm"
+                  borderRadius="30px"
+                >
+                  Категории
+                </MenuButton>
+                <MenuList minWidth="240px">
+                  <MenuOptionGroup
+                    type="checkbox"
+                    title="Выберите категории"
+                    value={filters.categories}
+                    onChange={(e) => {
+                      setFilters({ ...filters, categories: e });
+                    }}
+                  >
+                    {categoriesMap.map((category, index) => (
+                      <MenuItemOption
+                        value={index}
+                        key={index}
+                        sx={{ fontSize: "sm" }}
                       >
-                        {`${filters.duration} ${daysRus(filters.duration)}`}
-                      </MenuButton>
-                      <MenuList
-                        onClick={(e) => {
-                          setFilters({
-                            ...filters,
-                            duration: e.target.value,
-                          });
+                        {category}
+                      </MenuItemOption>
+                    ))}
+                  </MenuOptionGroup>
+                </MenuList>
+              </Menu>
+
+              <Wrap>
+                {filters.categories.length === 0 ? (
+                  <Tag>{"Все категории"}</Tag>
+                ) : (
+                  filters.categories.map((item, index) => (
+                    <Tag key={index}>{categoriesMap[item]}</Tag>
+                  ))
+                )}
+              </Wrap>
+
+              <Divider />
+              <Flex sx={{ justifyContent: "space-between" }}>
+                <Text
+                  sx={{
+                    textAlign: "start",
+                    color: "gray.600",
+                    fontSize: "sm",
+                  }}
+                >
+                  {`${tours.length} ${toursRus(tours.length)}`}
+                </Text>
+                <Menu>
+                  <MenuButton
+                    leftIcon={<FaSortAmountDownAlt />}
+                    as={Button}
+                    colorScheme="blue"
+                    variant="outline"
+                    size="sm"
+                    borderRadius="30px"
+                  >
+                    {sortingMap[sortBy]}
+                  </MenuButton>
+                  <MenuList
+                    onClick={(e) => {
+                      setSortBy(e.target.value);
+                    }}
+                  >
+                    <MenuItem isDisabled={true}>
+                      <Text
+                        sx={{
+                          fontSize: "sm",
                         }}
                       >
-                        <MenuItem isDisabled={true}>
-                          <Text
-                            sx={{
-                              fontSize: "sm",
-                            }}
-                          >
-                            Длительность от
-                          </Text>
-                        </MenuItem>
-                        {[...Array(10).keys()].map((_, index) => (
-                          <MenuItem
-                            value={index + 1}
-                            key={index}
-                            sx={{ fontSize: "sm" }}
-                          >
-                            {`${index + 1} ${daysRus(index + 1)}`}
-                          </MenuItem>
-                        ))}
-                      </MenuList>
-                    </Menu>
-
-                    <Menu closeOnSelect={false}>
-                      <MenuButton
-                        as={Button}
-                        colorScheme="blue"
-                        variant="outline"
-                        size="sm"
-                        borderRadius="lg"
-                        marginLeft="4"
-                      >
-                        Категории
-                      </MenuButton>
-                      <MenuList minWidth="240px">
-                        <MenuOptionGroup
-                          type="checkbox"
-                          value={filters.categories}
-                          onChange={(e) => {
-                            setFilters({ ...filters, categories: e });
-                          }}
-                        >
-                          {categoriesMap.map((category, index) => (
-                            <MenuItemOption
-                              value={index}
-                              key={index}
-                              sx={{ fontSize: "sm" }}
-                            >
-                              {category}
-                            </MenuItemOption>
-                          ))}
-                        </MenuOptionGroup>
-                      </MenuList>
-                    </Menu>
-
-                    <Menu>
-                      <MenuButton
-                        leftIcon={<FaSortAmountDownAlt />}
-                        as={Button}
-                        colorScheme="blue"
-                        variant="outline"
-                        size="sm"
-                        borderRadius="lg"
-                        marginLeft="4"
-                      >
-                        {sortingMap[sortBy]}
-                      </MenuButton>
-                      <MenuList
-                        onClick={(e) => {
-                          setSortBy(e.target.value);
-                        }}
-                      >
-                        <MenuItem isDisabled={true}>
-                          <Text
-                            sx={{
-                              fontSize: "sm",
-                            }}
-                          >
-                            Сортировать по
-                          </Text>
-                        </MenuItem>
-                        {Object.keys(sortingMap).map((item) => (
-                          <MenuItem sx={{ fontSize: "sm" }} value={item}>
-                            {sortingMap[item]}
-                          </MenuItem>
-                        ))}
-                      </MenuList>
-                    </Menu>
-                  </Flex>
-                </Flex>
+                        Сортировать по
+                      </Text>
+                    </MenuItem>
+                    {Object.keys(sortingMap).map((item) => (
+                      <MenuItem sx={{ fontSize: "sm" }} value={item}>
+                        {sortingMap[item]}
+                      </MenuItem>
+                    ))}
+                  </MenuList>
+                </Menu>
               </Flex>
+            </Stack>
 
-              <Text
-                sx={{
-                  textAlign: "start",
-                  width: "100%",
-                  color: "gray.600",
-                  fontSize: "sm",
-                }}
-              >
-                {`${tours.length} ${toursRus(tours.length)}`}
-              </Text>
-
-              {
-                <List sx={{ width: "100%", py: "20px" }} spacing="6">
-                  {fetching
-                    ? [...Array(3)].map((item, index) => (
-                        <Box
-                          sx={{
-                            borderRadius: "16px",
-                            p: [2, 4],
-                            border: "1px solid",
-                            borderColor: "gray.300",
-                            overflow: "hidden",
-                            width: "100%",
-                          }}
-                        >
-                          <Flex sx={{ width: "100%" }}>
-                            <Box sx={{ flex: 1 }}>
-                              <Skeleton height="100%" />
-                            </Box>
-                            <Box sx={{ flex: 3, marginLeft: 4 }}>
-                              <SkeletonText mb="4" noOfLines={4} spacing="5" />
-                            </Box>
-                          </Flex>
+            {
+              <List sx={{ width: "100%", py: "20px" }} spacing="6">
+                {fetching ? (
+                  [...Array(3)].map((item, index) => (
+                    <Box
+                      sx={{
+                        borderRadius: "16px",
+                        p: [2, 4],
+                        border: "1px solid",
+                        borderColor: "gray.300",
+                        overflow: "hidden",
+                        width: "100%",
+                      }}
+                    >
+                      <Flex sx={{ width: "100%" }}>
+                        <Box sx={{ flex: 1 }}>
+                          <Skeleton height="100%" />
                         </Box>
-                      ))
-                    : tours.map((tour, index) => (
-                        <ListItem key={index}>
-                          <Link href={`/tours/${tour?._id}`} passHref>
-                            <a>
-                              <TourCard {...tour} image={tour?.photos[0]} />
-                            </a>
-                          </Link>
-                        </ListItem>
-                      ))}
-                </List>
-              }
-            </Flex>
+                        <Box sx={{ flex: 3, marginLeft: 4 }}>
+                          <SkeletonText mb="4" noOfLines={4} spacing="5" />
+                        </Box>
+                      </Flex>
+                    </Box>
+                  ))
+                ) : tours.length === 0 ? (
+                  <Text
+                    sx={{
+                      textAlign: "center",
+                      mt: "50px",
+                      alignItems: "center",
+                      flexDirection: "column",
+                      width: "100%",
+                    }}
+                  >
+                    <SearchIcon boxSize="6" mb="3" />
+                    <Text>Туры не найдены</Text>
+                  </Text>
+                ) : (
+                  tours.map((tour, index) => (
+                    <ListItem key={index}>
+                      <Link href={`/tours/${tour?._id}`} passHref>
+                        <a>
+                          <TourCard {...tour} image={tour?.photos[0]} />
+                        </a>
+                      </Link>
+                    </ListItem>
+                  ))
+                )}
+              </List>
+            }
           </Flex>
         </Container>
       </Box>
