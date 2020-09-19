@@ -31,7 +31,7 @@ const Header = () => {
           <Link href="/" passHref>
             <ChakraLink>
               <Image
-                src="/logo.png"
+                src="/logo/logo.png"
                 objectFit="contain"
                 width={["100px", "130px"]}
               />

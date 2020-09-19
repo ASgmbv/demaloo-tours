@@ -1,3 +1,4 @@
+import Head from "next/head";
 import {
   Box,
   Image,
@@ -75,9 +76,7 @@ const SearchPage = () => {
       try {
         setFetching(true);
         const res = await fetch(
-          `/api/tours?currentDate=${new Date().toDateString()}&duration=${
-            filters.duration
-          }&categories=${filters.categories.join()}&sortBy=${sortBy}`,
+          `/api/tours?currentDate=${new Date().toDateString()}&categories=${filters.categories.join()}&sortBy=${sortBy}`,
           {
             method: "GET",
           }
@@ -96,6 +95,18 @@ const SearchPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Поиск туров по разным направлениям Кыргызстна. | Демалуу</title>
+        <meta
+          name="description"
+          content="Лучшие турагенства и гиды готовы предоставить вам конные походы , эко тур, подходящий для семьи, горящие путёвки на иссык-куль"
+        />
+        <meta
+          name="keywords"
+          content="туры, экскурсии, горящие туры, турагентство ,отдых за городом, тур пакеты, туристические пакеты"
+        />
+        <meta name="robots" content="noindex" />
+      </Head>
       <Header />
       <Box as="main">
         <Container as="main" maxW="lg" width="100%" centerContent>

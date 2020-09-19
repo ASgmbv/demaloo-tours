@@ -74,6 +74,13 @@ const Main = ({
 
   return (
     <>
+      <Head>
+        <title>{name}</title>
+        <meta
+          name="keywords"
+          content="туры, экскурсии, горящие туры, турагентство ,отдых за городом, тур пакеты, туристические пакеты"
+        />
+      </Head>
       <Header />
       <Box
         sx={{
