@@ -21,14 +21,12 @@ export default async (req, res) => {
 
   // rest of the api logic
   if (req.method === "PATCH") {
-    console.log("req.file:", req.file);
     if (req.file) {
       const image = await cloudinary.uploader.upload(req.file.path, {
         width: 512,
         height: 512,
         crop: "fill",
       });
-      console.log("image:", image);
     }
   }
   res.statusCode = 200;

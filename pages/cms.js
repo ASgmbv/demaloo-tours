@@ -62,7 +62,6 @@ const CMS = () => {
     });
 
     res = await res.json();
-    console.log("res:", res);
   };
 
   return (

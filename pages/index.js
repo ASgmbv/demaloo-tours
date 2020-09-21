@@ -6,126 +6,19 @@ import {
   Container,
   Flex,
   Text,
-  Divider,
   Button,
-  AspectRatio,
   Stack,
-  Badge,
-  List,
-  ListItem,
-  ListIcon,
-  SimpleGrid,
-  Tag,
-  Avatar,
   Wrap,
-  Accordion,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  AccordionItem,
   Center,
-  Link as ChakraLink,
   Grid,
 } from "@chakra-ui/core";
 import Link from "next/link";
-import { useRouter } from "next/router";
-
-import {
-  StarIcon,
-  CheckIcon,
-  InfoIcon,
-  AtSignIcon,
-  CalendarIcon,
-  TriangleUpIcon,
-  RepeatIcon,
-} from "@chakra-ui/icons";
-import { useState, useEffect, useRef, createRef } from "react";
-
-import GuideCard from "../components/GuideCard";
-import { useBreakpointValue } from "@chakra-ui/media-query";
-import Carousel from "../components/Carousel";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { partners, places } from "../utils/data";
 // Tour Page
 
-// TODO automatic companies count
-// TODO automatic
-
 export default function Home() {
-  // const router = useRouter();
-
-  const partners = [
-    {
-      title: "SLM TRIP",
-      logo: "/partners/slmtrip.png",
-    },
-    {
-      title: "ASIA WAY",
-      logo: "/partners/asiaway.png",
-    },
-    {
-      title: "SAMTOUR TRAVEL",
-      logo: "/partners/samtour.png",
-    },
-    {
-      title: "COOLTOUR KG",
-      logo: "/partners/cooltour.png",
-    },
-    {
-      title: "ETHNOWAY KG",
-      logo: "/partners/ethnoway.png",
-    },
-    {
-      title: "JANNAT TRAVEL",
-      logo: "/partners/jannattravel.png",
-    },
-  ];
-
-  const places = [
-    {
-      title: "Ала Кол",
-      image: "/places/alakol.png",
-    },
-    {
-      title: "Джети-Огуз",
-      image: "/places/jetioguz.png",
-    },
-    {
-      title: "Барскоон",
-      image: "/places/barskoon.png",
-    },
-    {
-      title: "Сон-Коль",
-      image: "/places/sonkol.png",
-    },
-    {
-      title: "Сары-Челек",
-      image: "/places/sarychelek.png",
-      isWide: true,
-    },
-    {
-      title: "Сказка",
-      image: "/places/skazka.png",
-    },
-    {
-      title: "Бурана",
-      image: "/places/burana.png",
-    },
-    {
-      title: "Чункурчак",
-      image: "/places/chunkurchak.jpg",
-    },
-    {
-      title: "Алтын-Арашан",
-      image: "/places/altynarashan.png",
-    },
-    {
-      title: "Коль-тор",
-      image: "/places/koltor.png",
-      isWide: true,
-    },
-  ];
-
   return (
     <>
       <Head>
@@ -143,7 +36,10 @@ export default function Home() {
       </Head>
       <Box as="main" sx={{ width: "100%" }}>
         <Header />
-        <Box as="section" sx={{ width: "100%", position: "relative" }}>
+        <Box
+          as="section"
+          sx={{ width: "100%", position: "relative", bg: "gray.50" }}
+        >
           <Image
             src="/heroes/hero.png"
             sx={{
@@ -151,8 +47,9 @@ export default function Home() {
               width: "100%",
               height: ["300px", "350px", "400px", "450px"],
             }}
-            alt="Demaloo"
+            alt="demaloo background"
           />
+
           <Flex
             sx={{
               position: "absolute",
@@ -338,6 +235,7 @@ export default function Home() {
                   position: "relative",
                   borderRadius: "10px",
                   gridColumn: isWide ? "span 2" : "span 1",
+                  bg: "gray.50",
                 }}
                 key={index}
               >
@@ -346,7 +244,7 @@ export default function Home() {
                   objectFit="cover"
                   boxSize="100%"
                   borderRadius="10px"
-                  alt={title}
+                  alt={`${title} | demaloo`}
                 />
                 <Box
                   sx={{
@@ -400,13 +298,16 @@ export default function Home() {
               <Flex
                 sx={{
                   flexDirection: "column",
-                  // flex: 1,
                   alignItems: "center",
                   width: "200px",
                 }}
                 key={index}
               >
-                <Image src={logo} boxSize="95px" alt={title} />
+                <Image
+                  src={logo || "./test/download.png"}
+                  boxSize="95px"
+                  alt={`${title} | demaloo`}
+                />
                 <Text
                   sx={{
                     fontWeight: "bold",
@@ -427,5 +328,20 @@ export default function Home() {
   );
 }
 
-// TODO add brand color scheme - "#20C4CE"
-// TODO change browser icon
+// export async function getStaticProps(context) {
+//   const getCompanies = require("./api/companies/index").getCompanies;
+//   let companies = null;
+
+//   try {
+//     companies = await getCompanies();
+//   } catch (error) {
+//     companies = null;
+//   }
+
+//   return {
+//     props: {
+//       companies: JSON.parse(JSON.stringify(companies)),
+//     },
+//     revalidate: 1,
+//   };
+// }

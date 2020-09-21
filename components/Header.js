@@ -9,7 +9,11 @@ import {
 } from "@chakra-ui/core";
 import Link from "next/link";
 
+import { signIn, signOut, useSession, getSession } from "next-auth/client";
+
 const Header = () => {
+  const [session, loading] = useSession();
+
   return (
     <Box
       as="header"
@@ -28,15 +32,44 @@ const Header = () => {
             alignItems: "center",
           }}
         >
-          <Link href="/" passHref>
-            <ChakraLink>
-              <Image
-                src="/logo/logo.png"
-                objectFit="contain"
-                width={["100px", "130px"]}
-              />
-            </ChakraLink>
-          </Link>
+          <ChakraLink href="/">
+            <Image
+              src="/logo/logo.png"
+              objectFit="contain"
+              width={["100px", "130px"]}
+              alt="demaloo logo"
+            />
+          </ChakraLink>
+
+          <Flex>
+            {!session && (
+              <>
+                <a
+                  href={`/api/auth/signin`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signIn();
+                  }}
+                >
+                  Sign in
+                </a>
+              </>
+            )}
+            {session && (
+              <>
+                {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
+                <a
+                  href={`/api/auth/signout`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signOut();
+                  }}
+                >
+                  Sign out
+                </a>
+              </>
+            )}
+          </Flex>
         </Flex>
       </Container>
     </Box>

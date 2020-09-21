@@ -2,30 +2,15 @@ import React from "react";
 import {
   Box,
   Image,
-  Heading,
   Container,
   Flex,
   Text,
   Divider,
   Button,
-  AspectRatio,
   Stack,
-  Badge,
   List,
   ListItem,
-  ListIcon,
-  SimpleGrid,
-  Tag,
-  Avatar,
-  Wrap,
-  Accordion,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  AccordionItem,
-  Center,
   Link as ChakraLink,
-  Grid,
 } from "@chakra-ui/core";
 import Link from "next/link";
 
@@ -52,21 +37,21 @@ const Footer = () => {
             objectFit="contain"
             width={["100px", "130px"]}
             mb={["20px", 0]}
-            alt="Demaloo"
+            alt="demaloo logo"
           />
-          <Link href="https://forms.gle/c17giajCUDcqoupi8" passHref>
-            <ChakraLink target="_blank">
-              <Button
-                as="a"
-                bg="white"
-                color="primary.500"
-                // size="lg"
-                borderRadius="10px"
-              >
-                СОТРУДНИЧЕСТВО
-              </Button>
-            </ChakraLink>
-          </Link>
+
+          <Button
+            as="a"
+            target="_blank"
+            href="https://forms.gle/c17giajCUDcqoupi8"
+            rel="noopener"
+            bg="white"
+            color="primary.500"
+            // size="lg"
+            borderRadius="10px"
+          >
+            СОТРУДНИЧЕСТВО
+          </Button>
         </Flex>
         <Flex
           sx={{

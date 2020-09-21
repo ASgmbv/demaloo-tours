@@ -143,7 +143,6 @@ export async function getTour(id) {
 }
 
 export default async (req, res) => {
-  console.log("query:", req.query);
   const query = req.query;
   if (req.method === "GET") {
     try {

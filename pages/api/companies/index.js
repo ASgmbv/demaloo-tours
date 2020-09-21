@@ -33,6 +33,20 @@ export async function createCompany({ name, logo, guides }) {
   return newCompany;
 }
 
+export async function getCompanies() {
+  const { db } = await connectToDatabase();
+  let companies = await db
+    .collection("companies")
+    .aggregate([
+      {
+        $match: {},
+      },
+    ])
+    .toArray();
+
+  return companies;
+}
+
 export default async (req, res) => {
   await runMiddleware(req, res, upload.single("logo"));
 
@@ -57,12 +71,24 @@ export default async (req, res) => {
     );
   }
 
-  const { name } = req.body;
+  if (req.method === "GET") {
+    try {
+      let data = await getCompanies();
 
-  if (req.method === "POST") {
+      res.status(200).json({
+        status: "success",
+        data: {
+          results: data.length,
+          data,
+        },
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  } else if (req.method === "POST") {
     try {
       let data = await createCompany({
-        name,
+        name: req.body?.name,
         // guides: guides?.map((guide) => JSON.parse(guide)),
         logo: logoUrl,
       });

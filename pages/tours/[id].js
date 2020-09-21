@@ -9,15 +9,10 @@ import {
   Text,
   Divider,
   Button,
-  AspectRatio,
   Stack,
-  Badge,
   List,
   ListItem,
-  ListIcon,
-  SimpleGrid,
   Tag,
-  Avatar,
   Wrap,
   Accordion,
   AccordionButton,
@@ -26,24 +21,15 @@ import {
   AccordionItem,
   Link as ChakraLink,
   Grid,
+  useDisclosure,
 } from "@chakra-ui/core";
 import Link from "next/link";
-
-import {
-  StarIcon,
-  CheckIcon,
-  InfoIcon,
-  AtSignIcon,
-  CalendarIcon,
-  TriangleUpIcon,
-  RepeatIcon,
-} from "@chakra-ui/icons";
-import { useState, useEffect, useRef, createRef } from "react";
 
 import GuideCard from "../../components/GuideCard";
 import { useBreakpointValue } from "@chakra-ui/media-query";
 import Carousel from "../../components/Carousel";
 import Header from "../../components/Header";
+import RegModal from "../../components/RegModal";
 
 // server
 // import { getAllTours } from "../api/tours/index";
@@ -67,10 +53,16 @@ const Main = ({
   transportation,
   dates = [],
   photos = [],
+  activities = [],
 }) => {
-  // const TourPage = ({ tour }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const buttonVariant = useBreakpointValue({ base: "md", sm: "lg" });
   const router = useRouter();
+
+  let carouselImages = [];
+  if (photos.length === 0) {
+    carouselImages.push("/batken.jpg");
+  }
 
   return (
     <>
@@ -82,6 +74,7 @@ const Main = ({
         />
       </Head>
       <Header />
+      <RegModal onClose={onClose} isOpen={isOpen} />
       <Box
         sx={{
           width: "100%",
@@ -117,7 +110,7 @@ const Main = ({
             spacing={["6", null, null, "16"]}
           >
             <Flex sx={{ flex: 1, alignItems: "center" }}>
-              <Carousel photos={photos} name={name} />
+              <Carousel photos={carouselImages} name={name} />
             </Flex>
             <Flex
               sx={{
@@ -188,7 +181,7 @@ const Main = ({
                       boxSize={["50px", "70px"]}
                       src={organizer.logo}
                       borderRadius="full"
-                      border="1px solid #20C4CE"
+                      // border="1px solid #20C4CE"
                       alt="icon"
                     />
                     <Text
@@ -200,31 +193,6 @@ const Main = ({
                     >
                       {organizer.name}
                     </Text>
-                    {/* <Flex
-                              sx={{
-                                 flexDirection: "column",
-                                 height: "100%",
-                                 ml: 3,
-                                 justifyContent: "space-between",
-                              }}
-                           >
-                              <Flex>
-                                 <Stack
-                                    direction="row"
-                                    align="baseline"
-                                    spacing="5px"
-                                 >
-                                    <Text
-                                       sx={{
-                                          fontSize: "2xl",
-                                       }}
-                                    >
-                                       {rating}
-                                    </Text>
-                                    <StarIcon color="yellow.400" />
-                                 </Stack>
-                              </Flex>
-                           </Flex> */}
                   </Flex>
                   <Button
                     colorScheme="teal"
@@ -232,6 +200,7 @@ const Main = ({
                     sx={{
                       borderRadius: "full",
                     }}
+                    onClick={onOpen}
                   >
                     Поехали
                   </Button>
@@ -254,7 +223,7 @@ const Main = ({
             borderBottomLeftRadius: "lg",
             borderBottomRightRadius: "lg",
             boxShadow: "base",
-            zIndex: 100,
+            zIndex: 10,
           }}
         >
           <List sx={{ d: "flex", overflow: "hidden" }}>
@@ -339,10 +308,7 @@ const Main = ({
                     </Heading>
                     <List spacing="3">
                       {services.map((item, index) => (
-                        <ListItem key={index}>
-                          <ListIcon as={CheckIcon} color="teal.500" />
-                          {item}
-                        </ListItem>
+                        <ListItem key={index}>👌 {item}</ListItem>
                       ))}
                     </List>
                   </Flex>
@@ -352,10 +318,7 @@ const Main = ({
                     </Heading>
                     <List spacing="3">
                       {whatToBring.map((item, index) => (
-                        <ListItem key={index}>
-                          <ListIcon as={InfoIcon} color="teal.500" />
-                          {item}
-                        </ListItem>
+                        <ListItem key={index}>☝️ {item}</ListItem>
                       ))}
                     </List>
                   </Flex>
@@ -364,11 +327,8 @@ const Main = ({
                       Занятия
                     </Heading>
                     <List spacing="3">
-                      {services.map((item, index) => (
-                        <ListItem key={index}>
-                          <ListIcon as={AtSignIcon} color="teal.500" />
-                          {item}
-                        </ListItem>
+                      {activities.map((item, index) => (
+                        <ListItem key={index}>⚽ {item}</ListItem>
                       ))}
                     </List>
                   </Flex>
@@ -398,7 +358,7 @@ const Main = ({
                   </Text>
                 </Text>
 
-                {groupDiscounts === undefined ? null : (
+                {groupDiscounts.length === 0 ? null : (
                   <>
                     <Text>Групповые скидки</Text>
                     {groupDiscounts.map(({ count, price }, index) => (
@@ -453,7 +413,8 @@ const Main = ({
               {days.map(({ description, locations }, index) => (
                 <AccordionItem key={index}>
                   <AccordionButton>
-                    <CalendarIcon color="teal.500" />
+                    {/* <CalendarIcon color="teal.500" /> */}
+                    👉
                     <Box flex="1" textAlign="left" ml="4" py="2">
                       <Heading
                         as="h4"
@@ -517,12 +478,9 @@ const Main = ({
                 const dateObj = new Date(date);
                 return (
                   <ListItem key={index} sx={{ fontSize: ["md", "lg"] }}>
-                    <ListIcon
-                      as={CalendarIcon}
-                      color="teal.500"
-                      sx={{ verticalAlign: "middle" }}
-                    />
-                    {`${dateObj.getDate()} ${monthsMap[dateObj.getMonth()]}`}
+                    {`📅  ${dateObj.getDate()} ${
+                      monthsMap[dateObj.getMonth()]
+                    }`}
                   </ListItem>
                 );
               })}
@@ -563,16 +521,18 @@ const Main = ({
               }}
               gap={6}
             >
-              {guides.map(({ name, age, experience, languages }, index) => (
-                <GuideCard
-                  key={index}
-                  name={name}
-                  age={age}
-                  experience={experience}
-                  languages={languages}
-                  photo={"/test/27.jpeg"}
-                />
-              ))}
+              {guides.map(
+                ({ name, age, experience, languages, photo }, index) => (
+                  <GuideCard
+                    key={index}
+                    name={name}
+                    age={age}
+                    experience={experience}
+                    languages={languages}
+                    photo={photo}
+                  />
+                )
+              )}
             </Grid>
           </Flex>
         </Container>

@@ -45,3 +45,75 @@ export const monthsMap = [
   "Ноябрь",
   "Декабрь",
 ];
+
+export const partners = [
+  {
+    title: "SLM TRIP",
+    logo: "/partners/slmtrip.png",
+  },
+  {
+    title: "ASIA WAY",
+    logo: "/partners/asiaway.png",
+  },
+  {
+    title: "SAMTOUR TRAVEL",
+    logo: "/partners/samtour.png",
+  },
+  {
+    title: "COOLTOUR KG",
+    logo: "/partners/cooltour.png",
+  },
+  {
+    title: "ETHNOWAY KG",
+    logo: "/partners/ethnoway.png",
+  },
+  {
+    title: "JANNAT TRAVEL",
+    logo: "/partners/jannattravel.png",
+  },
+];
+
+export const places = [
+  {
+    title: "Ала Кол",
+    image: "/places/alakol.png",
+  },
+  {
+    title: "Джети-Огуз",
+    image: "/places/jetioguz.png",
+  },
+  {
+    title: "Барскоон",
+    image: "/places/barskoon.png",
+  },
+  {
+    title: "Сон-Коль",
+    image: "/places/sonkol.png",
+  },
+  {
+    title: "Сары-Челек",
+    image: "/places/sarychelek.png",
+    isWide: true,
+  },
+  {
+    title: "Сказка",
+    image: "/places/skazka.png",
+  },
+  {
+    title: "Бурана",
+    image: "/places/burana.png",
+  },
+  {
+    title: "Чункурчак",
+    image: "/places/chunkurchak.jpg",
+  },
+  {
+    title: "Алтын-Арашан",
+    image: "/places/altynarashan.png",
+  },
+  {
+    title: "Коль-тор",
+    image: "/places/koltor.png",
+    isWide: true,
+  },
+];

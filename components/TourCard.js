@@ -1,41 +1,24 @@
 import {
   Box,
   Image,
-  Heading,
-  Container,
   Flex,
   Text,
-  Divider,
-  Button,
   AspectRatio,
   Stack,
   Badge,
-  List,
-  ListItem,
-  ListIcon,
-  SimpleGrid,
   Tag,
   Avatar,
   Wrap,
-  Accordion,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  AccordionItem,
-  Center,
   Link as ChakraLink,
-  Grid,
   Skeleton,
 } from "@chakra-ui/core";
 
-import Carousel from "../components/Carousel";
 import { daysRus } from "../utils/ruswords";
 import { useState } from "react";
 import { categoriesMap, monthsMap } from "../utils/data";
 
 const TourCard = ({
   name,
-  image,
   categories = [],
   organizer,
   duration,
@@ -45,6 +28,7 @@ const TourCard = ({
   price,
   days = [],
   dates,
+  photos = [],
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -54,6 +38,7 @@ const TourCard = ({
   });
 
   const closestDate = new Date(dates[0]);
+  const photo = photos[0] || "/batken.jpg";
 
   return (
     <Box
@@ -73,13 +58,15 @@ const TourCard = ({
         <AspectRatio
           maxW={["100%", null, "200px"]}
           width="100%"
+          minWidth="200px"
+          flex="1"
           ratio={[3 / 2, 4 / 3]}
           sx={{ alignSelf: "center" }}
         >
           <Skeleton isLoaded={imageLoaded}>
             <Image
               alt={name}
-              src={image}
+              src={photo}
               objectFit="cover"
               align="center"
               onLoad={() => {
@@ -95,25 +82,32 @@ const TourCard = ({
             sx={{
               flex: 1,
             }}
-            // spacing="1"
           >
-            <Text
-              sx={{
-                fontWeight: "bold",
-                fontSize: ["lg", "xl"],
-                whiteSpace: "normal",
-                minWidth: "200px",
-              }}
-              isTruncated
-            >
-              {name}
-            </Text>
+            <Flex sx={{ justifyContent: "space-between" }}>
+              <Text
+                sx={{
+                  fontWeight: "bold",
+                  fontSize: ["lg", "lg"],
+                  whiteSpace: "normal",
+                  minWidth: "200px",
+                }}
+                isTruncated
+              >
+                {name}
+              </Text>
+              <Text
+                sx={{
+                  fontWeight: "bold",
+                  fontSize: ["lg", "lg"],
+                  textAlign: "end",
+                }}
+              >
+                {`${price} сом`}
+              </Text>
+            </Flex>
+
             <Flex sx={{ alignItems: "center" }}>
-              <Avatar
-                src={organizer?.logo}
-                border="1px solid #20C4CE"
-                size="xs"
-              />
+              <Avatar src={organizer?.logo} size="xs" />
               <Text sx={{ ml: 2 }} isTruncated>
                 {organizer?.name}
               </Text>
@@ -154,9 +148,6 @@ const TourCard = ({
               )}
             </Wrap>
           </Stack>
-          <Text sx={{ fontWeight: "bold", fontSize: ["lg", "xl"] }}>
-            {`${price} сом`}
-          </Text>
         </Flex>
       </Flex>
     </Box>

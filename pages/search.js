@@ -1,8 +1,6 @@
 import Head from "next/head";
 import {
   Box,
-  Image,
-  Heading,
   Container,
   Flex,
   Text,
@@ -10,53 +8,36 @@ import {
   Button,
   AspectRatio,
   Stack,
-  Badge,
   List,
   ListItem,
-  ListIcon,
-  SimpleGrid,
   Tag,
-  Avatar,
   Wrap,
-  Accordion,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  AccordionItem,
-  Center,
-  Link as ChakraLink,
-  Grid,
   Menu,
   MenuButton,
   MenuList,
   MenuOptionGroup,
   MenuItemOption,
-  MenuDivider,
-  Select,
   MenuItem,
   Skeleton,
   SkeletonText,
-  Collapse,
 } from "@chakra-ui/core";
 import Link from "next/link";
 import TourCard from "../components/TourCard";
 import Header from "../components/Header";
-import { HamburgerIcon, SearchIcon } from "@chakra-ui/icons";
-import { daysRus } from "../utils/ruswords";
+import { SearchIcon } from "@chakra-ui/icons";
 import { categoriesMap, sortingMap } from "../utils/data";
 import { FaSortAmountDownAlt } from "react-icons/fa";
-import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { toursRus } from "../utils/ruswords";
+import { useRouter } from "next/router";
 
 // TODO error when the internet is down
-// TODO add the number of listings on the search page
-// TODO show something when empty
 // TODO sorting closest
 // TODO add carousel
 // TODO add url query
 
 const SearchPage = () => {
+  const router = useRouter();
   const [filters, setFilters] = React.useState({
     duration: 1,
     // categories: [...Array(categoriesMap.length).keys()],
@@ -64,12 +45,9 @@ const SearchPage = () => {
   });
 
   const [sortBy, setSortBy] = React.useState(Object.keys(sortingMap)[0]);
-
   const [fetching, setFetching] = useState(true);
   const [error, setError] = useState(false);
   const [tours, setTours] = useState([]);
-
-  console.log("tours", tours);
 
   useEffect(() => {
     const fetchTours = async () => {
@@ -160,7 +138,9 @@ const SearchPage = () => {
                   <Tag>{"Все категории"}</Tag>
                 ) : (
                   filters.categories.map((item, index) => (
-                    <Tag key={index}>{categoriesMap[item]}</Tag>
+                    <Tag key={index} key={index}>
+                      {categoriesMap[item]}
+                    </Tag>
                   ))
                 )}
               </Wrap>
@@ -201,8 +181,12 @@ const SearchPage = () => {
                         Сортировать по
                       </Text>
                     </MenuItem>
-                    {Object.keys(sortingMap).map((item) => (
-                      <MenuItem sx={{ fontSize: "sm" }} value={item}>
+                    {Object.keys(sortingMap).map((item, index) => (
+                      <MenuItem
+                        sx={{ fontSize: "sm" }}
+                        value={item}
+                        key={index}
+                      >
                         {sortingMap[item]}
                       </MenuItem>
                     ))}
@@ -214,8 +198,9 @@ const SearchPage = () => {
             {
               <List sx={{ width: "100%", py: "20px" }} spacing="6">
                 {fetching ? (
-                  [...Array(3)].map((item, index) => (
-                    <Box
+                  [...Array(3)].map((_, index) => (
+                    <Flex
+                      key={index}
                       sx={{
                         borderRadius: "16px",
                         p: [2, 4],
@@ -223,17 +208,32 @@ const SearchPage = () => {
                         borderColor: "gray.300",
                         overflow: "hidden",
                         width: "100%",
+                        flexDirection: ["column", null, "row"],
                       }}
                     >
-                      <Flex sx={{ width: "100%" }}>
-                        <Box sx={{ flex: 1 }}>
-                          <Skeleton height="100%" />
-                        </Box>
-                        <Box sx={{ flex: 3, marginLeft: 4 }}>
-                          <SkeletonText mb="4" noOfLines={4} spacing="5" />
-                        </Box>
-                      </Flex>
-                    </Box>
+                      <AspectRatio
+                        maxW={["100%", null, "200px"]}
+                        width="100%"
+                        minWidth="200px"
+                        flex="1"
+                        ratio={[3 / 2, 4 / 3]}
+                        sx={{
+                          alignSelf: "center",
+                          mb: [4, null, 0],
+                          mr: [0, null, 4],
+                        }}
+                      >
+                        <Skeleton />
+                      </AspectRatio>
+                      <SkeletonText
+                        mb="4"
+                        noOfLines={4}
+                        spacing="5"
+                        sx={{
+                          width: ["100%", null, "60%"],
+                        }}
+                      />
+                    </Flex>
                   ))
                 ) : tours.length === 0 ? (
                   <Text
@@ -246,14 +246,14 @@ const SearchPage = () => {
                     }}
                   >
                     <SearchIcon boxSize="6" mb="3" />
-                    <Text>Туры не найдены</Text>
+                    Туры не найдены
                   </Text>
                 ) : (
                   tours.map((tour, index) => (
                     <ListItem key={index}>
                       <Link href={`/tours/${tour?._id}`} passHref>
                         <a>
-                          <TourCard {...tour} image={tour?.photos[0]} />
+                          <TourCard {...tour} />
                         </a>
                       </Link>
                     </ListItem>
@@ -273,7 +273,6 @@ export async function getStaticProps(context) {
   try {
     const getAllTours = require("./api/tours/index").getAllTours;
     tours = await getAllTours();
-    console.log({ tours });
   } catch (error) {
     tours = null;
   }
