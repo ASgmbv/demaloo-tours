@@ -13,26 +13,26 @@ export async function getAllTours(
   let tours = await db
     .collection("tours")
     .aggregate([
-      {
-        $match: {
-          $expr: {
-            $gte: [
-              {
-                $dateFromString: {
-                  dateString: {
-                    $arrayElemAt: ["$dates", 0],
-                  },
-                },
-              },
-              {
-                $dateFromString: {
-                  dateString: currentDate,
-                },
-              },
-            ],
-          },
-        },
-      },
+      // {
+      //   $match: {
+      //     $expr: {
+      //       $gte: [
+      //         {
+      //           $dateFromString: {
+      //             dateString: {
+      //               $arrayElemAt: ["$dates", 0],
+      //             },
+      //           },
+      //         },
+      //         {
+      //           $dateFromString: {
+      //             dateString: currentDate,
+      //           },
+      //         },
+      //       ],
+      //     },
+      //   },
+      // },
       {
         $match: {
           $expr: {

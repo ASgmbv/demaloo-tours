@@ -9,10 +9,10 @@ import {
 } from "@chakra-ui/core";
 import Link from "next/link";
 
-import { signIn, signOut, useSession, getSession } from "next-auth/client";
+// import { signIn, signOut, useSession, getSession } from "next-auth/client";
 
 const Header = () => {
-  const [session, loading] = useSession();
+  // const [session, loading] = useSession();
 
   return (
     <Box
@@ -41,7 +41,7 @@ const Header = () => {
             />
           </ChakraLink>
 
-          <Flex>
+          {/* <Flex>
             {!session && (
               <>
                 <a
@@ -57,7 +57,6 @@ const Header = () => {
             )}
             {session && (
               <>
-                {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
                 <a
                   href={`/api/auth/signout`}
                   onClick={(e) => {
@@ -69,7 +68,7 @@ const Header = () => {
                 </a>
               </>
             )}
-          </Flex>
+          </Flex> */}
         </Flex>
       </Container>
     </Box>

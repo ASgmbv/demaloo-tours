@@ -30,6 +30,7 @@ import { useBreakpointValue } from "@chakra-ui/media-query";
 import Carousel from "../../components/Carousel";
 import Header from "../../components/Header";
 import RegModal from "../../components/RegModal";
+import ConsModal from "../../components/ConsModal";
 
 // server
 // import { getAllTours } from "../api/tours/index";
@@ -56,13 +57,13 @@ const Main = ({
   activities = [],
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isConsOpen,
+    onOpen: onConsOpen,
+    onClose: onConsClose,
+  } = useDisclosure();
   const buttonVariant = useBreakpointValue({ base: "md", sm: "lg" });
   const router = useRouter();
-
-  let carouselImages = [];
-  if (photos.length === 0) {
-    carouselImages.push("/batken.jpg");
-  }
 
   return (
     <>
@@ -74,7 +75,13 @@ const Main = ({
         />
       </Head>
       <Header />
-      <RegModal onClose={onClose} isOpen={isOpen} />
+      <RegModal
+        onClose={onClose}
+        isOpen={isOpen}
+        tour={name}
+        company={organizer.name}
+      />
+      <ConsModal onClose={onConsClose} isOpen={isConsOpen} />
       <Box
         sx={{
           width: "100%",
@@ -110,7 +117,10 @@ const Main = ({
             spacing={["6", null, null, "16"]}
           >
             <Flex sx={{ flex: 1, alignItems: "center" }}>
-              <Carousel photos={carouselImages} name={name} />
+              <Carousel
+                photos={photos.length === 0 ? ["/batken.jpg"] : photos}
+                name={name}
+              />
             </Flex>
             <Flex
               sx={{
@@ -205,6 +215,20 @@ const Main = ({
                     Поехали
                   </Button>
                 </Flex>
+                <Divider />
+                <Flex sx={{ justifyContent: "start" }}>
+                  <Button
+                    variant="ghost"
+                    colorScheme="blue"
+                    size={buttonVariant}
+                    sx={{
+                      borderRadius: "full",
+                    }}
+                    onClick={onConsOpen}
+                  >
+                    Связь с компанией
+                  </Button>
+                </Flex>
               </Stack>
             </Flex>
           </Stack>
@@ -223,7 +247,6 @@ const Main = ({
             borderBottomLeftRadius: "lg",
             borderBottomRightRadius: "lg",
             boxShadow: "base",
-            zIndex: 10,
           }}
         >
           <List sx={{ d: "flex", overflow: "hidden" }}>
@@ -318,7 +341,7 @@ const Main = ({
                     </Heading>
                     <List spacing="3">
                       {whatToBring.map((item, index) => (
-                        <ListItem key={index}>☝️ {item}</ListItem>
+                        <ListItem key={index}>✋ {item}</ListItem>
                       ))}
                     </List>
                   </Flex>

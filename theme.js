@@ -2,8 +2,8 @@ import { extendTheme } from "@chakra-ui/core";
 
 extendTheme({
   fonts: {
-    body: "Comfortaa, cursive",
-    heading: "Comfortaa, cursive",
+    body: "Comfortaa, sans-serif",
+    heading: "Comfortaa, sans-serif",
   },
   colors: {
     primary: {

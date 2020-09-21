@@ -64,27 +64,33 @@ const Footer = () => {
             <Text sx={{ color: "white", fontSize: "lg" }}>КОНТАКТЫ</Text>
             <List spacing="5px">
               <ListItem>
-                <Link href="tel:+996706100901" passHref>
-                  <ChakraLink target="_blank" color="white">
-                    +996 706 100 901
-                  </ChakraLink>
-                </Link>
+                <ChakraLink
+                  href="tel:+996706100901"
+                  target="_blank"
+                  color="white"
+                >
+                  +996 706 100 901
+                </ChakraLink>
               </ListItem>
 
               <ListItem>
-                <Link href="tel:+996702308926" passHref>
-                  <ChakraLink target="_blank" color="white">
-                    +996 702 308 926
-                  </ChakraLink>
-                </Link>
+                <ChakraLink
+                  href="tel:+996702308926"
+                  target="_blank"
+                  color="white"
+                >
+                  +996 702 308 926
+                </ChakraLink>
               </ListItem>
 
               <ListItem>
-                <Link href="mailto:demaloo.dev@gmail.com" passHref>
-                  <ChakraLink target="_blank" color="white">
-                    demaloo.dev@gmail.com
-                  </ChakraLink>
-                </Link>
+                <ChakraLink
+                  href="mailto:demaloo.dev@gmail.com"
+                  target="_blank"
+                  color="white"
+                >
+                  demaloo.dev@gmail.com
+                </ChakraLink>
               </ListItem>
             </List>
           </Stack>
@@ -93,18 +99,14 @@ const Footer = () => {
             <Text sx={{ color: "white", fontSize: "lg" }}>СОЦИАЛЬНЫЕ СЕТИ</Text>
             <List spacing="5px">
               <ListItem>
-                <Link href="/" passHref>
-                  <ChakraLink target="_blank" color="white">
-                    FACEBOOK
-                  </ChakraLink>
-                </Link>
+                <ChakraLink href="/" target="_blank" color="white">
+                  FACEBOOK
+                </ChakraLink>
               </ListItem>
               <ListItem>
-                <Link href="/" passHref>
-                  <ChakraLink target="_blank" color="white">
-                    TWITTER
-                  </ChakraLink>
-                </Link>
+                <ChakraLink href="/" target="_blank" color="white">
+                  TWITTER
+                </ChakraLink>
               </ListItem>
             </List>
           </Stack>

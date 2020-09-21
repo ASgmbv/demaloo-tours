@@ -10,32 +10,132 @@ import {
   Input,
   ModalFooter,
   Button,
-  useDisclosure,
+  Text,
+  useToast,
 } from "@chakra-ui/core";
+import { useRouter } from "next/router";
 
-const RegModal = ({ isOpen, onClose }) => {
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+
+// type = required, min, max
+
+const RegModal = ({ isOpen, onClose, tour, company }) => {
+  const { register, handleSubmit, watch, errors, reset } = useForm();
+  const router = useRouter();
+  const toast = useToast();
+
+  const [isSending, setSending] = useState(false);
+
+  const onSubmit = async (data) => {
+    try {
+      setSending(true);
+      await fetch("/api/registerTour", {
+        method: "POST",
+        body: JSON.stringify({
+          ...data,
+          tour,
+          company,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setSending(false);
+      toast({
+        title: "Тур успешно забронирован!",
+        description:
+          "Через некоторое время с вами свяжутся по номеру телефона который вы указали",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+      handleClose();
+    } catch (error) {
+      setSending(false);
+      toast({
+        title: "Что-то пошло не так!",
+        description: "Попробуйте перезагрузить страницу",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const handleClose = () => {
+    reset();
+    onClose();
+  };
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={handleClose} size="lg">
       <ModalOverlay>
         <ModalContent>
-          <ModalHeader>Create your account</ModalHeader>
+          <ModalHeader>Заполните поля</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <FormControl>
-              <FormLabel>First name</FormLabel>
-              <Input placeholder="First name" />
-            </FormControl>
+            <Text mb="6" color="gray.500" fontSize="sm">
+              После отправления формы через некоторое время с вами свяжутся по
+              номеру телефона который вы указали
+            </Text>
+            <form id="form" onSubmit={handleSubmit(onSubmit)}>
+              <FormControl>
+                <FormLabel>Ваше имя</FormLabel>
+                <Input
+                  name="name"
+                  ref={register}
+                  type="text"
+                  ref={register({ required: true })}
+                />
+              </FormControl>
 
-            <FormControl>
-              <FormLabel>Last name</FormLabel>
-              <Input placeholder="Last name" />
-            </FormControl>
+              {errors?.name?.type === "required" && (
+                <Text color="orangered">Введите ваше имя</Text>
+              )}
+
+              <FormControl mt="4">
+                <FormLabel>Ваш телефон</FormLabel>
+                <Input
+                  name="phone"
+                  type="tel"
+                  placeholder="0 ( ___ ) __-__-__"
+                  ref={register({ required: true })}
+                />
+              </FormControl>
+
+              {errors?.phone?.type === "required" && (
+                <Text color="orangered">Введите ваш телефон</Text>
+              )}
+
+              <FormControl mt="4">
+                <FormLabel>Количество человек</FormLabel>
+                <Input
+                  name="count"
+                  type="number"
+                  placeholder="1"
+                  ref={register({ required: true, min: 1, max: 100 })}
+                />
+              </FormControl>
+              {errors?.count?.type === "required" && (
+                <Text color="orangered">Введите количество человек</Text>
+              )}
+              {errors?.count?.type === "min" && (
+                <Text color="orangered">Мин. количество = 1</Text>
+              )}
+            </form>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              Save
+            <Button
+              isLoading={isSending}
+              colorScheme="primary"
+              type="submit"
+              form="form"
+              mr={3}
+            >
+              Готово
             </Button>
-            <Button onClick={onClose}>Cancel</Button>
+            <Button onClick={onClose}>Отменить</Button>
           </ModalFooter>
         </ModalContent>
       </ModalOverlay>

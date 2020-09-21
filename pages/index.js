@@ -145,7 +145,7 @@ export default function Home() {
                 as="h3"
                 sx={{ fontSize: ["md", "lg"], textAlign: "center", mb: 3 }}
               >
-                О нас
+                О нас 🤘
               </Heading>
               <Text sx={{ textAlign: "center", maxW: "md" }}>
                 Сотрудничаем с более <strong>13-ти турфирмами.</strong>
@@ -166,7 +166,7 @@ export default function Home() {
                 as="h3"
                 sx={{ fontSize: ["md", "lg"], textAlign: "center", mb: 3 }}
               >
-                Почему мы?
+                Почему мы? 👊
               </Heading>
               <Text sx={{ textAlign: "center", maxW: "md" }}>
                 Те же цены что и у турагенств
@@ -188,7 +188,7 @@ export default function Home() {
                 as="h3"
                 sx={{ fontSize: ["md", "lg"], textAlign: "center", mb: 3 }}
               >
-                Как это работает?
+                Как это работает? 👏
               </Heading>
               <Text sx={{ textAlign: "center", maxW: "md" }}>
                 1) Выберите тур.
