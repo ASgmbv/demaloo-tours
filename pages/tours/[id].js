@@ -226,7 +226,7 @@ const Main = ({
                     }}
                     onClick={onConsOpen}
                   >
-                    Связь с компанией
+                    Есть вопросы?
                   </Button>
                 </Flex>
               </Stack>

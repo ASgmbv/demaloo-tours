@@ -64,8 +64,8 @@ export const partners = [
     logo: "/partners/cooltour.png",
   },
   {
-    title: "ETHNOWAY KG",
-    logo: "/partners/ethnoway.png",
+    title: "POBEG KG",
+    logo: "/partners/pobeg.png",
   },
   {
     title: "JANNAT TRAVEL",

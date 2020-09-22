@@ -36,7 +36,7 @@ import { useRouter } from "next/router";
 // TODO add carousel
 // TODO add url query
 
-const SearchPage = () => {
+const SearchPage = ({ tours }) => {
   const router = useRouter();
   const [filters, setFilters] = React.useState({
     duration: 1,
@@ -45,31 +45,31 @@ const SearchPage = () => {
   });
 
   const [sortBy, setSortBy] = React.useState(Object.keys(sortingMap)[0]);
-  const [fetching, setFetching] = useState(true);
+  const [fetching, setFetching] = useState(false);
   const [error, setError] = useState(false);
-  const [tours, setTours] = useState([]);
+  // const [tours, setTours] = useState([]);
 
-  useEffect(() => {
-    const fetchTours = async () => {
-      try {
-        setFetching(true);
-        const res = await fetch(
-          `/api/tours?currentDate=${new Date().toDateString()}&categories=${filters.categories.join()}&sortBy=${sortBy}`,
-          {
-            method: "GET",
-          }
-        );
-        const tours = await res.json();
-        setFetching(false);
-        setTours(tours);
-      } catch (error) {
-        setFetching(false);
-        setError(true);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchTours = async () => {
+  //     try {
+  //       setFetching(true);
+  //       const res = await fetch(
+  //         `/api/tours?currentDate=${new Date().toDateString()}&categories=${filters.categories.join()}&sortBy=${sortBy}`,
+  //         {
+  //           method: "GET",
+  //         }
+  //       );
+  //       const tours = await res.json();
+  //       setFetching(false);
+  //       setTours(tours);
+  //     } catch (error) {
+  //       setFetching(false);
+  //       setError(true);
+  //     }
+  //   };
 
-    fetchTours();
-  }, [filters, setFetching, setError, setTours, sortBy]);
+  //   fetchTours();
+  // }, [filters, setFetching, setError, setTours, sortBy]);
 
   return (
     <>

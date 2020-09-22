@@ -30,6 +30,16 @@ const ConsModal = ({ isOpen, onClose }) => {
             <List spacing="4">
               <ListItem>
                 <ChakraLink
+                  href="tel:+996706100901"
+                  target="_blank"
+                  sx={{ d: "flex", alignItems: "center" }}
+                >
+                  <FaPhone style={{ marginRight: "10px", fontSize: "20px" }} />
+                  +996 706 100 901
+                </ChakraLink>
+              </ListItem>
+              <ListItem>
+                <ChakraLink
                   href="tel:+996702308926"
                   target="_blank"
                   sx={{ d: "flex", alignItems: "center" }}
@@ -40,7 +50,7 @@ const ConsModal = ({ isOpen, onClose }) => {
               </ListItem>
               <ListItem>
                 <ChakraLink
-                  href="https://wa.me/+996707355697"
+                  href="https://wa.me/+996706100901"
                   target="_blank"
                   sx={{ d: "flex", alignItems: "center" }}
                 >
@@ -51,12 +61,12 @@ const ConsModal = ({ isOpen, onClose }) => {
                       color: "#26D366",
                     }}
                   />
-                  +996707355697
+                  +996 706 100 901
                 </ChakraLink>
               </ListItem>
               <ListItem>
                 <ChakraLink
-                  href="tg://msg?to=+996 779 540 142"
+                  href="tg://msg?to=+996706100901"
                   target="_blank"
                   sx={{ d: "flex", alignItems: "center" }}
                 >
@@ -67,7 +77,7 @@ const ConsModal = ({ isOpen, onClose }) => {
                       color: "#0088cc",
                     }}
                   />
-                  +996 779 540 142
+                  +996 706 100 901
                 </ChakraLink>
               </ListItem>
             </List>
