@@ -33,17 +33,6 @@ export default function Home() {
           name="keywords"
           content="туры, экскурсии, горящие туры, турагентство ,отдых за городом, тур пакеты, туристические пакеты"
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-            
-              gtag('config', 'UA-164756023-2');          
-            `,
-          }}
-        />
       </Head>
       <Box as="main" sx={{ width: "100%" }}>
         <Header />

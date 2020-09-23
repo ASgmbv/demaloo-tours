@@ -10,6 +10,17 @@ class MyDocument extends Document {
     return (
       <Html lang="ru">
         <Head>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+            
+              gtag('config', 'UA-164756023-2');          
+            `,
+            }}
+          />
           <link rel="shortcut icon" href="/favicon.svg" />
           <link
             href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap"
