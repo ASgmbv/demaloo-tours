@@ -30,46 +30,62 @@ import { FaSortAmountDownAlt } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { toursRus } from "../utils/ruswords";
 import { useRouter } from "next/router";
+import { useInfiniteQuery, useQuery, useQueryCache } from "react-query";
+import useIntersectionObserver from "../lib/hooks/useIntersectionObserver";
 
 // TODO error when the internet is down
 // TODO sorting closest
 // TODO add carousel
 // TODO add url query
 
-const SearchPage = ({ tours }) => {
-  const router = useRouter();
-  const [filters, setFilters] = React.useState({
-    duration: 1,
-    // categories: [...Array(categoriesMap.length).keys()],
-    categories: [],
+const SearchPage = ({ tours = [] }) => {
+  const [categories, setCategories] = React.useState([]);
+  const [sortBy, setSortBy] = React.useState(Object.keys(sortingMap)[0]);
+  const loadMoreButtonRef = React.useRef();
+  let limit = 5;
+
+  let cache = useQueryCache();
+
+  //?currentDate=${new Date().toDateString()}
+
+  const fetchTours = async (key, cat, sb, page = 0) => {
+    let res = await fetch(
+      "http://localhost:3000/api/tours?page=" +
+        page +
+        "&limit=" +
+        limit +
+        "&sortBy=" +
+        sortBy +
+        "&categories=" +
+        categories.join()
+    );
+    res = await res.json();
+
+    return res;
+  };
+
+  const temp = useInfiniteQuery(["tours", categories, sortBy], fetchTours, {
+    getFetchMore: (group) => {
+      let totalCount = group?.data?.count;
+      let currentPage = group?.data?.page;
+
+      if (totalCount - (currentPage + 1) * limit > 0) {
+        return currentPage + 1;
+      }
+
+      return null;
+    },
   });
 
-  const [sortBy, setSortBy] = React.useState(Object.keys(sortingMap)[0]);
-  const [fetching, setFetching] = useState(false);
-  const [error, setError] = useState(false);
-  // const [tours, setTours] = useState([]);
+  const { data, status, fetchMore, canFetchMore, isFetchingMore } = temp;
 
-  // useEffect(() => {
-  //   const fetchTours = async () => {
-  //     try {
-  //       setFetching(true);
-  //       const res = await fetch(
-  //         `/api/tours?currentDate=${new Date().toDateString()}&categories=${filters.categories.join()}&sortBy=${sortBy}`,
-  //         {
-  //           method: "GET",
-  //         }
-  //       );
-  //       const tours = await res.json();
-  //       setFetching(false);
-  //       setTours(tours);
-  //     } catch (error) {
-  //       setFetching(false);
-  //       setError(true);
-  //     }
-  //   };
+  useIntersectionObserver({
+    target: loadMoreButtonRef,
+    onIntersect: fetchMore,
+    enabled: canFetchMore,
+  });
 
-  //   fetchTours();
-  // }, [filters, setFetching, setError, setTours, sortBy]);
+  const totalNumberOfPosts = data === undefined ? 0 : data[0].data.count;
 
   return (
     <>
@@ -115,9 +131,9 @@ const SearchPage = ({ tours }) => {
                   <MenuOptionGroup
                     type="checkbox"
                     title="Выберите категории"
-                    value={filters.categories}
+                    value={categories}
                     onChange={(e) => {
-                      setFilters({ ...filters, categories: e });
+                      setCategories(e);
                     }}
                   >
                     {categoriesMap.map((category, index) => (
@@ -134,10 +150,10 @@ const SearchPage = ({ tours }) => {
               </Menu>
 
               <Wrap>
-                {filters.categories.length === 0 ? (
+                {categories.length === 0 ? (
                   <Tag>{"Все категории"}</Tag>
                 ) : (
-                  filters.categories.map((item, index) => (
+                  categories.map((item, index) => (
                     <Tag key={index} key={index}>
                       {categoriesMap[item]}
                     </Tag>
@@ -154,7 +170,7 @@ const SearchPage = ({ tours }) => {
                     fontSize: "sm",
                   }}
                 >
-                  {`${tours.length} ${toursRus(tours.length)}`}
+                  {`${totalNumberOfPosts} ${toursRus(totalNumberOfPosts)}`}
                 </Text>
                 <Menu>
                   <MenuButton
@@ -195,72 +211,95 @@ const SearchPage = ({ tours }) => {
               </Flex>
             </Stack>
 
-            {
-              <List sx={{ width: "100%", py: "20px" }} spacing="6">
-                {fetching ? (
-                  [...Array(3)].map((_, index) => (
-                    <Flex
-                      key={index}
-                      sx={{
-                        borderRadius: "16px",
-                        p: [2, 4],
-                        border: "1px solid",
-                        borderColor: "gray.300",
-                        overflow: "hidden",
-                        width: "100%",
-                        flexDirection: ["column", null, "row"],
-                      }}
-                    >
-                      <AspectRatio
-                        maxW={["100%", null, "200px"]}
-                        width="100%"
-                        minWidth="200px"
-                        flex="1"
-                        ratio={[3 / 2, 4 / 3]}
-                        sx={{
-                          alignSelf: "center",
-                          mb: [4, null, 0],
-                          mr: [0, null, 4],
-                        }}
-                      >
-                        <Skeleton />
-                      </AspectRatio>
-                      <SkeletonText
-                        mb="4"
-                        noOfLines={4}
-                        spacing="5"
-                        sx={{
-                          width: ["100%", null, "60%"],
-                        }}
-                      />
-                    </Flex>
-                  ))
-                ) : tours.length === 0 ? (
-                  <Text
+            {status === "loading" ? (
+              <List sx={{ width: "100%", py: "20px" }} spacing="4">
+                {[...Array(3)].map((_, index) => (
+                  <Flex
+                    key={index}
                     sx={{
-                      textAlign: "center",
-                      mt: "50px",
-                      alignItems: "center",
-                      flexDirection: "column",
+                      borderRadius: "16px",
+                      p: [2, 4],
+                      border: "1px solid",
+                      borderColor: "gray.300",
+                      overflow: "hidden",
                       width: "100%",
+                      flexDirection: ["column", null, "row"],
                     }}
                   >
-                    <SearchIcon boxSize="6" mb="3" />
-                    Туры не найдены
-                  </Text>
-                ) : (
-                  tours.map((tour, index) => (
-                    <ListItem key={index}>
-                      <Link href={`/tours/${tour?._id}`} passHref>
-                        <a>
-                          <TourCard {...tour} />
-                        </a>
-                      </Link>
-                    </ListItem>
-                  ))
-                )}
+                    <AspectRatio
+                      maxW={["100%", null, "200px"]}
+                      width="100%"
+                      minWidth="200px"
+                      flex="1"
+                      ratio={[3 / 2, 4 / 3]}
+                      sx={{
+                        alignSelf: "center",
+                        mb: [4, null, 0],
+                        mr: [0, null, 4],
+                      }}
+                    >
+                      <Skeleton />
+                    </AspectRatio>
+                    <SkeletonText
+                      mb="4"
+                      noOfLines={4}
+                      spacing="5"
+                      sx={{
+                        width: ["100%", null, "60%"],
+                      }}
+                    />
+                  </Flex>
+                ))}
               </List>
-            }
+            ) : (
+              <>
+                <List sx={{ width: "100%", py: "20px" }}>
+                  {data.map((page, i) => {
+                    if (page.data.page === 0 && page.data.data.length === 0) {
+                      return (
+                        <Text
+                          sx={{
+                            textAlign: "center",
+                            mt: "50px",
+                            alignItems: "center",
+                            flexDirection: "column",
+                            width: "100%",
+                          }}
+                        >
+                          <SearchIcon boxSize="6" mb="3" />
+                          Туры не найдены
+                        </Text>
+                      );
+                    }
+
+                    return (
+                      <React.Fragment key={i}>
+                        {page.data.data?.map((tour, index) => (
+                          <ListItem key={index} my="4">
+                            <Link href={`/tours/${tour?._id}`} passHref>
+                              <a>
+                                <TourCard {...tour} />
+                              </a>
+                            </Link>
+                          </ListItem>
+                        ))}
+                      </React.Fragment>
+                    );
+                  })}
+                </List>
+                <Button
+                  ref={loadMoreButtonRef}
+                  disabled={!canFetchMore || isFetchingMore}
+                  onClick={() => fetchMore()}
+                >
+                  {isFetchingMore
+                    ? "Загрузка..."
+                    : canFetchMore
+                    ? "Посмотреть еще"
+                    : "Вы посмотрели все посты"}
+                </Button>
+              </>
+            )}
           </Flex>
         </Container>
       </Box>
@@ -268,21 +307,24 @@ const SearchPage = ({ tours }) => {
   );
 };
 
-export async function getStaticProps(context) {
-  let tours = null;
-  try {
-    const getAllTours = require("./api/tours/index").getAllTours;
-    tours = await getAllTours();
-  } catch (error) {
-    tours = null;
-  }
+// export async function getStaticProps(context) {
+//   let tours = null;
+//   console.log("here");
 
-  return {
-    props: {
-      tours: JSON.parse(JSON.stringify(tours)),
-    },
-    revalidate: 1,
-  };
-}
+//   try {
+//     const getTours = require("./api/tours/index").getTours;
+//     tours = await getTours();
+//     console.log("tours", tours);
+//   } catch (error) {
+//     tours = null;
+//   }
+
+//   return {
+//     props: {
+//       tours: JSON.parse(JSON.stringify(tours)),
+//     },
+//     revalidate: 1,
+//   };
+// }
 
 export default SearchPage;

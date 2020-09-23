@@ -40,6 +40,8 @@ const TourCard = ({
   const closestDate = new Date(dates[0]);
   const photo = photos[0] || "/batken.jpg";
 
+  // TODO error when dates is an empty array closestData dates[0]
+
   return (
     <Box
       sx={{

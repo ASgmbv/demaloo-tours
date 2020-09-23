@@ -579,12 +579,11 @@ export default function TourPage({ tour }) {
 }
 
 export async function getStaticPaths() {
-  const getAllTours = require("../api/tours/index").getAllTours;
-  const tours = await getAllTours();
-  let paths = tours.map(({ _id }) => ({ params: { id: String(_id) } }));
+  const getTours = require("../api/tours/index").getTours;
+  const { data } = await getTours({});
+  let paths = data.map(({ _id }) => ({ params: { id: String(_id) } }));
 
   // pre-rendering all the individual tour pages
-
   return {
     paths,
     fallback: true,
