@@ -11,6 +11,11 @@ class MyDocument extends Document {
       <Html lang="ru">
         <Head>
           <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-164756023-2"
+          />
+
+          <script
             dangerouslySetInnerHTML={{
               __html: `
               window.dataLayer = window.dataLayer || [];
