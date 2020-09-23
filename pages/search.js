@@ -50,7 +50,7 @@ const SearchPage = ({ tours = [] }) => {
 
   const fetchTours = async (key, cat, sb, page = 0) => {
     let res = await fetch(
-      "http://localhost:3000/api/tours?page=" +
+      "/api/tours?page=" +
         page +
         "&limit=" +
         limit +
