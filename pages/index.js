@@ -11,6 +11,9 @@ import {
   Wrap,
   Center,
   Grid,
+  Alert,
+  CloseButton,
+  Link as ChakraLink,
 } from "@chakra-ui/core";
 import Link from "next/link";
 import Header from "../components/Header";
@@ -36,6 +39,29 @@ export default function Home() {
       </Head>
       <Box as="main" sx={{ width: "100%" }}>
         <Header />
+
+        <Alert
+          status="info"
+          sx={{
+            textAlign: "center",
+            justifyContent: "center",
+            alignItems: "center",
+            py: "3px",
+            fontSize: "14px",
+            textDecoration: "underline",
+          }}
+        >
+          <ChakraLink href="https://covid.kg" rel="noopener" target="_blank">
+            Актуальная информация о COVID-19 в Кыргызстане
+          </ChakraLink>
+          {/* <CloseButton
+            position="absolute"
+            right="8px"
+            top="8px"
+            justifyContent="center"
+          /> */}
+        </Alert>
+
         <Box
           as="section"
           sx={{ width: "100%", position: "relative", bg: "gray.50" }}
