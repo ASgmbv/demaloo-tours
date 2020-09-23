@@ -47,7 +47,9 @@ const Header = () => {
           </ChakraLink>
 
           <IconButton
-            onClick={toggleColorMode}
+            onClick={() => {
+              toggleColorMode();
+            }}
             aria-label="Search database"
             icon={colorMode === "dark" ? <SunIcon /> : <MoonIcon />}
           />
