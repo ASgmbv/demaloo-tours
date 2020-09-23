@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { AspectRatio, Image, Text, Box } from "@chakra-ui/core";
+import {
+  AspectRatio,
+  Image,
+  Text,
+  Box,
+  LightMode,
+  DarkMode,
+} from "@chakra-ui/core";
 import SwipeableViews from "react-swipeable-views";
 import { virtualize } from "react-swipeable-views-utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
@@ -95,6 +102,7 @@ const Carousel = ({
               backgroundColor: "gray.50",
               borderRadius: "full",
               cursor: "pointer",
+              color: "black",
             }}
           />
         ) : null}
@@ -109,6 +117,7 @@ const Carousel = ({
               backgroundColor: "gray.50",
               borderRadius: "full",
               cursor: "pointer",
+              color: "black",
             }}
           />
         ) : null}

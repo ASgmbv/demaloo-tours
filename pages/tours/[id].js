@@ -22,6 +22,8 @@ import {
   Link as ChakraLink,
   Grid,
   useDisclosure,
+  useColorModeValue,
+  LightMode,
 } from "@chakra-ui/core";
 import Link from "next/link";
 
@@ -65,6 +67,9 @@ const Main = ({
   const buttonVariant = useBreakpointValue({ base: "md", sm: "lg" });
   const router = useRouter();
 
+  const mainBg = useColorModeValue("#FAFAFA", "#1A202C");
+  const sectionBg = useColorModeValue("#fff", "#1A202C");
+
   return (
     <>
       <Head>
@@ -85,7 +90,7 @@ const Main = ({
       <Box
         sx={{
           width: "100%",
-          bg: "#F6F6F6",
+          bg: mainBg,
           py: 4,
         }}
       >
@@ -93,10 +98,10 @@ const Main = ({
           maxW="xl"
           centerContent
           sx={{
-            bg: "white",
             p: [4, 6],
-            borderRadius: ["10px", "20px"],
             border: "1px solid #e2e2e2",
+            borderRadius: [0, 10],
+            bg: sectionBg,
           }}
         >
           <Heading as="h1" fontSize={["xl", "2xl"]}>
@@ -107,11 +112,11 @@ const Main = ({
         <Container
           maxW="xl"
           sx={{
-            borderRadius: ["10px", "20px"],
             p: [4, 10],
-            bg: "white",
             mt: 4,
             border: "1px solid #e2e2e2",
+            borderRadius: [0, 10],
+            bg: sectionBg,
           }}
         >
           <Stack
@@ -245,11 +250,11 @@ const Main = ({
             position: "sticky",
             top: 0,
             left: 0,
-            bg: "white",
-            borderBottomLeftRadius: "lg",
-            borderBottomRightRadius: "lg",
+            borderBottomLeftRadius: [0, 10],
+            borderBottomRightRadius: [0, 10],
             boxShadow: "base",
             border: "1px solid #e2e2e2",
+            bg: sectionBg,
           }}
         >
           <List sx={{ d: "flex", overflow: "hidden" }}>
@@ -312,12 +317,12 @@ const Main = ({
           <Flex sx={{ flexDirection: ["column-reverse", null, null, "row"] }}>
             <Box
               sx={{
-                borderRadius: ["10px", "20px"],
                 p: [4, 10],
-                bg: "white",
                 flex: 1,
                 width: "100%",
                 border: "1px solid #e2e2e2",
+                borderRadius: [0, 10],
+                bg: sectionBg,
               }}
             >
               <Stack spacing={["4", "8"]}>
@@ -364,14 +369,14 @@ const Main = ({
             </Box>
             <Box
               sx={{
-                borderRadius: ["10px", "20px"],
                 p: [3, 6],
-                bg: "white",
                 ml: [0, null, null, 4],
                 mb: [4, null, null, 0],
                 minW: "xs",
                 maxW: [null, "sm"],
                 border: "1px solid #e2e2e2",
+                borderRadius: [0, 10],
+                bg: sectionBg,
               }}
             >
               <Stack direction="column" align="center">
@@ -424,11 +429,11 @@ const Main = ({
           maxW="xl"
           centerContent
           sx={{
-            bg: "white",
-            borderRadius: ["10px", "20px"],
             mt: 4,
             p: [4, 10],
             border: "1px solid #e2e2e2",
+            borderRadius: [0, 10],
+            bg: sectionBg,
           }}
         >
           <Flex sx={{ width: "100%", flexDirection: "column" }}>
@@ -489,11 +494,11 @@ const Main = ({
           maxW="xl"
           centerContent
           sx={{
-            bg: "white",
-            borderRadius: ["10px", "20px"],
             mt: 4,
             p: [4, 10],
             border: "1px solid #e2e2e2",
+            borderRadius: [0, 10],
+            bg: sectionBg,
           }}
         >
           <Flex sx={{ width: "100%", flexDirection: "column" }}>
@@ -530,11 +535,11 @@ const Main = ({
           maxW="xl"
           centerContent
           sx={{
-            bg: "white",
-            borderRadius: ["10px", "20px"],
             mt: 4,
             p: [4, 10],
             border: "1px solid #e2e2e2",
+            borderRadius: [0, 10],
+            bg: sectionBg,
           }}
         >
           <Flex sx={{ width: "100%", flexDirection: "column" }}>
@@ -566,6 +571,10 @@ const Main = ({
               )}
             </Grid>
           </Flex>
+        </Container>
+
+        <Container maxW="xl" centerContent sx={{ mt: "100px" }}>
+          Demaloo 2020
         </Container>
       </Box>
     </>

@@ -46,8 +46,6 @@ const SearchPage = ({ tours = [] }) => {
 
   let cache = useQueryCache();
 
-  //?currentDate=${new Date().toDateString()}
-
   const fetchTours = async (key, cat, sb, page = 0) => {
     let res = await fetch(
       "/api/tours?page=" +
@@ -57,7 +55,9 @@ const SearchPage = ({ tours = [] }) => {
         "&sortBy=" +
         sortBy +
         "&categories=" +
-        categories.join()
+        categories.join() +
+        "&currentDate=" +
+        new Date().toDateString()
     );
     res = await res.json();
 

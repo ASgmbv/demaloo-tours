@@ -178,10 +178,11 @@ export async function getTour(id) {
 
 export default async (req, res) => {
   const query = req.query;
+
   if (req.method === "GET") {
     try {
       const tours = await getTours({
-        currentData: query.currentDate,
+        currentDate: query.currentDate,
         categories: query.categories,
         sortBy: query.sortBy,
         page: query.page,

@@ -13,6 +13,7 @@ import {
   Link as ChakraLink,
 } from "@chakra-ui/core";
 import Link from "next/link";
+import LogoIcon from "../icons/Logo";
 
 const Footer = () => {
   return (
@@ -32,12 +33,19 @@ const Footer = () => {
             flexDirection: ["column", "row"],
           }}
         >
-          <Image
+          {/* <Image
             src="/logo/logo_white.png"
             objectFit="contain"
             width={["100px", "130px"]}
             mb={["20px", 0]}
             alt="demaloo logo"
+          /> */}
+
+          <LogoIcon
+            width={["100px", "130px"]}
+            height={["40px"]}
+            color={"#fff"}
+            mb={["20px", 0]}
           />
 
           <Button

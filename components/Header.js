@@ -6,13 +6,19 @@ import {
   Link as ChakraLink,
   Stack,
   ListItem,
+  useColorMode,
+  Button,
+  IconButton,
 } from "@chakra-ui/core";
 import Link from "next/link";
+import LogoIcon from "../icons/Logo";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 // import { signIn, signOut, useSession, getSession } from "next-auth/client";
 
 const Header = () => {
   // const [session, loading] = useSession();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Box
@@ -20,7 +26,7 @@ const Header = () => {
       sx={{
         borderBottom: "1px solid",
         borderBottomColor: "gray.300",
-        bg: "white",
+        // bg: "white",
       }}
     >
       <Container maxW="lg">
@@ -33,13 +39,18 @@ const Header = () => {
           }}
         >
           <ChakraLink href="/">
-            <Image
-              src="/logo/logo.png"
-              objectFit="contain"
+            <LogoIcon
               width={["100px", "130px"]}
-              alt="demaloo logo"
+              height={["40px"]}
+              color={colorMode === "dark" && "#fff"}
             />
           </ChakraLink>
+
+          <IconButton
+            onClick={toggleColorMode}
+            aria-label="Search database"
+            icon={colorMode === "dark" ? <SunIcon /> : <MoonIcon />}
+          />
 
           {/* <Flex>
             {!session && (

@@ -108,7 +108,7 @@ export default function Home() {
             </Box>
           </Flex>
         </Box>
-        <Container as="section" maxW="xl" sx={{ my: "100px" }}>
+        <Container as="section" maxW="xl" sx={{ my: ["50px", "100px"] }}>
           <Heading
             as="h2"
             sx={{
@@ -130,67 +130,78 @@ export default function Home() {
           />
           <Stack
             direction={["column", null, "row"]}
-            spacing={[3, null, 8]}
+            spacing={[8]}
             sx={{ width: "100%", marginTop: "50px" }}
           >
-            <Center
+            <Flex
               sx={{
-                p: 4,
+                p: [0, 4],
                 flex: 1,
                 flexDirection: "column",
                 minW: 56,
+                alignItems: ["start", "center"],
               }}
             >
               <Heading
                 as="h3"
-                sx={{ fontSize: ["md", "lg"], textAlign: "center", mb: 3 }}
+                fontSize={["18px", "22px"]}
+                sx={{
+                  textAlign: "center",
+                  mb: 3,
+                }}
               >
                 О нас 🤘
               </Heading>
-              <Text sx={{ textAlign: "center", maxW: "md" }}>
+              <Text sx={{ textAlign: ["start", "center"], maxW: "md" }}>
                 Сотрудничаем с более <strong>13-ти турфирмами.</strong>
                 <br />
                 Около <strong>50 туров</strong> и экскурсий по всем
                 достопримечательностям Бишкека, Каракола, Нарына и т.д.
               </Text>
-            </Center>
-            <Center
+            </Flex>
+
+            <Flex
               sx={{
-                p: 4,
+                p: [0, 4],
                 flex: 1,
                 flexDirection: "column",
                 minW: 56,
+                alignItems: ["start", "center"],
               }}
             >
               <Heading
                 as="h3"
-                sx={{ fontSize: ["md", "lg"], textAlign: "center", mb: 3 }}
+                fontSize={["18px", "22px"]}
+                sx={{ textAlign: "center", mb: 3 }}
               >
                 Почему мы? 👊
               </Heading>
-              <Text sx={{ textAlign: "center", maxW: "md" }}>
+              <Text sx={{ textAlign: ["start", "center"], maxW: "md" }}>
                 Те же цены что и у турагенств
                 <br />
                 Накопительная система - <strong>5% от суммы покупки.</strong>
                 Накопив достаточно, вы сможете получить бесплатный тур от любого
                 туроператора.
               </Text>
-            </Center>
-            <Center
+            </Flex>
+
+            <Flex
               sx={{
-                p: 4,
+                p: [0, 4],
                 flex: 1,
                 flexDirection: "column",
                 minW: 56,
+                alignItems: ["start", "center"],
               }}
             >
               <Heading
                 as="h3"
-                sx={{ fontSize: ["md", "lg"], textAlign: "center", mb: 3 }}
+                fontSize={["18px", "22px"]}
+                sx={{ textAlign: "center", mb: 3 }}
               >
                 Как это работает? 👏
               </Heading>
-              <Text sx={{ textAlign: "center", maxW: "md" }}>
+              <Text sx={{ textAlign: ["start", "center"], maxW: "md" }}>
                 1) Выберите тур.
                 <br />
                 2) Заполните форму.
@@ -199,11 +210,11 @@ export default function Home() {
                 <br />
                 4) Приятного отдыха!
               </Text>
-            </Center>
+            </Flex>
           </Stack>
         </Container>
 
-        <Container as="section" maxW="xl" sx={{ my: "100px" }}>
+        <Container as="section" maxW="xl" sx={{ my: ["50px", "100px"] }}>
           <Heading
             as="h2"
             sx={{
@@ -225,7 +236,7 @@ export default function Home() {
 
           <Grid
             templateColumns={["repeat(2, 1fr)", null, "repeat(4, 1fr)"]}
-            gap={"20px"}
+            gap={["10px", "20px"]}
             sx={{ marginTop: "50px" }}
           >
             {places.map(({ title, image, isWide }, index) => (
@@ -268,7 +279,7 @@ export default function Home() {
           </Grid>
         </Container>
 
-        <Container as="section" maxW="xl" sx={{ my: "100px" }}>
+        <Container as="section" maxW="xl" sx={{ my: ["50px", "100px"] }}>
           <Heading
             as="h2"
             sx={{
@@ -293,13 +304,14 @@ export default function Home() {
               marginTop: "50px",
             }}
             justify="center"
+            spacing="8"
           >
             {partners.map(({ title, logo }, index) => (
               <Flex
                 sx={{
                   flexDirection: "column",
                   alignItems: "center",
-                  width: "200px",
+                  width: "150px",
                 }}
                 key={index}
               >
