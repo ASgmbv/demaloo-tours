@@ -96,6 +96,7 @@ const Main = ({
             bg: "white",
             p: [4, 6],
             borderRadius: ["10px", "20px"],
+            border: "1px solid #e2e2e2",
           }}
         >
           <Heading as="h1" fontSize={["xl", "2xl"]}>
@@ -110,6 +111,7 @@ const Main = ({
             p: [4, 10],
             bg: "white",
             mt: 4,
+            border: "1px solid #e2e2e2",
           }}
         >
           <Stack
@@ -210,7 +212,7 @@ const Main = ({
                     sx={{
                       borderRadius: "full",
                     }}
-                    onClick={onOpen}
+                    onClick={onConsOpen}
                   >
                     Поехали
                   </Button>
@@ -247,6 +249,7 @@ const Main = ({
             borderBottomLeftRadius: "lg",
             borderBottomRightRadius: "lg",
             boxShadow: "base",
+            border: "1px solid #e2e2e2",
           }}
         >
           <List sx={{ d: "flex", overflow: "hidden" }}>
@@ -314,6 +317,7 @@ const Main = ({
                 bg: "white",
                 flex: 1,
                 width: "100%",
+                border: "1px solid #e2e2e2",
               }}
             >
               <Stack spacing={["4", "8"]}>
@@ -367,6 +371,7 @@ const Main = ({
                 mb: [4, null, null, 0],
                 minW: "xs",
                 maxW: [null, "sm"],
+                border: "1px solid #e2e2e2",
               }}
             >
               <Stack direction="column" align="center">
@@ -423,6 +428,7 @@ const Main = ({
             borderRadius: ["10px", "20px"],
             mt: 4,
             p: [4, 10],
+            border: "1px solid #e2e2e2",
           }}
         >
           <Flex sx={{ width: "100%", flexDirection: "column" }}>
@@ -487,6 +493,7 @@ const Main = ({
             borderRadius: ["10px", "20px"],
             mt: 4,
             p: [4, 10],
+            border: "1px solid #e2e2e2",
           }}
         >
           <Flex sx={{ width: "100%", flexDirection: "column" }}>
@@ -527,6 +534,7 @@ const Main = ({
             borderRadius: ["10px", "20px"],
             mt: 4,
             p: [4, 10],
+            border: "1px solid #e2e2e2",
           }}
         >
           <Flex sx={{ width: "100%", flexDirection: "column" }}>
@@ -606,6 +614,8 @@ export async function getStaticProps(context) {
     revalidate: 1,
   };
 }
+
+// TODO revalidate value
 
 // first place is starting point
 // starting point - next point

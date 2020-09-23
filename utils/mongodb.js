@@ -8,18 +8,17 @@ let cachedDb = null;
 
 if (!uri) {
   throw new Error(
-    "Please define the MONDODB_URI environment variable inside .env.local"
+    "Please define the MONGODB_URI environment variable inside .env.local"
   );
 }
 
 if (!dbName) {
   throw new Error(
-    "Please define the MONGODB_DB environment vairable inside .env.local"
+    "Please define the MONGODB_DB environment variable inside .env.local"
   );
 }
 
 export async function connectToDatabase() {
-  // console.log("cached db:", cachedDb);
   if (cachedClient && cachedDb) {
     return { client: cachedClient, db: cachedDb };
   }
@@ -31,7 +30,7 @@ export async function connectToDatabase() {
 
   const db = await client.db(dbName);
 
-  console.log("connected to database");
+  console.log("+1 mongodb connection!");
 
   cachedClient = client;
   cachedDb = db;

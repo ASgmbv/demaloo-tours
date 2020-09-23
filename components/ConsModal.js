@@ -20,12 +20,12 @@ const ConsModal = ({ isOpen, onClose }) => {
     <Modal isOpen={isOpen} onClose={onClose} size="lg">
       <ModalOverlay>
         <ModalContent>
-          <ModalHeader>Консультация</ModalHeader>
+          <ModalHeader>Контакты</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Text mb="6" color="gray.500" fontSize="sm">
               Вы можете обратиться по данным контактам по любым интересующим вас
-              вопросом о туре
+              вопросоми о туре
             </Text>
             <List spacing="4">
               <ListItem>
