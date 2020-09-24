@@ -217,7 +217,7 @@ const Main = ({
                     sx={{
                       borderRadius: "full",
                     }}
-                    onClick={onConsOpen}
+                    onClick={onOpen}
                   >
                     Поехали
                   </Button>

@@ -12,6 +12,7 @@ import {
   Button,
   Text,
   useToast,
+  Checkbox,
 } from "@chakra-ui/core";
 import { useRouter } from "next/router";
 
@@ -19,9 +20,13 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 // type = required, min, max
+// TODO save bookings to a database
+// TODO option to send email to a user if they want
 
 const RegModal = ({ isOpen, onClose, tour, company }) => {
-  const { register, handleSubmit, watch, errors, reset } = useForm();
+  const temp = useForm();
+  const { register, handleSubmit, watch, errors, reset } = temp;
+
   const router = useRouter();
   const toast = useToast();
 
@@ -30,17 +35,46 @@ const RegModal = ({ isOpen, onClose, tour, company }) => {
   const onSubmit = async (data) => {
     try {
       setSending(true);
-      await fetch("/api/registerTour", {
+
+      let details = {
+        ...data,
+        tour,
+        company,
+      };
+
+      let dbResponse = await fetch("/api/bookings", {
         method: "POST",
         body: JSON.stringify({
-          ...data,
-          tour,
-          company,
+          ...details,
         }),
         headers: {
           "Content-Type": "application/json",
         },
       });
+
+      if (dbResponse.status < 200 || dbResponse.status > 299) {
+        throw new Error("Failed to save booking to a database");
+      }
+
+      dbResponse = await dbResponse.json();
+
+      let id = dbResponse.data.data._id;
+
+      let emailResponse = await fetch("/api/registerTour", {
+        method: "POST",
+        body: JSON.stringify({
+          ...details,
+          id,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (emailResponse.status < 200 || emailResponse.status > 299) {
+        throw new Error("Failed to send registration email");
+      }
+
       setSending(false);
       toast({
         title: "Тур успешно забронирован!",
@@ -123,6 +157,16 @@ const RegModal = ({ isOpen, onClose, tour, company }) => {
               {errors?.count?.type === "min" && (
                 <Text color="orangered">Мин. количество = 1</Text>
               )}
+
+              {/* <Checkbox
+                name="sendEmail"
+                mt="5"
+                size="sm"
+                sx={{ fontSize: "12px" }}
+                color="gray.500"
+              >
+                Получить детали регистрации на свою почту
+              </Checkbox> */}
             </form>
           </ModalBody>
           <ModalFooter>
