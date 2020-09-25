@@ -61,9 +61,22 @@ export default function Home() {
 
         <Box
           as="section"
-          sx={{ width: "100%", position: "relative", bg: "gray.50" }}
+          sx={{
+            width: "100%",
+            position: "relative",
+            height: ["400px", "400px", "500px"],
+            bg: colorMode === "dark" ? "#0B3372" : "#91DEDB",
+            backgroundImage: `url(${
+              colorMode === "dark"
+                ? "/heroes/herodark.png"
+                : "/heroes/herolight.png"
+            })`,
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
         >
-          <Image
+          {/* <Image
             src={
               colorMode === "dark"
                 ? "/heroes/herodark.png"
@@ -73,9 +86,10 @@ export default function Home() {
               objectFit: "cover",
               width: "100%",
               height: ["400px", "400px", "500px"],
+              bg: "gray.50",
             }}
             alt="demaloo background"
-          />
+          /> */}
 
           {/* <Image
             src={colorMode === "dark" ? "/heroes/moon.png" : "/heroes/sun.png"}
@@ -113,6 +127,8 @@ export default function Home() {
                 color: "white",
                 fontSize: ["2xl", "4xl"],
                 textAlign: "center",
+                transition: "opacity .3s, transform .6s",
+                transitionDelay: ".4s",
               }}
             >
               Путешествуйте с нами!
