@@ -2,3 +2,12 @@
 body {
    scroll-behavior: smooth;
 } */
+
+@keyframes example {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100px);
+  }
+}

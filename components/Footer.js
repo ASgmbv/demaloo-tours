@@ -14,6 +14,21 @@ import {
 } from "@chakra-ui/core";
 import Link from "next/link";
 import LogoIcon from "../icons/Logo";
+import { FeedbackForm } from "feedback-fish";
+
+const FeedbackFishButton = (props) => {
+  return (
+    <Button
+      mt={[4, 0]}
+      {...props}
+      bg="white"
+      color="primary.500"
+      borderRadius="10px"
+    >
+      Оставьте отзыв
+    </Button>
+  );
+};
 
 const Footer = () => {
   return (
@@ -60,6 +75,11 @@ const Footer = () => {
           >
             СОТРУДНИЧЕСТВО
           </Button>
+
+          <FeedbackForm
+            projectId={"9c2cf5932ba675"}
+            triggerComponent={FeedbackFishButton}
+          />
         </Flex>
         <Flex
           sx={{

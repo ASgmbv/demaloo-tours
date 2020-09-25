@@ -14,6 +14,7 @@ import {
   Alert,
   CloseButton,
   Link as ChakraLink,
+  useColorMode,
 } from "@chakra-ui/core";
 import Link from "next/link";
 import Header from "../components/Header";
@@ -22,6 +23,8 @@ import { partners, places } from "../utils/data";
 // Tour Page
 
 export default function Home() {
+  const { colorMode } = useColorMode();
+
   return (
     <>
       <Head>
@@ -54,12 +57,6 @@ export default function Home() {
           <ChakraLink href="https://covid.kg" rel="noopener" target="_blank">
             Актуальная информация о COVID-19 в Кыргызстане
           </ChakraLink>
-          {/* <CloseButton
-            position="absolute"
-            right="8px"
-            top="8px"
-            justifyContent="center"
-          /> */}
         </Alert>
 
         <Box
@@ -67,14 +64,33 @@ export default function Home() {
           sx={{ width: "100%", position: "relative", bg: "gray.50" }}
         >
           <Image
-            src="/heroes/hero.png"
+            src={
+              colorMode === "dark"
+                ? "/heroes/herodark.png"
+                : "/heroes/herolight.png"
+            }
             sx={{
               objectFit: "cover",
               width: "100%",
-              height: ["300px", "350px", "400px", "450px"],
+              height: ["400px", "400px", "500px"],
             }}
             alt="demaloo background"
           />
+
+          {/* <Image
+            src={colorMode === "dark" ? "/heroes/moon.png" : "/heroes/sun.png"}
+            sx={{
+              objectFit: "cover",
+              width: "50px",
+              position: "absolute",
+              top: "50px",
+              left: "px",
+            }}
+            _hover={{
+              width: "100px",
+              opacity: 0,
+            }}
+          /> */}
 
           <Flex
             sx={{
@@ -84,7 +100,7 @@ export default function Home() {
               width: "100%",
               height: "100%",
               alignItems: "center",
-              justifyContent: "center",
+              justifyContent: "top",
               flexDirection: "column",
               bg: "rgba(0, 0, 0, 0.1)",
             }}
@@ -93,6 +109,7 @@ export default function Home() {
               as="h1"
               sx={{
                 mb: 4,
+                mt: 6,
                 color: "white",
                 fontSize: ["2xl", "4xl"],
                 textAlign: "center",
@@ -108,7 +125,7 @@ export default function Home() {
                 textAlign: "center",
                 fontSize: ["lg", "xl"],
                 lineHeight: "tall",
-                mb: "50px",
+                mb: 8,
               }}
             >
               Быстрый поиск туров по всему Кыргызстану
@@ -116,15 +133,16 @@ export default function Home() {
 
             <Box
               sx={{
-                bg: "rgba(255, 255, 255, 0.4)",
-                padding: "15px 20px",
+                bg: "rgba(255, 255, 255, 0.8)",
                 borderRadius: "10px",
+                border: "3px solid",
+                borderColor: "white",
               }}
             >
               <Link href="/search" passHref>
                 <Button
                   as="a"
-                  colorScheme="primary"
+                  colorScheme="orange"
                   size="lg"
                   borderRadius="10px"
                 >
