@@ -1,0 +1,4 @@
+// TODO
+
+1) Chakra Image has fallback prop, use it!
+2)  
