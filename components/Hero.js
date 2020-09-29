@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { jsx, css, keyframes } from "@emotion/core";
 import { Box, Flex, Heading, useColorMode, Button } from "@chakra-ui/core";
+import Logo from "../icons/Logo";
 
-const randomWalk = keyframes`
+const flame = keyframes`
   from {
     
   }
@@ -11,8 +12,18 @@ const randomWalk = keyframes`
   }
 `;
 
+const clouds = keyframes`
+  from {
+
+  }
+  to {
+    transform: translateX(1000px);
+  }
+`;
+
 const Hero = (params) => {
   const { colorMode } = useColorMode();
+
   return (
     <Box
       as="section"
@@ -40,25 +51,26 @@ const Hero = (params) => {
           height: "100%",
         }}
       >
-        {[...Array(10)].map((_, index) => (
-          <Box
-            key={index}
-            sx={{
-              width: "4px",
-              height: "4px",
-              borderRadius: "50%",
-              bg: "#E5B908",
-              position: "absolute",
-              bottom: `${50 + Math.floor(Math.random() * 50)}px`,
-              left: `${43 + Math.floor(Math.random() * 10)}%`,
-              animation: `${randomWalk}`,
-              animationDuration: `${3 + Math.floor(Math.random() * 10)}s`,
-              animationDelay: `-${Math.floor(Math.random() * 10)}s`,
-              animationIterationCount: "infinite",
-              animationTimingFunction: "linear",
-            }}
-          ></Box>
-        ))}
+        {colorMode === "dark" &&
+          [...Array(10)].map((_, index) => (
+            <Box
+              key={index}
+              sx={{
+                width: "4px",
+                height: "4px",
+                borderRadius: "50%",
+                bg: "#E5B908",
+                position: "absolute",
+                bottom: `${50 + Math.floor(Math.random() * 50)}px`,
+                left: `${43 + Math.floor(Math.random() * 10)}%`,
+                animation: `${flame}`,
+                animationDuration: `${3 + Math.floor(Math.random() * 10)}s`,
+                animationDelay: `-${Math.floor(Math.random() * 10)}s`,
+                animationIterationCount: "infinite",
+                animationTimingFunction: "linear",
+              }}
+            ></Box>
+          ))}
       </Box>
 
       <Flex

@@ -2,15 +2,10 @@ import {
   Box,
   Container,
   Flex,
-  Image,
   Link as ChakraLink,
-  Stack,
-  ListItem,
   useColorMode,
-  Button,
   IconButton,
 } from "@chakra-ui/core";
-import Link from "next/link";
 import LogoIcon from "../icons/Logo";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
