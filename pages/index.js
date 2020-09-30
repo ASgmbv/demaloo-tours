@@ -21,9 +21,28 @@ import Hero from "../components/Hero";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { partners, places } from "../utils/data";
+import { useRef, useEffect } from "react";
 // Tour Page
 
 export default function Home() {
+  // useEffect(() => {
+  //   let observer = new IntersectionObserver(
+  //     (entries, observer) => {
+  //       // console.log("hurray!", entries, observer);
+  //       console.log("threshold!");
+  //     },
+  //     {
+  //       root: null,
+  //       rootMargin: "0px",
+  //       threshold: 0,
+  //     }
+  //   );
+
+  //   observer.observe(heroRef.current);
+
+  //   return () => {};
+  // }, [headerRef]);
+
   return (
     <>
       <Head>
@@ -40,15 +59,13 @@ export default function Home() {
         />
       </Head>
       <Box as="main" sx={{ width: "100%" }}>
-        <Header />
-
         <Alert
           status="info"
           sx={{
             textAlign: "center",
             justifyContent: "center",
             alignItems: "center",
-            py: "3px",
+            py: "10px",
             fontSize: "14px",
             textDecoration: "underline",
           }}
@@ -57,6 +74,7 @@ export default function Home() {
             Актуальная информация о COVID-19 в Кыргызстане
           </ChakraLink>
         </Alert>
+        <Header />
 
         <Hero />
 

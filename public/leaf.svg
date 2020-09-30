@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<!-- ClipArt by Arvin61r58 (http://openclipart.org/user-detail/Arvin61r58) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.1"
+   id="svg4324"
+   viewBox="0 0 355 455.00001"
+   height="455"
+   width="355">
+  <title
+     id="title4948">Autumn Leaf 5</title>
+  <defs
+     id="defs4326">
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       y2="955.2818"
+       x2="-123.07352"
+       y1="886.69604"
+       x1="-242.22475"
+       id="linearGradient4275"
+       xlink:href="#linearGradient4269" />
+    <linearGradient
+       id="linearGradient4269">
+      <stop
+         id="stop4271"
+         offset="0"
+         style="stop-color:#e56f1a;stop-opacity:1;" />
+      <stop
+         id="stop4273"
+         offset="1"
+         style="stop-color:#e1d06c;stop-opacity:1" />
+    </linearGradient>
+    <filter
+       height="1"
+       width="1"
+       x="0"
+       y="0"
+       id="filter4277"
+       style="color-interpolation-filters:sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur4279"
+         result="result8"
+         stdDeviation="0.01" />
+      <feTurbulence
+         id="feTurbulence4281"
+         seed="3"
+         result="result7"
+         type="turbulence"
+         numOctaves="5"
+         baseFrequency="0.025 0.028" />
+      <feColorMatrix
+         id="feColorMatrix4283"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 6 -2.4 " />
+      <feComposite
+         id="feComposite4285"
+         result="result6"
+         in="result8"
+         operator="in"
+         in2="result7" />
+      <feDisplacementMap
+         id="feDisplacementMap4287"
+         in="result5"
+         xChannelSelector="R"
+         yChannelSelector="A"
+         scale="75"
+         result="result4"
+         in2="result6" />
+      <feFlood
+         id="feFlood4289"
+         result="result10"
+         flood-opacity="1"
+         flood-color="rgb(232,121,31)" />
+      <feComposite
+         id="feComposite4291"
+         result="result2"
+         operator="in"
+         in2="result4" />
+      <feComposite
+         id="feComposite4293"
+         result="result9"
+         in="result2"
+         operator="in"
+         in2="result8" />
+      <feBlend
+         id="feBlend4295"
+         result="result11"
+         in2="result8"
+         mode="normal" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata4329">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Autumn Leaf 5</dc:title>
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Arvin61r58</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Openclipart.org</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:identifier>https://openclipart.org/</dc:identifier>
+        <dc:source>https://openclipart.org/user-detail/Arvin61r58</dc:source>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Autumn</rdf:li>
+            <rdf:li>Fall</rdf:li>
+            <rdf:li>leaf</rdf:li>
+            <rdf:li>tree</rdf:li>
+            <rdf:li>nature</rdf:li>
+            <rdf:li>colors</rdf:li>
+            <rdf:li>colours</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:description>Autumn colors leaf</dc:description>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-154.75862,-313.70331)"
+     id="layer1">
+    <g
+       id="g4417"
+       transform="matrix(2.7514015,0,0,2.679537,-329.54539,-1915.1234)">
+      <title
+         id="title5532">Autumn Leaf 5  --  by Arvin61r58</title>
+      <g
+         id="g4404">
+        <path
+           style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#005100;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+           d="m 241.18738,940.62145 -1.41845,0.38036 c 2.15348,16.04627 -6.23659,40.28432 -18.77491,52.92622 2.07022,-0.5713 2.75666,0.2412 2.42188,2.0749 13.13734,-13.2459 20.04276,-38.45751 17.77148,-55.38148 z"
+           id="path4350" />
+        <g
+           id="g4393">
+          <path
+             id="path4267"
+             d="m -207.60856,1018.597 0.79653,-23.31026 c -12.36381,-9.1845 -26.84259,-13.08158 -46.29036,-4.55616 -24.09203,-31.48221 -5.24668,-17.20395 -24.09203,-31.48221 17.19136,-0.19019 33.10503,-1.65808 39.77595,-12.36871 0.48623,-16.06073 -9.77306,-29.05132 -34.16511,-38.00397 l 22.12643,-4.73508 -8.02822,-19.49338 -7.8918,-36.87738 23.89842,17.06129 17.19038,-14.28446 19.55058,23.77667 14.94456,11.26419 1.52853,-51.42736 13.43075,8.69568 2.57586,-28.51177 13.19179,-25.26937 -0.013,1e-5 16.8263,24.52297 -1.05865,23.28699 13.43075,1.00749 1.52853,47.69537 c 7.85863,8.96365 13.25553,0.23298 19.30597,-3.80021 l 15.189165,-31.24065 19.371091,7.56688 21.717713,-10.34371 -18.068432,36.87738 2.148412,19.49338 22.12643,4.73508 c -19.737312,13.73223 -26.001121,30.82546 -34.16511,38.00397 6.67092,10.71063 22.58459,12.17852 39.77595,12.36871 -18.84535,14.27826 0,0 -24.09203,31.48221 -19.44777,-8.52542 -33.926554,-4.62834 -46.290359,4.55616 l 0.79653,23.31025 c -19.53036,-0.5218 -48.53576,-19.25718 -48.53576,-19.25718 0,0 -29.0054,18.73538 -48.53576,19.25718 z"
+             style="opacity:0.98999999;fill:url(#linearGradient4275);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4277)"
+             transform="matrix(0.5,0,0,0.5,320.06982,442.85608)" />
+          <g
+             id="g4384">
+            <path
+               id="path4359"
+               d="M 240.97502,942.27565 C 218.65266,921.46055 208.8994,928.2537 193.76168,926.84951"
+               style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#924100;stroke-width:0.54563451;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.19607843" />
+            <path
+               style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#924100;stroke-width:0.54563451;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.19607843"
+               d="m 287.95276,926.84951 c -15.13772,1.40419 -24.89098,-5.38896 -47.21241,15.30878 l 0.23467,-98.04793"
+               id="path4361" />
+            <path
+               id="path4363"
+               d="m 230.69093,934.32885 c -1.3784,7.46018 -5.35704,10.23991 -9.81664,12.15393"
+               style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#924100;stroke-width:0.54563451;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.19607843" />
+            <path
+               style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#924100;stroke-width:0.54563451;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.19607843"
+               d="m 253.82492,932.92648 c 1.3784,7.46018 5.35704,10.23991 9.81664,12.15393"
+               id="path4367" />
+            <path
+               style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#924100;stroke-width:0.54563451;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.19607843"
+               d="m 282.34089,882.90838 c -25.12781,6.31749 -31.70016,34.04514 -41.83545,58.08176 -10.13528,-24.27035 -16.70763,-51.998 -41.83544,-58.31549"
+               id="path4373" />
+            <path
+               id="path4375"
+               d="m 226.25008,907.91743 c -19.07391,-1.37908 -22.14047,-6.01864 -28.51499,-9.81664"
+               style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#924100;stroke-width:0.54563451;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.19607843" />
+            <path
+               style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#924100;stroke-width:0.54563451;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.19607843"
+               d="m 254.99977,907.44998 c 19.07391,-1.37908 22.14047,-6.01864 28.51499,-9.81664"
+               id="path4377" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

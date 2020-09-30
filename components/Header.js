@@ -9,19 +9,17 @@ import {
 import LogoIcon from "../icons/Logo";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
-// import { signIn, signOut, useSession, getSession } from "next-auth/client";
-
-const Header = () => {
-  // const [session, loading] = useSession();
+const Header = React.forwardRef((props, ref) => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Box
+      ref={ref}
+      {...props}
       as="header"
       sx={{
         borderBottom: "1px solid",
         borderBottomColor: "gray.300",
-        // bg: "white",
       }}
     >
       <Container maxW="lg">
@@ -81,6 +79,6 @@ const Header = () => {
       </Container>
     </Box>
   );
-};
+});
 
 export default Header;

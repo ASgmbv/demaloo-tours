@@ -1,4 +1,5 @@
 // TODO
 
 1) Chakra Image has fallback prop, use it!
-2)  
+2) Header with "view tours" button
+3) 

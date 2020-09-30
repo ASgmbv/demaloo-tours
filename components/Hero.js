@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { jsx, css, keyframes } from "@emotion/core";
 import { Box, Flex, Heading, useColorMode, Button } from "@chakra-ui/core";
-import Logo from "../icons/Logo";
+import Leaf from "../icons/Leaf";
 
 const flame = keyframes`
   from {
@@ -12,20 +12,30 @@ const flame = keyframes`
   }
 `;
 
-const clouds = keyframes`
-  from {
+// const wind = keyframes`
+//   from {
 
-  }
-  to {
-    transform: translateX(1000px);
-  }
-`;
+//   }
+//   33% {
+//     transform-origin: 100px;
+//     transform: translateX(20vw) rotate(360deg);
+//   }
+//   66% {
+//     transform-origin: -100px;
+//     transform: translateX(50vw) rotate(360deg);
+//   }
+//   to {
+//     transform: translateX(100vw) rotate(360deg);
+//   }
+// `;
 
-const Hero = (params) => {
+const Hero = React.forwardRef((props, ref) => {
   const { colorMode } = useColorMode();
 
   return (
     <Box
+      ref={ref}
+      {...props}
       as="section"
       sx={{
         width: "100%",
@@ -71,6 +81,42 @@ const Hero = (params) => {
               }}
             ></Box>
           ))}
+        {/* {colorMode === "light" &&
+          [...Array(1)].map((_, index) => (
+            <Leaf
+              key={index}
+              sx={{
+                animation: `${wind}`,
+                animationIterationCount: "infinite",
+                animationTimingFunction: "linear",
+                animationDuration: "5s",
+                position: "absolute",
+                bottom: "50%",
+                left: "10%",
+                width: "50px",
+                height: "50px",
+              }}
+            />
+
+            // <Box
+            //   sx={{
+            //     width: "50px",
+            //     height: "3px",
+            //     bg: "white",
+            //     position: "absolute",
+            //     bottom: "50%",
+            //     left: "10%",
+            //     // bottom: `${20 + Math.floor(Math.random() * 10)}%`,
+            //     // left: `${40 + Math.floor(Math.random() * 10)}%`,
+            //     animation: `${wind}`,
+            //     animationIterationCount: "infinite",
+            //     animationTimingFunction: "linear",
+            //     animationDuration: "5s",
+            //     // animationDelay: `-${Math.floor(Math.random() * 4)}s`,
+            //   }}
+            //   key={index}
+            // ></Box>
+          ))} */}
       </Box>
 
       <Flex
@@ -131,6 +177,6 @@ const Hero = (params) => {
       </Flex>
     </Box>
   );
-};
+});
 
 export default Hero;
