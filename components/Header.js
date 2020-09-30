@@ -36,7 +36,7 @@ const Header = React.forwardRef(({ isVisible = false, ...props }, ref) => {
         top: 0,
         // TODO these may lead to unexpected bugs, research
         zIndex: 10000,
-        bg: "white",
+        bg: colorMode === "dark" ? "#1A202C" : "white",
         // marginBottom: "-65px",
       }}
     >
@@ -56,7 +56,7 @@ const Header = React.forwardRef(({ isVisible = false, ...props }, ref) => {
             <LogoIcon
               width={["100px", "130px"]}
               height={["40px"]}
-              // color={colorMode === "dark" && "#fff"}
+              color={colorMode === "dark" && "#fff"}
             />
           </ChakraLink>
 
@@ -84,22 +84,12 @@ const Header = React.forwardRef(({ isVisible = false, ...props }, ref) => {
           <IconButton
             sx={{
               justifySelf: "flex-end",
-              bg: "#EDF2F7",
-            }}
-            _hover={{
-              bg: "#EDF2F7",
             }}
             onClick={() => {
               toggleColorMode();
             }}
             aria-label="Search database"
-            icon={
-              colorMode === "dark" ? (
-                <SunIcon color="black" />
-              ) : (
-                <MoonIcon color="black" />
-              )
-            }
+            icon={colorMode === "dark" ? <SunIcon /> : <MoonIcon />}
           />
         </Flex>
       </Container>
