@@ -6,42 +6,25 @@ import {
   Container,
   Flex,
   Text,
-  Button,
   Stack,
   Wrap,
-  Center,
   Grid,
   Alert,
-  CloseButton,
   Link as ChakraLink,
-  useColorMode,
 } from "@chakra-ui/core";
 
 import Hero from "../components/Hero";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { partners, places } from "../utils/data";
-import { useRef, useEffect } from "react";
-// Tour Page
+import { useRef, useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 export default function Home() {
-  // useEffect(() => {
-  //   let observer = new IntersectionObserver(
-  //     (entries, observer) => {
-  //       // console.log("hurray!", entries, observer);
-  //       console.log("threshold!");
-  //     },
-  //     {
-  //       root: null,
-  //       rootMargin: "0px",
-  //       threshold: 0,
-  //     }
-  //   );
-
-  //   observer.observe(heroRef.current);
-
-  //   return () => {};
-  // }, [headerRef]);
+  const { ref: heroRef, inView, entry } = useInView({
+    threshold: 0.7,
+    initialInView: true,
+  });
 
   return (
     <>
@@ -58,25 +41,27 @@ export default function Home() {
           content="туры, экскурсии, горящие туры, турагентство ,отдых за городом, тур пакеты, туристические пакеты"
         />
       </Head>
-      <Box as="main" sx={{ width: "100%" }}>
-        <Alert
-          status="info"
-          sx={{
-            textAlign: "center",
-            justifyContent: "center",
-            alignItems: "center",
-            py: "10px",
-            fontSize: "14px",
-            textDecoration: "underline",
-          }}
-        >
-          <ChakraLink href="https://covid.kg" rel="noopener" target="_blank">
-            Актуальная информация о COVID-19 в Кыргызстане
-          </ChakraLink>
-        </Alert>
-        <Header />
 
-        <Hero />
+      <Alert
+        status="info"
+        sx={{
+          textAlign: "center",
+          justifyContent: "center",
+          alignItems: "center",
+          py: "5px",
+          fontSize: "13px",
+          textDecoration: "underline",
+        }}
+      >
+        <ChakraLink href="https://covid.kg" rel="noopener" target="_blank">
+          Актуальная информация о COVID-19 в Кыргызстане
+        </ChakraLink>
+      </Alert>
+
+      <Box as="main" sx={{ width: "100%" }}>
+        <Header isVisible={!inView} />
+
+        <Hero ref={heroRef} />
 
         <Container as="section" maxW="xl" sx={{ my: ["50px", "100px"] }}>
           <Heading

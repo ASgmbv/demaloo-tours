@@ -1,7 +1,13 @@
 import Link from "next/link";
 import { jsx, css, keyframes } from "@emotion/core";
-import { Box, Flex, Heading, useColorMode, Button } from "@chakra-ui/core";
-import Leaf from "../icons/Leaf";
+import {
+  Box,
+  Flex,
+  Heading,
+  useColorMode,
+  Button,
+  Stack,
+} from "@chakra-ui/core";
 
 const flame = keyframes`
   from {
@@ -12,24 +18,7 @@ const flame = keyframes`
   }
 `;
 
-// const wind = keyframes`
-//   from {
-
-//   }
-//   33% {
-//     transform-origin: 100px;
-//     transform: translateX(20vw) rotate(360deg);
-//   }
-//   66% {
-//     transform-origin: -100px;
-//     transform: translateX(50vw) rotate(360deg);
-//   }
-//   to {
-//     transform: translateX(100vw) rotate(360deg);
-//   }
-// `;
-
-const Hero = React.forwardRef((props, ref) => {
+const Hero = React.forwardRef(({ ...props }, ref) => {
   const { colorMode } = useColorMode();
 
   return (
@@ -81,7 +70,86 @@ const Hero = React.forwardRef((props, ref) => {
               }}
             ></Box>
           ))}
-        {/* {colorMode === "light" &&
+      </Box>
+
+      <Flex
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          alignItems: "center",
+          justifyContent: "top",
+          flexDirection: "column",
+          bg: "rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <Stack align="center" spacing="4" mt="3">
+          <Heading
+            as="h1"
+            sx={{
+              color: "white",
+              fontSize: ["2xl", "4xl"],
+              textAlign: "center",
+              transition: "opacity .3s, transform .6s",
+              transitionDelay: ".4s",
+            }}
+          >
+            Путешествуйте с нами!
+          </Heading>
+
+          <Heading
+            as="h2"
+            sx={{
+              color: "white",
+              maxW: "300px",
+              textAlign: "center",
+              fontSize: ["lg", "xl"],
+              lineHeight: "tall",
+            }}
+          >
+            Быстрый поиск туров по всему Кыргызстану
+          </Heading>
+
+          <Link href="/search" passHref>
+            <Button
+              as="a"
+              colorScheme="orange"
+              size="lg"
+              borderRadius="10px"
+              width="100%"
+              border="2px solid #fff"
+              width="fit-content"
+            >
+              Все туры
+            </Button>
+          </Link>
+        </Stack>
+      </Flex>
+    </Box>
+  );
+});
+
+// const wind = keyframes`
+//   from {
+
+//   }
+//   33% {
+//     transform-origin: 100px;
+//     transform: translateX(20vw) rotate(360deg);
+//   }
+//   66% {
+//     transform-origin: -100px;
+//     transform: translateX(50vw) rotate(360deg);
+//   }
+//   to {
+//     transform: translateX(100vw) rotate(360deg);
+//   }
+// `;
+
+{
+  /* {colorMode === "light" &&
           [...Array(1)].map((_, index) => (
             <Leaf
               key={index}
@@ -116,67 +184,7 @@ const Hero = React.forwardRef((props, ref) => {
             //   }}
             //   key={index}
             // ></Box>
-          ))} */}
-      </Box>
-
-      <Flex
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          alignItems: "center",
-          justifyContent: "top",
-          flexDirection: "column",
-          bg: "rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <Heading
-          as="h1"
-          sx={{
-            mb: 4,
-            mt: 6,
-            color: "white",
-            fontSize: ["2xl", "4xl"],
-            textAlign: "center",
-            transition: "opacity .3s, transform .6s",
-            transitionDelay: ".4s",
-          }}
-        >
-          Путешествуйте с нами!
-        </Heading>
-        <Heading
-          as="h2"
-          sx={{
-            color: "white",
-            maxW: "300px",
-            textAlign: "center",
-            fontSize: ["lg", "xl"],
-            lineHeight: "tall",
-            mb: 8,
-          }}
-        >
-          Быстрый поиск туров по всему Кыргызстану
-        </Heading>
-
-        <Box
-          sx={{
-            bg: "rgba(255, 255, 255, 0.8)",
-            borderRadius: "10px",
-            border: "3px solid",
-            borderColor: "white",
-          }}
-        >
-          <Link href="/search" passHref>
-            <Button as="a" colorScheme="orange" size="lg" borderRadius="10px">
-              Все туры
-            </Button>
-          </Link>
-        </Box>
-      </Flex>
-    </Box>
-  );
-});
+          ))} */
+}
 
 export default Hero;

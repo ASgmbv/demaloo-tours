@@ -5,12 +5,24 @@ import {
   Link as ChakraLink,
   useColorMode,
   IconButton,
+  Button,
 } from "@chakra-ui/core";
 import LogoIcon from "../icons/Logo";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { jsx, css, keyframes } from "@emotion/core";
+import Link from "next/link";
 
-const Header = React.forwardRef((props, ref) => {
+const Header = React.forwardRef(({ isVisible = false, ...props }, ref) => {
   const { colorMode, toggleColorMode } = useColorMode();
+
+  const button = keyframes`
+      from {
+        transform: scale(2) translateY(10px);
+      }
+      to {
+        transform: scale(1) translateY(0px);
+      }
+    `;
 
   return (
     <Box
@@ -20,34 +32,83 @@ const Header = React.forwardRef((props, ref) => {
       sx={{
         borderBottom: "1px solid",
         borderBottomColor: "gray.300",
+        position: "sticky",
+        top: 0,
+        // TODO these may lead to unexpected bugs, research
+        zIndex: 10000,
+        bg: "white",
+        // marginBottom: "-65px",
       }}
     >
       <Container maxW="lg">
         <Flex
           sx={{
+            d: "grid",
             width: "100%",
             height: "64px",
-            justifyContent: "space-between",
+            gridTemplateColumns: isVisible
+              ? "repeat(3, 1fr)"
+              : "repeat(2, 1fr)",
             alignItems: "center",
           }}
         >
-          <ChakraLink href="/">
+          <ChakraLink href="/" sx={{ justifySelf: "flex-start" }}>
             <LogoIcon
               width={["100px", "130px"]}
               height={["40px"]}
-              color={colorMode === "dark" && "#fff"}
+              // color={colorMode === "dark" && "#fff"}
             />
           </ChakraLink>
 
+          {isVisible ? (
+            <Link href="/search" passHref>
+              <Button
+                as="a"
+                colorScheme="orange"
+                size="lg"
+                borderRadius="10px"
+                width="100%"
+                border="2px solid #fff"
+                sx={{
+                  animation: `${button}`,
+                  animationDuration: `${0.1}s`,
+                  animationTimingFunction: "linear",
+                  animationFillMode: "forwards",
+                }}
+              >
+                Все туры
+              </Button>
+            </Link>
+          ) : null}
+
           <IconButton
+            sx={{
+              justifySelf: "flex-end",
+              bg: "#EDF2F7",
+            }}
+            _hover={{
+              bg: "#EDF2F7",
+            }}
             onClick={() => {
               toggleColorMode();
             }}
             aria-label="Search database"
-            icon={colorMode === "dark" ? <SunIcon /> : <MoonIcon />}
+            icon={
+              colorMode === "dark" ? (
+                <SunIcon color="black" />
+              ) : (
+                <MoonIcon color="black" />
+              )
+            }
           />
+        </Flex>
+      </Container>
+    </Box>
+  );
+});
 
-          {/* <Flex>
+{
+  /* <Flex>
             {!session && (
               <>
                 <a
@@ -74,11 +135,7 @@ const Header = React.forwardRef((props, ref) => {
                 </a>
               </>
             )}
-          </Flex> */}
-        </Flex>
-      </Container>
-    </Box>
-  );
-});
+          </Flex> */
+}
 
 export default Header;
