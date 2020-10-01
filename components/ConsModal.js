@@ -17,7 +17,7 @@ import { FaWhatsapp, FaTelegram, FaPhone } from "react-icons/fa";
 
 const ConsModal = ({ isOpen, onClose }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="lg">
+    <Modal isOpen={isOpen} onClose={onClose} size="lg" isCentered>
       <ModalOverlay>
         <ModalContent>
           <ModalHeader>Контакты</ModalHeader>

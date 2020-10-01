@@ -220,20 +220,6 @@ const Main = ({
                     {organizer.name}
                   </Text>
                 </Flex>
-                <Divider />
-                <Flex sx={{ justifyContent: "start" }}>
-                  <Button
-                    variant="ghost"
-                    colorScheme="blue"
-                    size={buttonVariant}
-                    sx={{
-                      borderRadius: "full",
-                    }}
-                    onClick={onConsOpen}
-                  >
-                    Есть вопросы?
-                  </Button>
-                </Flex>
               </Stack>
             </Flex>
           </Stack>
@@ -292,7 +278,6 @@ const Main = ({
                 border: "1px solid #e2e2e2",
                 borderRadius: [0, 10],
                 bg: sectionBg,
-                height: "230px",
                 gridRowStart: 1,
                 gridRowEnd: 4,
                 gridColumnStart: 2,
@@ -305,6 +290,7 @@ const Main = ({
                 flexDir: "column",
                 alignItems: "center",
                 display: ["none", null, null, "flex"],
+                height: "fit-content",
               }}
             >
               <Text>(цена за человека)</Text>
@@ -326,6 +312,17 @@ const Main = ({
                 onClick={onOpen}
               >
                 Поехали
+              </Button>
+              <Button
+                variant="ghost"
+                colorScheme="blue"
+                size="sm"
+                mt="3"
+                fontSize="sm"
+                size={buttonVariant}
+                onClick={onConsOpen}
+              >
+                Есть вопросы?
               </Button>
             </Flex>
 

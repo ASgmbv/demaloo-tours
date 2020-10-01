@@ -103,7 +103,7 @@ const RegModal = ({ isOpen, onClose, tour, company }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} size="lg">
+    <Modal isOpen={isOpen} onClose={handleClose} size="lg" isCentered>
       <ModalOverlay>
         <ModalContent>
           <ModalHeader>Заполните поля</ModalHeader>
