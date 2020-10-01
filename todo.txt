@@ -3,3 +3,50 @@
 1) Chakra Image has fallback prop, use it!
 2) Header with "view tours" button
 3) 
+
+
+
+
+// guides
+
+<Container
+  maxW="xl"
+  centerContent
+  sx={{
+    mt: 4,
+    p: [4, 10],
+    border: "1px solid #e2e2e2",
+    borderRadius: [0, 10],
+    bg: sectionBg,
+  }}
+>
+  <Flex sx={{ width: "100%", flexDirection: "column" }}>
+    <Heading
+      as="h3"
+      sx={{ color: "teal.500", mb: [4, 8], fontSize: ["lg", "xl"] }}
+    >
+      Гиды
+    </Heading>
+
+    <Grid
+      width="100%"
+      sx={{
+        gridTemplateColumns: ["1fr", null, null, "repeat(2, 1fr)"],
+      }}
+      gap={6}
+    >
+      {guides.map(
+        ({ name, age, experience, languages, photo }, index) => (
+          <GuideCard
+            key={index}
+            name={name}
+            age={age}
+            experience={experience}
+            languages={languages}
+            photo={photo}
+          />
+        )
+      )}
+    </Grid>
+  </Flex>
+</Container> 

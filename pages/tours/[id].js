@@ -20,14 +20,12 @@ import {
   AccordionIcon,
   AccordionItem,
   Link as ChakraLink,
-  Grid,
   useDisclosure,
   useColorModeValue,
-  LightMode,
+  Grid,
 } from "@chakra-ui/core";
 import Link from "next/link";
 
-import GuideCard from "../../components/GuideCard";
 import { useBreakpointValue } from "@chakra-ui/media-query";
 import Carousel from "../../components/Carousel";
 import Header from "../../components/Header";
@@ -38,6 +36,24 @@ import ConsModal from "../../components/ConsModal";
 // import { getAllTours } from "../api/tours/index";
 import { daysRus } from "../../utils/ruswords";
 import { categoriesMap, monthsMap } from "../../utils/data";
+
+const Section = ({ children, ...props }) => {
+  const sectionBg = useColorModeValue("#fff", "#1A202C");
+  return (
+    <Flex
+      {...props}
+      sx={{
+        p: [4, 10],
+        width: "100%",
+        border: "1px solid #e2e2e2",
+        borderRadius: [0, null, null, 10],
+        bg: sectionBg,
+      }}
+    >
+      {children}
+    </Flex>
+  );
+};
 
 const Main = ({
   name,
@@ -184,43 +200,25 @@ const Main = ({
                 <Flex
                   sx={{
                     alignItems: "center",
-                    justifyContent: "space-between",
+                    height: "100%",
                   }}
                 >
-                  <Flex
+                  <Image
+                    objectFit="cover"
+                    boxSize={["50px", "70px"]}
+                    src={organizer.logo}
+                    borderRadius="full"
+                    alt="icon"
+                  />
+                  <Text
                     sx={{
-                      alignItems: "center",
-                      height: "100%",
+                      fontWeight: "normal",
+                      fontSize: ["xl", "2xl"],
+                      ml: 3,
                     }}
                   >
-                    <Image
-                      objectFit="cover"
-                      boxSize={["50px", "70px"]}
-                      src={organizer.logo}
-                      borderRadius="full"
-                      // border="1px solid #20C4CE"
-                      alt="icon"
-                    />
-                    <Text
-                      sx={{
-                        fontWeight: "normal",
-                        fontSize: ["xl", "2xl"],
-                        ml: 3,
-                      }}
-                    >
-                      {organizer.name}
-                    </Text>
-                  </Flex>
-                  <Button
-                    colorScheme="teal"
-                    size={buttonVariant}
-                    sx={{
-                      borderRadius: "full",
-                    }}
-                    onClick={onOpen}
-                  >
-                    Поехали
-                  </Button>
+                    {organizer.name}
+                  </Text>
                 </Flex>
                 <Divider />
                 <Flex sx={{ justifyContent: "start" }}>
@@ -241,90 +239,9 @@ const Main = ({
           </Stack>
         </Container>
 
-        <Container
-          maxW="xl"
-          sx={{
-            mt: 4,
-            px: [4, 10],
-            py: 2,
-            position: "sticky",
-            top: 0,
-            left: 0,
-            borderBottomLeftRadius: [0, 10],
-            borderBottomRightRadius: [0, 10],
-            boxShadow: "base",
-            border: "1px solid #e2e2e2",
-            bg: sectionBg,
-          }}
-        >
-          <List sx={{ d: "flex", overflow: "hidden" }}>
-            <ListItem>
-              <Link
-                href={router.pathname}
-                as={`${router?.query?.id}/#about-tour`}
-              >
-                <ChakraLink sx={{ fontSize: ["lg", "xl"] }}>О Туре</ChakraLink>
-              </Link>
-            </ListItem>
-
-            <ListItem>
-              <Link
-                href={router.pathname}
-                as={`${router?.query?.id}/#days-description`}
-              >
-                <ChakraLink sx={{ fontSize: ["lg", "xl"], ml: 4 }}>
-                  Дни
-                </ChakraLink>
-              </Link>
-            </ListItem>
-
-            <ListItem>
-              <Link
-                href={router.pathname}
-                as={`${router?.query?.id}/#coming-dates`}
-              >
-                <ChakraLink sx={{ fontSize: ["lg", "xl"], ml: 4 }}>
-                  Даты
-                </ChakraLink>
-              </Link>
-            </ListItem>
-
-            <ListItem>
-              <Link href={router.pathname} as={`${router?.query?.id}/#guides`}>
-                <ChakraLink sx={{ ml: 4, fontSize: ["lg", "xl"] }}>
-                  Гиды
-                </ChakraLink>
-              </Link>
-            </ListItem>
-          </List>
-        </Container>
-
-        <Box
-          id="about-tour"
-          sx={{
-            position: "relative",
-            top: ["-20px", 0],
-          }}
-        />
-
-        <Container
-          maxW="xl"
-          sx={{
-            mt: 4,
-            p: 0,
-          }}
-        >
-          <Flex sx={{ flexDirection: ["column-reverse", null, null, "row"] }}>
-            <Box
-              sx={{
-                p: [4, 10],
-                flex: 1,
-                width: "100%",
-                border: "1px solid #e2e2e2",
-                borderRadius: [0, 10],
-                bg: sectionBg,
-              }}
-            >
+        <Container maxW="xl" mt="4" p="0">
+          <Grid templateColumns={["1fr", null, null, "1fr auto"]} gap="4">
+            <Section>
               <Stack spacing={["4", "8"]}>
                 <Heading
                   as="h3"
@@ -366,216 +283,165 @@ const Main = ({
                   </Flex>
                 </Stack>
               </Stack>
-            </Box>
-            <Box
+            </Section>
+
+            <Flex
               sx={{
-                p: [3, 6],
-                ml: [0, null, null, 4],
-                mb: [4, null, null, 0],
-                minW: "xs",
-                maxW: [null, "sm"],
+                p: [4, 10],
+                width: "330px",
                 border: "1px solid #e2e2e2",
                 borderRadius: [0, 10],
                 bg: sectionBg,
+                height: "230px",
+                gridRowStart: 1,
+                gridRowEnd: 4,
+                gridColumnStart: 2,
+                gridColumnEnd: 3,
+                position: "sticky",
+                top: "100px",
+                boxShadow: "rgba(0, 0, 0, 0.12) 0px 6px 16px",
+                border: "1px solid",
+                borderColor: "gray.200",
+                flexDir: "column",
+                alignItems: "center",
+                display: ["none", null, null, "flex"],
               }}
             >
-              <Stack direction="column" align="center">
-                <Text>(цена за человека)</Text>
-                <Text
-                  fontSize={["3xl", "4xl"]}
-                  sx={{ textAlign: "center", fontWeight: "bold" }}
-                >
-                  {price}{" "}
-                  <Text as="span" fontSize="xl">
-                    сом
-                  </Text>
+              <Text>(цена за человека)</Text>
+              <Text
+                fontSize={["3xl", "4xl"]}
+                sx={{ textAlign: "center", fontWeight: "bold" }}
+              >
+                {price}{" "}
+                <Text as="span" fontSize="xl">
+                  сом
                 </Text>
+              </Text>
 
-                {groupDiscounts.length === 0 ? null : (
-                  <>
-                    <Text>Групповые скидки</Text>
-                    {groupDiscounts.map(({ count, price }, index) => (
-                      <Text
-                        fontSize={["xl", "2xl"]}
-                        sx={{ textAlign: "center" }}
-                        key={index}
-                      >
+              <Button
+                colorScheme="teal"
+                size={buttonVariant}
+                borderRadius="full"
+                mt="4"
+                onClick={onOpen}
+              >
+                Поехали
+              </Button>
+            </Flex>
+
+            <Section flexDir="column">
+              <Heading
+                as="h3"
+                sx={{ color: "teal.500", mb: [4, 8], fontSize: ["lg", "xl"] }}
+              >
+                Даты
+              </Heading>
+              <List spacing="4">
+                {dates.map((date, index) => {
+                  const dateObj = new Date(date);
+                  return (
+                    <ListItem key={index} sx={{ fontSize: ["md", "lg"] }}>
+                      {`📅  ${dateObj.getDate()} ${
+                        monthsMap[dateObj.getMonth()]
+                      }`}
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </Section>
+
+            <Section flexDir="column">
+              <Heading
+                as="h3"
+                sx={{ color: "teal.500", mb: [4, 8], fontSize: ["lg", "xl"] }}
+              >
+                Программа
+              </Heading>
+              <Accordion defaultIndex={[0]} allowToggle={true}>
+                {days.map(({ description, locations }, index) => (
+                  <AccordionItem key={index}>
+                    <AccordionButton>
+                      {/* <CalendarIcon color="teal.500" /> */}
+                      👉
+                      <Box flex="1" textAlign="left" ml="4" py="2">
+                        <Heading
+                          as="h4"
+                          sx={{
+                            fontSize: ["md", "lg"],
+                            fontWeight: "normal",
+                          }}
+                        >
+                          {`День ${index + 1} | ${locations
+                            .map((location) => location.name)
+                            .join(" - ")}`}
+                        </Heading>
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                    <AccordionPanel>
+                      <Container maxW="lg">
                         <Text
-                          as="span"
-                          fontSize="lg"
-                        >{`до ${count} чел. - `}</Text>
-                        {`${price} `}
-                        <Text as="span" fontSize="lg">
-                          сом
+                          sx={{
+                            lineHeight: "taller",
+                            fontSize: ["sm", "md"],
+                          }}
+                        >
+                          {description}
                         </Text>
-                      </Text>
-                    ))}
-                  </>
-                )}
-              </Stack>
-            </Box>
-          </Flex>
+                      </Container>
+                    </AccordionPanel>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </Section>
+          </Grid>
         </Container>
 
-        <Box
-          id="days-description"
-          sx={{
-            position: "relative",
-            top: ["-20px", 0],
-          }}
-        />
-
-        <Container
-          maxW="xl"
-          centerContent
-          sx={{
-            mt: 4,
-            p: [4, 10],
-            border: "1px solid #e2e2e2",
-            borderRadius: [0, 10],
-            bg: sectionBg,
-          }}
-        >
-          <Flex sx={{ width: "100%", flexDirection: "column" }}>
-            <Heading
-              as="h3"
-              sx={{ color: "teal.500", mb: [4, 8], fontSize: ["lg", "xl"] }}
-            >
-              Дни
-            </Heading>
-            <Accordion defaultIndex={[0]} allowToggle={true}>
-              {days.map(({ description, locations }, index) => (
-                <AccordionItem key={index}>
-                  <AccordionButton>
-                    {/* <CalendarIcon color="teal.500" /> */}
-                    👉
-                    <Box flex="1" textAlign="left" ml="4" py="2">
-                      <Heading
-                        as="h4"
-                        sx={{
-                          fontSize: ["md", "lg"],
-                          fontWeight: "normal",
-                        }}
-                      >
-                        {`День ${index + 1} | ${locations
-                          .map((location) => location.name)
-                          .join(" - ")}`}
-                      </Heading>
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                  <AccordionPanel>
-                    <Container maxW="lg">
-                      <Text
-                        sx={{
-                          lineHeight: "taller",
-                          fontSize: ["sm", "md"],
-                        }}
-                      >
-                        {description}
-                      </Text>
-                    </Container>
-                  </AccordionPanel>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </Flex>
-        </Container>
-
-        <Box
-          id="coming-dates"
-          sx={{
-            position: "relative",
-            top: ["-20px", 0],
-          }}
-        />
-
-        <Container
-          maxW="xl"
-          centerContent
-          sx={{
-            mt: 4,
-            p: [4, 10],
-            border: "1px solid #e2e2e2",
-            borderRadius: [0, 10],
-            bg: sectionBg,
-          }}
-        >
-          <Flex sx={{ width: "100%", flexDirection: "column" }}>
-            <Heading
-              as="h3"
-              sx={{ color: "teal.500", mb: [4, 8], fontSize: ["lg", "xl"] }}
-            >
-              Даты
-            </Heading>
-            <List spacing="4">
-              {dates.map((date, index) => {
-                const dateObj = new Date(date);
-                return (
-                  <ListItem key={index} sx={{ fontSize: ["md", "lg"] }}>
-                    {`📅  ${dateObj.getDate()} ${
-                      monthsMap[dateObj.getMonth()]
-                    }`}
-                  </ListItem>
-                );
-              })}
-            </List>
-          </Flex>
-        </Container>
-
-        <Box
-          id="guides"
-          sx={{
-            position: "relative",
-            top: ["-20px", 0],
-          }}
-        />
-
-        <Container
-          maxW="xl"
-          centerContent
-          sx={{
-            mt: 4,
-            p: [4, 10],
-            border: "1px solid #e2e2e2",
-            borderRadius: [0, 10],
-            bg: sectionBg,
-          }}
-        >
-          <Flex sx={{ width: "100%", flexDirection: "column" }}>
-            <Heading
-              as="h3"
-              sx={{ color: "teal.500", mb: [4, 8], fontSize: ["lg", "xl"] }}
-            >
-              Гиды
-            </Heading>
-
-            <Grid
-              width="100%"
-              sx={{
-                gridTemplateColumns: ["1fr", null, null, "repeat(2, 1fr)"],
-              }}
-              gap={6}
-            >
-              {guides.map(
-                ({ name, age, experience, languages, photo }, index) => (
-                  <GuideCard
-                    key={index}
-                    name={name}
-                    age={age}
-                    experience={experience}
-                    languages={languages}
-                    photo={photo}
-                  />
-                )
-              )}
-            </Grid>
-          </Flex>
-        </Container>
-
-        <Container maxW="xl" centerContent sx={{ mt: "100px" }}>
+        <Container maxW="xl" centerContent sx={{ mt: "50px", mb: "20px" }}>
           Demaloo 2020
         </Container>
+
+        <Flex
+          sx={{
+            height: "65px",
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            boxShadow: "rgba(0, 0, 0, 0.28) 0px 8px 28px !important",
+            bg: sectionBg,
+            justifyContent: "space-between",
+            alignItems: "center",
+            px: 4,
+            display: ["flex", null, null, "none"],
+          }}
+        >
+          <Flex flexDir="column" justifyContent="center">
+            <Text fontSize="sm">цена за человека</Text>
+            <Text
+              fontSize={["2xl"]}
+              sx={{ textAlign: "center", fontWeight: "bold" }}
+            >
+              {price}{" "}
+              <Text as="span" fontSize="xl">
+                сом
+              </Text>
+            </Text>
+          </Flex>
+
+          <Button
+            colorScheme="teal"
+            size={buttonVariant}
+            sx={
+              {
+                // borderRadius: "full",
+              }
+            }
+            onClick={onOpen}
+          >
+            Поехали
+          </Button>
+        </Flex>
       </Box>
     </>
   );
