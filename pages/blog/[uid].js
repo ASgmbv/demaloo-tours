@@ -39,7 +39,7 @@ const Post = ({ post }) => {
                   <ArrowBackIcon />
                   <Text verticalAlign="middle" ml="5px">
                     {" "}
-                    Все статьи
+                    Блог
                   </Text>
                 </Flex>
               </ChakraLink>
@@ -62,7 +62,7 @@ const Post = ({ post }) => {
 };
 
 const SliceZone = ({ sliceZone }) => (
-  <Stack spacing="30px">
+  <>
     {sliceZone.map((slice, index) => {
       switch (slice.slice_type) {
         case "image_with_caption":
@@ -77,7 +77,7 @@ const SliceZone = ({ sliceZone }) => (
           );
       }
     })}
-  </Stack>
+  </>
 );
 
 const TextSlice = ({ slice }) => {
@@ -94,18 +94,16 @@ const ImageWithCaption = ({ slice }) => {
     : "";
 
   return (
-    <Fragment>
-      <Box>
-        <Image
-          mx="auto"
-          src={slice.primary.image.url}
-          alt={slice.primary.image.alt}
-        />
-        <Text textAlign="center" color="gray.500" fontStyle="italic">
-          {caption}
-        </Text>
-      </Box>
-    </Fragment>
+    <Box my="30px">
+      <Image
+        mx="auto"
+        src={slice.primary.image.url}
+        alt={slice.primary.image.alt}
+      />
+      <Text textAlign="center" color="gray.500" fontStyle="italic">
+        {caption}
+      </Text>
+    </Box>
   );
 };
 

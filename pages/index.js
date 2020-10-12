@@ -27,7 +27,7 @@ import { RichText } from "prismic-reactjs";
 import Link from "next/link";
 import { linkResolver, hrefResolver } from "../prismic-configuration";
 
-export default function Home({ companies, toursCount, blogPosts }) {
+export default function Home({ companies, tours, blogPosts }) {
   const { ref: heroRef, inView, entry } = useInView({
     threshold: 0.7,
     initialInView: true,
@@ -118,7 +118,7 @@ export default function Home({ companies, toursCount, blogPosts }) {
                 Сотрудничаем с более{" "}
                 <strong>{companies.length} турфирмами.</strong>
                 <br />
-                Около <strong>{toursCount} туров</strong> и экскурсий по всем
+                Около <strong>{tours.count} туров</strong> и экскурсий по всем
                 достопримечательностям Бишкека, Каракола, Нарына и т.д.
               </Text>
             </Flex>
@@ -371,12 +371,11 @@ export async function getStaticProps() {
     companies = [];
   }
 
-  let toursCount = 0;
+  let tours = null;
   try {
-    let res = await getTours({});
-    toursCount = res.count;
+    tours = await getTours({ sortBy: "dates.0" });
   } catch (error) {
-    toursCount = 0;
+    tours = null;
   }
 
   const blogPosts = await Client().query(
@@ -391,7 +390,7 @@ export async function getStaticProps() {
     props: {
       companies: JSON.parse(JSON.stringify(companies)),
       blogPosts: JSON.parse(JSON.stringify(blogPosts.results)),
-      toursCount,
+      tours: JSON.parse(JSON.stringify(tours)),
     },
     revalidate: 30,
   };

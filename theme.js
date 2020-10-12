@@ -29,7 +29,7 @@ const customTheme = extendTheme({
           fontFamily: "Comfortaa, sans-serif",
           fontSize: "18px",
           lineHeight: "32px",
-          marginBottom: "30px",
+          paddingBottom: "30px",
         },
         a: {
           textDecoration: "underline",
