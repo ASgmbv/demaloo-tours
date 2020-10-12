@@ -6,11 +6,20 @@ import {
   useColorMode,
   IconButton,
   Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuGroup,
+  MenuItem,
 } from "@chakra-ui/core";
 import LogoIcon from "../icons/Logo";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { jsx, css, keyframes } from "@emotion/core";
 import Link from "next/link";
+
+const MButton = (params) => {
+  return <IconButton icon={<SunIcon />} />;
+};
 
 const Header = React.forwardRef(({ isVisible = false, ...props }, ref) => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -91,6 +100,22 @@ const Header = React.forwardRef(({ isVisible = false, ...props }, ref) => {
             aria-label="Search database"
             icon={colorMode === "dark" ? <SunIcon /> : <MoonIcon />}
           />
+
+          {/* <Menu>
+            <MenuButton justifySelf="flex-end">
+              <Box bg="green.300" p="3">
+                <SunIcon />
+              </Box>
+            </MenuButton>
+            <MenuList>
+              <MenuGroup>
+                <MenuItem>Blog</MenuItem>
+              </MenuGroup>
+              <MenuGroup>
+                <MenuItem>Color mode</MenuItem>
+              </MenuGroup>
+            </MenuList>
+          </Menu> */}
         </Flex>
       </Container>
     </Box>

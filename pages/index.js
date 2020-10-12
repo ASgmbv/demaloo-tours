@@ -17,10 +17,11 @@ import Hero from "../components/Hero";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { partners, places } from "../utils/data";
-import { useRef, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import { getCompanies } from "../pages/api/companies/index";
+import { getTours } from "../pages/api/tours/index";
 
-export default function Home() {
+export default function Home({ companies, toursCount }) {
   const { ref: heroRef, inView, entry } = useInView({
     threshold: 0.7,
     initialInView: true,
@@ -108,9 +109,10 @@ export default function Home() {
                 О нас 🤘
               </Heading>
               <Text sx={{ textAlign: ["start", "center"], maxW: "md" }}>
-                Сотрудничаем с более <strong>13-ти турфирмами.</strong>
+                Сотрудничаем с более{" "}
+                <strong>{companies.length} турфирмами.</strong>
                 <br />
-                Около <strong>50 туров</strong> и экскурсий по всем
+                Около <strong>{toursCount} туров</strong> и экскурсий по всем
                 достопримечательностям Бишкека, Каракола, Нарына и т.д.
               </Text>
             </Flex>
@@ -169,7 +171,7 @@ export default function Home() {
           </Stack>
         </Container>
 
-        <Container as="section" maxW="xl" sx={{ my: ["50px", "100px"] }}>
+        {/* <Container as="section" maxW="xl" sx={{ my: ["50px", "100px"] }}>
           <Heading
             as="h2"
             sx={{
@@ -232,7 +234,7 @@ export default function Home() {
               </Box>
             ))}
           </Grid>
-        </Container>
+        </Container> */}
 
         <Container as="section" maxW="xl" sx={{ my: ["50px", "100px"] }}>
           <Heading
@@ -261,7 +263,7 @@ export default function Home() {
             justify="center"
             spacing="8"
           >
-            {partners.map(({ title, logo }, index) => (
+            {companies.map(({ name, logo }, index) => (
               <Flex
                 sx={{
                   flexDirection: "column",
@@ -273,7 +275,7 @@ export default function Home() {
                 <Image
                   src={logo || "./test/download.png"}
                   boxSize="95px"
-                  alt={`${title} | demaloo`}
+                  alt={`${name} | demaloo`}
                 />
                 <Text
                   sx={{
@@ -283,32 +285,57 @@ export default function Home() {
                     textAlign: "center",
                   }}
                 >
-                  {title}
+                  {name}
                 </Text>
               </Flex>
             ))}
           </Wrap>
         </Container>
+
+        {/* <pre>{JSON.stringify(tours, null, 2)}</pre> */}
+
+        {/* <Container>
+          <Heading
+            as="h2"
+            sx={{
+              fontSize: ["xl", "2xl"],
+              textAlign: "center",
+              mb: "10px",
+            }}
+          >
+            Наши партнеры
+          </Heading>
+          <Box h="100px" />
+        </Container> */}
+
         <Footer />
       </Box>
     </>
   );
 }
 
-// export async function getStaticProps(context) {
-//   const getCompanies = require("./api/companies/index").getCompanies;
-//   let companies = null;
+export async function getStaticProps() {
+  let companies = null;
 
-//   try {
-//     companies = await getCompanies();
-//   } catch (error) {
-//     companies = null;
-//   }
+  try {
+    companies = await getCompanies();
+  } catch (error) {
+    companies = [];
+  }
 
-//   return {
-//     props: {
-//       companies: JSON.parse(JSON.stringify(companies)),
-//     },
-//     revalidate: 1,
-//   };
-// }
+  let toursCount = 0;
+  try {
+    let res = await getTours({});
+    toursCount = res.count;
+  } catch (error) {
+    toursCount = 0;
+  }
+
+  return {
+    props: {
+      companies: JSON.parse(JSON.stringify(companies)),
+      toursCount,
+    },
+    revalidate: 30,
+  };
+}
