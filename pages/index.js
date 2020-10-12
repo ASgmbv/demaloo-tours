@@ -20,8 +20,14 @@ import { partners, places } from "../utils/data";
 import { useInView } from "react-intersection-observer";
 import { getCompanies } from "../pages/api/companies/index";
 import { getTours } from "../pages/api/tours/index";
+import { Client } from "../utils/prismicHelpers";
+import Prismic from "prismic-javascript";
+import BlogFirstParagraph from "../components/BlogFirstParagraph";
+import { RichText } from "prismic-reactjs";
+import Link from "next/link";
+import { linkResolver, hrefResolver } from "../prismic-configuration";
 
-export default function Home({ companies, toursCount }) {
+export default function Home({ companies, toursCount, blogPosts }) {
   const { ref: heroRef, inView, entry } = useInView({
     threshold: 0.7,
     initialInView: true,
@@ -292,9 +298,7 @@ export default function Home({ companies, toursCount }) {
           </Wrap>
         </Container>
 
-        {/* <pre>{JSON.stringify(tours, null, 2)}</pre> */}
-
-        {/* <Container>
+        <Container as="section" maxW="md" sx={{ my: ["50px", "100px"] }}>
           <Heading
             as="h2"
             sx={{
@@ -303,10 +307,54 @@ export default function Home({ companies, toursCount }) {
               mb: "10px",
             }}
           >
-            Наши партнеры
+            Наш блог
           </Heading>
-          <Box h="100px" />
-        </Container> */}
+          <Box
+            sx={{
+              width: "50px",
+              height: "4px",
+              backgroundColor: "#20C4CE",
+              mx: "auto",
+            }}
+          />
+
+          <Stack mt="50px" spacing="50px">
+            {blogPosts.map((post) => {
+              return (
+                <Link
+                  as={linkResolver(post)}
+                  href={hrefResolver(post)}
+                  passHref
+                >
+                  <a>
+                    <Stack>
+                      <Heading as="h2" fontSize={["xl", "2xl"]}>
+                        {RichText.asText(post.data.title)}
+                      </Heading>
+                      <BlogFirstParagraph
+                        sliceZone={post.data.body}
+                        textLimit="200"
+                      />
+                      <Text color="gray.400">
+                        {new Date(post.last_publication_date)
+                          .toLocaleString()
+                          .substring(0, 10)}
+                      </Text>
+                    </Stack>
+                  </a>
+                </Link>
+              );
+            })}
+          </Stack>
+
+          <Link href="/blog" passHref>
+            <ChakraLink>
+              <Text mt="50px" textAlign="center">
+                Все статьи ->
+              </Text>
+            </ChakraLink>
+          </Link>
+        </Container>
 
         <Footer />
       </Box>
@@ -331,9 +379,18 @@ export async function getStaticProps() {
     toursCount = 0;
   }
 
+  const blogPosts = await Client().query(
+    Prismic.Predicates.at("document.type", "blog_post"),
+    {
+      orderings: "[document.last_publication_date desc]",
+      pageSize: 3,
+    }
+  );
+
   return {
     props: {
       companies: JSON.parse(JSON.stringify(companies)),
+      blogPosts: JSON.parse(JSON.stringify(blogPosts.results)),
       toursCount,
     },
     revalidate: 30,

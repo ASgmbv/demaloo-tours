@@ -1,11 +1,21 @@
 import { Client } from "../../utils/prismicHelpers";
 import Prismic from "prismic-javascript";
-import { Box, Image, Text, Container, Stack } from "@chakra-ui/core";
+import {
+  Box,
+  Image,
+  Text,
+  Container,
+  Stack,
+  Flex,
+  Link as ChakraLink,
+} from "@chakra-ui/core";
 import { RichText } from "prismic-reactjs";
 import { Heading } from "@chakra-ui/core";
 import { Fragment } from "react";
 import Header from "../../components/Header";
 import Head from "next/head";
+import Link from "next/link";
+import { ArrowBackIcon } from "@chakra-ui/icons";
 
 const Post = ({ post }) => {
   if (post && post.data) {
@@ -21,7 +31,19 @@ const Post = ({ post }) => {
         <Box>
           <Header />
           {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
+
           <Container maxW="sm" mt="30px">
+            <Link href="/blog">
+              <ChakraLink>
+                <Flex my="30px" alignItems="center">
+                  <ArrowBackIcon />
+                  <Text verticalAlign="middle" ml="5px">
+                    {" "}
+                    Все статьи
+                  </Text>
+                </Flex>
+              </ChakraLink>
+            </Link>
             <Heading as="h1">{title}</Heading>
             <Text color="gray.400" mb="30px">
               {new Date(post.last_publication_date)
