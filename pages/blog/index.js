@@ -13,24 +13,30 @@ import {
 import Header from "../../components/Header";
 import Link from "next/link";
 import { linkResolver, hrefResolver } from "../../prismic-configuration";
+import Head from "next/head";
 
 const Blog = ({ posts }) => {
   return (
-    <Box>
-      <Header />
-      <Container maxW="sm">
-        <Heading as="h1" mt="30px">
-          Блог Demaloo
-        </Heading>
-        <Divider my="30px" />
-        <Stack spacing="50px">
-          {posts.map((post) => (
-            <BlogPost post={post} key={post.id} />
-          ))}
-        </Stack>
-        {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
-      </Container>
-    </Box>
+    <>
+      <Head>
+        <title>Блог Demaloo</title>
+      </Head>
+      <Box>
+        <Header />
+        <Container maxW="sm">
+          <Heading as="h1" mt="30px">
+            Блог Demaloo
+          </Heading>
+          <Divider my="30px" />
+          <Stack spacing="50px">
+            {posts.map((post) => (
+              <BlogPost post={post} key={post.id} />
+            ))}
+          </Stack>
+          {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
+        </Container>
+      </Box>
+    </>
   );
 };
 

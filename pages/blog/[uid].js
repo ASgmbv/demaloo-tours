@@ -5,6 +5,7 @@ import { RichText } from "prismic-reactjs";
 import { Heading } from "@chakra-ui/core";
 import { Fragment } from "react";
 import Header from "../../components/Header";
+import Head from "next/head";
 
 const Post = ({ post }) => {
   if (post && post.data) {
@@ -13,20 +14,25 @@ const Post = ({ post }) => {
       : "Без названия";
 
     return (
-      <Box>
-        <Header />
-        {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
-        <Container maxW="sm" mt="30px">
-          <Heading as="h1">{title}</Heading>
-          <Text color="gray.400" mb="30px">
-            {new Date(post.last_publication_date)
-              .toLocaleString()
-              .substring(0, 10)}
-          </Text>
-          <SliceZone sliceZone={post.data.body} />
-        </Container>
-        <Box height="100px" />
-      </Box>
+      <>
+        <Head>
+          <title>{title}</title>
+        </Head>
+        <Box>
+          <Header />
+          {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
+          <Container maxW="sm" mt="30px">
+            <Heading as="h1">{title}</Heading>
+            <Text color="gray.400" mb="30px">
+              {new Date(post.last_publication_date)
+                .toLocaleString()
+                .substring(0, 10)}
+            </Text>
+            <SliceZone sliceZone={post.data.body} />
+          </Container>
+          <Box height="100px" />
+        </Box>
+      </>
     );
   }
 
