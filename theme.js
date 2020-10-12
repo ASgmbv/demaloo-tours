@@ -1,7 +1,9 @@
-import { theme } from "@chakra-ui/core";
-import { merge } from "@chakra-ui/utils";
+import { extendTheme } from "@chakra-ui/core";
 
-const customTheme = merge(theme, {
+// useSystemColorMode: false,
+// initialColorMode: "light",
+
+const customTheme = extendTheme({
   fonts: {
     body: "Comfortaa, sans-serif",
     heading: "Comfortaa, sans-serif",

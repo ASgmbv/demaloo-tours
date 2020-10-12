@@ -1,9 +1,9 @@
 import "../styles/globals.css";
-import { ChakraProvider } from "@chakra-ui/core";
 import theme from "../theme";
 // import { Provider } from "next-auth/client";
 import { QueryCache, ReactQueryCacheProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query-devtools";
+import { ChakraProvider } from "@chakra-ui/core";
 
 const queryCache = new QueryCache();
 

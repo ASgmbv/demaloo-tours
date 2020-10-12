@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import { ColorModeScript } from "@chakra-ui/core";
 import PrismicScript from "../utils/prismicScript";
+import { ColorModeScript } from "@chakra-ui/core";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
