@@ -15,6 +15,7 @@ const Post = ({ post }) => {
     return (
       <Box>
         <Header />
+        {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
         <Container maxW="sm" mt="30px">
           <Heading as="h1">{title}</Heading>
           <Text color="gray.400" mb="30px">
@@ -86,7 +87,9 @@ export async function getStaticProps({
   previewData = {},
 }) {
   const { ref } = previewData;
-  const post = (await Client().getByID(params.uid, ref ? { ref } : null)) || {};
+  const post =
+    (await Client().getByUID("blog_post", params.uid, ref ? { ref } : null)) ||
+    {};
 
   return {
     props: {
@@ -105,7 +108,7 @@ export async function getStaticPaths() {
   );
 
   return {
-    paths: res.results.map((doc) => ({ params: { uid: `/blog/${doc.id}` } })),
+    paths: res.results.map((doc) => ({ params: { uid: `/blog/${doc.uid}` } })),
     fallback: true,
   };
 }
