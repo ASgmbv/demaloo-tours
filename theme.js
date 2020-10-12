@@ -1,6 +1,7 @@
-import { extendTheme } from "@chakra-ui/core";
+import { theme } from "@chakra-ui/core";
+import { merge } from "@chakra-ui/utils";
 
-extendTheme({
+const customTheme = merge(theme, {
   fonts: {
     body: "Comfortaa, sans-serif",
     heading: "Comfortaa, sans-serif",
@@ -19,4 +20,21 @@ extendTheme({
       900: "#001719",
     },
   },
+  styles: {
+    global: {
+      ".blog-content": {
+        p: {
+          fontFamily: "Comfortaa, sans-serif",
+          fontSize: "18px",
+          lineHeight: "32px",
+          marginBottom: "30px",
+        },
+        a: {
+          textDecoration: "underline",
+        },
+      },
+    },
+  },
 });
+
+export default customTheme;

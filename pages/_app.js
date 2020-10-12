@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
     // <Provider session={pageProps.session}>
 
     <ReactQueryCacheProvider queryCache={queryCache}>
-      <ChakraProvider resetCSS>
+      <ChakraProvider resetCSS theme={theme}>
         <Component {...pageProps} />
         <ReactQueryDevtools />
       </ChakraProvider>

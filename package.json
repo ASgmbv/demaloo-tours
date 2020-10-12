@@ -10,7 +10,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@chakra-ui/core": "^1.0.0-rc.3",
+    "@chakra-ui/core": "^1.0.0-rc.5",
     "@chakra-ui/icons": "^1.0.0-rc.3",
     "@emotion/core": "^10.0.35",
     "@sendgrid/mail": "^7.2.6",
