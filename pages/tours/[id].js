@@ -90,10 +90,10 @@ const Main = ({
     <>
       <Head>
         <title>{name}</title>
-        {/* <meta
+        <meta
           name="keywords"
           content="туры, экскурсии, горящие туры, турагентство ,отдых за городом, тур пакеты, туристические пакеты"
-        /> */}
+        />
       </Head>
       <Header />
       <RegModal

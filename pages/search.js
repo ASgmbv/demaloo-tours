@@ -99,7 +99,7 @@ const SearchPage = ({ tours = [] }) => {
           name="keywords"
           content="туры, экскурсии, горящие туры, турагентство ,отдых за городом, тур пакеты, туристические пакеты"
         />
-        <meta name="robots" content="noindex" />
+        {/* <meta name="robots" content="noindex" /> */}
       </Head>
       <Header />
       <Box as="main">
