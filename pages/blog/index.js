@@ -81,6 +81,7 @@ export async function getStaticProps({ preview = null, previewData = {} }) {
       posts: posts ? posts.results : [],
       preview,
     },
+    revalidate: 1,
   };
 }
 
