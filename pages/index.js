@@ -4,6 +4,7 @@ import {
   Link as ChakraLink,
   Grid,
   useColorMode,
+  Box,
 } from "@chakra-ui/react";
 import Header from "../components/Header";
 import ResultsTourCard from "../components/ResultsTourCard";
@@ -80,6 +81,7 @@ const ResultsPage = ({ tours }) => {
           })}
         </Grid>
         {/* <pre>{JSON.stringify(tours, null, 2)}</pre> */}
+        <Box h="100px"></Box>
       </Container>
     </>
   );
@@ -87,7 +89,10 @@ const ResultsPage = ({ tours }) => {
 
 export async function getStaticProps() {
   const tours = await Client().query(
-    Prismic.Predicates.at("document.type", "tour")
+    Prismic.Predicates.at("document.type", "tour"),
+    {
+      pageSize: 200,
+    }
   );
 
   return {
