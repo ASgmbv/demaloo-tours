@@ -26,7 +26,7 @@ import {
   Center,
   Link as ChakraLink,
   Grid,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { useState } from "react";
 
 // accept, multiple, required

@@ -11,7 +11,7 @@ import {
   List,
   ListItem,
   Link as ChakraLink,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import Link from "next/link";
 import LogoIcon from "../icons/Logo";
 import { FeedbackForm } from "feedback-fish";

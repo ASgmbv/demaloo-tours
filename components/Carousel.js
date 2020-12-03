@@ -6,7 +6,7 @@ import {
   Box,
   LightMode,
   DarkMode,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import SwipeableViews from "react-swipeable-views";
 import { virtualize } from "react-swipeable-views-utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";

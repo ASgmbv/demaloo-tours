@@ -7,7 +7,7 @@ import {
   useColorMode,
   Button,
   Stack,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 
 const flame = keyframes`
   from {

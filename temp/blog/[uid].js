@@ -8,16 +8,16 @@ import {
   Stack,
   Flex,
   Link as ChakraLink,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { RichText } from "prismic-reactjs";
-import { Heading } from "@chakra-ui/core";
+import { Heading } from "@chakra-ui/react";
 import { Fragment } from "react";
 import Header from "../../components/Header";
 import Head from "next/head";
 import Link from "next/link";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 
-const Post = ({ post }) => {
+const Post = ({ post, t }) => {
   if (post && post.data) {
     let title = post.data.title
       ? RichText.asText(post.data.title)
@@ -25,6 +25,7 @@ const Post = ({ post }) => {
 
     return (
       <>
+        <pre>{JSON.stringify(t, null, 2)}</pre>
         <Head>
           <title>{title}</title>
         </Head>
@@ -117,10 +118,18 @@ export async function getStaticProps({
     (await Client().getByUID("blog_post", params.uid, ref ? { ref } : null)) ||
     {};
 
+  let t = await Client().query(
+    [Prismic.Predicates.at("document.type", "tour")],
+    {
+      fetchLinks: ["organizer.organizer_name", "organizer.organizer_logo"],
+    }
+  );
+
   return {
     props: {
       preview,
       post,
+      t,
     },
     revalidate: 30,
   };

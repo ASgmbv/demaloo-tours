@@ -11,7 +11,7 @@ import {
   List,
   ListItem,
   Link as ChakraLink,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 
 import { FaWhatsapp, FaTelegram, FaPhone } from "react-icons/fa";
 

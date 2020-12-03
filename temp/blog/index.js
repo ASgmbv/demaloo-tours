@@ -10,7 +10,7 @@ import {
   Stack,
   Link as ChakraLink,
   Flex,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import Header from "../../components/Header";
 import Link from "next/link";
 import { linkResolver, hrefResolver } from "../../prismic-configuration";

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Stack, Avatar, Text, Wrap, Tag } from "@chakra-ui/core";
+import { Box, Stack, Avatar, Text, Wrap, Tag } from "@chakra-ui/react";
 import { useBreakpointValue } from "@chakra-ui/media-query";
 import { yearsRus } from "../utils/ruswords";
 

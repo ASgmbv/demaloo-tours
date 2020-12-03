@@ -11,7 +11,7 @@ import {
   Wrap,
   Link as ChakraLink,
   Skeleton,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 
 import { daysRus } from "../utils/ruswords";
 import { useState } from "react";

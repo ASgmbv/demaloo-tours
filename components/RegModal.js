@@ -13,7 +13,7 @@ import {
   Text,
   useToast,
   Checkbox,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 import { useState } from "react";

@@ -23,7 +23,8 @@ import {
   useDisclosure,
   useColorModeValue,
   Grid,
-} from "@chakra-ui/core";
+  WrapItem,
+} from "@chakra-ui/react";
 import Link from "next/link";
 
 import { useBreakpointValue } from "@chakra-ui/media-query";
@@ -37,6 +38,10 @@ import ConsModal from "../../components/ConsModal";
 import { daysRus } from "../../utils/ruswords";
 import { categoriesMap, monthsMap } from "../../utils/data";
 
+import { Client } from "../../utils/prismicHelpers";
+import Prismic from "prismic-javascript";
+
+import { RichText } from "prismic-reactjs";
 const Section = ({ children, ...props }) => {
   const sectionBg = useColorModeValue("#fff", "#1A202C");
   return (
@@ -56,16 +61,14 @@ const Section = ({ children, ...props }) => {
 };
 
 const Main = ({
-  name,
-  description,
+  name = "",
+  description = "",
   organizer,
   categories = [],
   duration = 0,
   services = [],
   whatToBring = [],
   price,
-  groupDiscounts = [],
-  guides = [],
   maxGroupCount,
   days = [],
   distance,
@@ -85,6 +88,8 @@ const Main = ({
 
   const mainBg = useColorModeValue("#FAFAFA", "#1A202C");
   const sectionBg = useColorModeValue("#fff", "#1A202C");
+
+  console.log({ name });
 
   return (
     <>
@@ -154,40 +159,45 @@ const Main = ({
               <Stack direction="column" spacing="20px">
                 <Wrap>
                   {categories.map((category, index) => (
-                    <Tag
-                      variant="solid"
-                      colorScheme="teal"
-                      key={index}
-                      size="lg"
-                    >
-                      {categoriesMap[category]}
-                    </Tag>
+                    <WrapItem key={index}>
+                      <Tag variant="solid" colorScheme="teal" size="lg">
+                        {/* {categoriesMap[category]} */}
+                        {category}
+                      </Tag>
+                    </WrapItem>
                   ))}
                   {duration === undefined ? null : (
-                    <Tag variant="solid" colorScheme="green" size="lg">
-                      {`${duration} ${daysRus(duration)}`}
-                    </Tag>
+                    <WrapItem>
+                      <Tag variant="solid" colorScheme="green" size="lg">
+                        {`${duration} ${daysRus(duration)}`}
+                      </Tag>
+                    </WrapItem>
                   )}
                   {maxGroupCount === undefined ? null : (
-                    <Tag variant="solid" colorScheme="yellow" size="lg">
-                      {`${maxGroupCount} чел`}
-                    </Tag>
+                    <WrapItem>
+                      <Tag variant="solid" colorScheme="yellow" size="lg">
+                        {`${maxGroupCount} чел`}
+                      </Tag>
+                    </WrapItem>
                   )}
                   {distance === undefined ? null : (
-                    <Tag variant="solid" colorScheme="orange" size="lg">
-                      {`${distance} км`}
-                    </Tag>
+                    <WrapItem>
+                      <Tag variant="solid" colorScheme="orange" size="lg">
+                        {`${distance} км`}
+                      </Tag>
+                    </WrapItem>
                   )}
                   {transportation === undefined ? null : (
-                    <Tag variant="solid" colorScheme="blue" size="lg">
-                      {transportation}
-                    </Tag>
+                    <WrapItem>
+                      <Tag variant="solid" colorScheme="blue" size="lg">
+                        {transportation}
+                      </Tag>
+                    </WrapItem>
                   )}
                 </Wrap>
 
                 {description === undefined ? null : (
                   <Text
-                    // fontSize={["sm", "lg"]}
                     as="p"
                     sx={{ textAlign: "start", lineHeight: "taller" }}
                   >
@@ -368,9 +378,7 @@ const Main = ({
                             fontWeight: "normal",
                           }}
                         >
-                          {`День ${index + 1} | ${locations
-                            .map((location) => location.name)
-                            .join(" - ")}`}
+                          {`День ${index + 1} | ${locations}`}
                         </Heading>
                       </Box>
                       <AccordionIcon />
@@ -426,16 +434,7 @@ const Main = ({
             </Text>
           </Flex>
 
-          <Button
-            colorScheme="teal"
-            size={buttonVariant}
-            sx={
-              {
-                // borderRadius: "full",
-              }
-            }
-            onClick={onOpen}
-          >
+          <Button colorScheme="teal" size={buttonVariant} onClick={onOpen}>
             Поехали
           </Button>
         </Flex>
@@ -455,15 +454,49 @@ export default function TourPage({ tour }) {
     return <div>Something went wrong!</div>;
   }
 
-  return <Main {...tour} />;
+  let data = tour.data;
+  let organizer = {
+    name: RichText.asText(data.organizer.data?.organizer_name),
+    logo: data.organizer.data?.organizer_logo?.url,
+  };
+
+  // return <pre>{JSON.stringify(tour, null, 2)}</pre>;
+
+  return (
+    <Main
+      name={RichText.asText(data.name)}
+      description={RichText.asText(data.description)}
+      organizer={organizer}
+      categories={data.categories.map((item) => item.category)}
+      duration={data.duration}
+      services={data.services.map((item) => RichText.asText(item.service))}
+      whatToBring={data.what_to_bring.map((item) =>
+        RichText.asText(item.item_to_bring)
+      )}
+      price={data.price}
+      maxGroupCount={data.maxgroupcount}
+      days={data.days.map((item) => ({
+        description: RichText.asText(item.day_description),
+        locations: RichText.asText(item.locations),
+      }))}
+      distance={data.distance}
+      dates={data.dates.map((item) => item.date)}
+      transportation={RichText.asText(data.transportation)}
+      activities={data.activities.map((item) => RichText.asText(item.activity))}
+      photos={data.images
+        .filter((item) => item.image.link_type === "Web")
+        .map((item) => item.image.url)}
+    />
+  );
 }
 
 export async function getStaticPaths() {
-  const getTours = require("../api/tours/index").getTours;
-  const { data } = await getTours({});
-  let paths = data.map(({ _id }) => ({ params: { id: String(_id) } }));
+  const tours = await Client().query(
+    Prismic.Predicates.at("document.type", "tour")
+  );
 
-  // pre-rendering all the individual tour pages
+  let paths = tours.results.map(({ id }) => ({ params: { id: String(id) } }));
+
   return {
     paths,
     fallback: true,
@@ -473,10 +506,11 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   let tour = null;
   try {
-    const getTour = require("../api/tours/index").getTour;
-    tour = await getTour(context?.params?.id);
+    tour = await Client().getByID(context?.params?.id, {
+      fetchLinks: ["organizer.organizer_name", "organizer.organizer_logo"],
+    });
   } catch (error) {
-    tour = null;
+    console.log({ error });
   }
 
   return {
@@ -486,6 +520,35 @@ export async function getStaticProps(context) {
     revalidate: 1,
   };
 }
+
+// export async function getStaticPaths() {
+//   const getTours = require("../api/tours/index").getTours;
+//   const { data } = await getTours({});
+//   let paths = data.map(({ _id }) => ({ params: { id: String(_id) } }));
+
+//   // pre-rendering all the individual tour pages
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// }
+
+// export async function getStaticProps(context) {
+//   let tour = null;
+//   try {
+//     const getTour = require("../api/tours/index").getTour;
+//     tour = await getTour(context?.params?.id);
+//   } catch (error) {
+//     tour = null;
+//   }
+
+//   return {
+//     props: {
+//       tour: JSON.parse(JSON.stringify(tour)),
+//     },
+//     revalidate: 1,
+//   };
+// }
 
 // TODO revalidate value
 

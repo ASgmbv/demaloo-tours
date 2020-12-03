@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/core";
+import { Text } from "@chakra-ui/react";
 import { RichText } from "prismic-reactjs";
 
 const BlogFirstParagraph = ({ sliceZone, textLimit = 300 }) => {

@@ -1,7 +1,7 @@
 import React from "react";
 
 import GuideCard from "../components/GuideCard";
-import { ChakraProvider } from "@chakra-ui/core";
+import { ChakraProvider } from "@chakra-ui/react";
 
 export default {
    title: "GuideCard",

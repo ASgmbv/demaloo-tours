@@ -20,7 +20,7 @@ import {
   MenuItem,
   Skeleton,
   SkeletonText,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import Link from "next/link";
 import TourCard from "../components/TourCard";
 import Header from "../components/Header";
