@@ -228,10 +228,7 @@ const ResultsPage = ({ tours }) => {
         >
           {filteredTours.map(({ data, id }) => {
             // latest data
-            // let date = data.dates[0].date;
-            let date;
-            let currentDate = new Date();
-            data.dates.map((d) => {});
+            let date = data.dates[0].date;
 
             let categories = data.categories.map((item) => item.category);
 
