@@ -1,17 +1,10 @@
 import {
   Heading,
   Container,
-  Link as ChakraLink,
   Grid,
   useColorMode,
   Box,
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuOptionGroup,
-  Select,
   Drawer,
   useDisclosure,
   DrawerOverlay,
@@ -26,11 +19,8 @@ import {
   WrapItem,
   Tag,
   TagLabel,
-  TagRightIcon,
   TagCloseButton,
   Flex,
-  MenuGroup,
-  MenuItemOption,
   useRadio,
   useRadioGroup,
   HStack,
@@ -41,9 +31,8 @@ import { Client } from "../utils/prismicHelpers";
 import Prismic from "prismic-javascript";
 import { RichText } from "prismic-reactjs";
 import Link from "next/link";
-import { AddIcon } from "@chakra-ui/icons";
-import FilterByCategories from "../components/FilterByCategories";
 import { useState, useRef } from "react";
+import Head from "next/head";
 
 const ctgrs = [
   "Приватный",
@@ -70,7 +59,6 @@ const ctgrs = [
 function sortByPrice(a, b) {
   let aprice = a.data.price;
   let bprice = b.data.price;
-
   if (aprice > bprice) return 1;
   if (aprice < bprice) return -1;
   return 0;
@@ -79,6 +67,7 @@ function sortByPrice(a, b) {
 function sortByDate(a, b) {
   let adate = new Date(a.data.dates[0].date);
   let bdate = new Date(b.data.dates[0].date);
+
   if (adate > bdate) return 1;
   if (adate < bdate) return -1;
   return 0;
@@ -101,6 +90,7 @@ const ResultsPage = ({ tours }) => {
   const group = getRootProps();
 
   let filteredTours = React.useMemo(() => {
+    // filter by categories
     let temp =
       selectedCategories.length !== 0
         ? tours.filter((t) => {
@@ -114,6 +104,19 @@ const ResultsPage = ({ tours }) => {
           })
         : tours;
 
+    // // filter by date
+    // temp.filter((item) => {
+    //   let currentDate = new Date()
+    //   let dates = item.data.dates;
+    //   let ok = false;
+    //   dates.forEach((d) => {
+    //     if () {
+
+    //     }
+    //   })
+    // });
+
+    // filter by preferences
     temp.sort(filterBy === options[0] ? sortByDate : sortByPrice);
 
     return temp;
@@ -121,6 +124,9 @@ const ResultsPage = ({ tours }) => {
 
   return (
     <>
+      <Head>
+        <title>Demaloo - Быстрый поиск туров по всему Кыргызстану</title>
+      </Head>
       <Header />
       <Container maxW="7xl">
         <Heading
@@ -222,7 +228,10 @@ const ResultsPage = ({ tours }) => {
         >
           {filteredTours.map(({ data, id }) => {
             // latest data
-            let date = data.dates[0].date;
+            // let date = data.dates[0].date;
+            let date;
+            let currentDate = new Date();
+            data.dates.map((d) => {});
 
             let categories = data.categories.map((item) => item.category);
 
