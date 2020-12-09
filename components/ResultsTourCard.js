@@ -96,33 +96,41 @@ const ResultsTourCard = ({
         <Heading size="md" fontWeight="bold">
           {name}
         </Heading>
-        <Text my="4" h="60px" fontSize="sm">
+        <Text my="4" h="60px" fontSize="sm" color="gray.600" fontWeight="500">
           {description}
         </Text>
-        <Stack>
+        <Stack spacing="4px">
           <Flex justifyContent="space-between">
             <Text fontWeight="bold" fontSize="sm">
               Длительность:
             </Text>
-            <Text>{duration} день</Text>
+            <Text fontWeight="500" color="gray.600">
+              {duration} день
+            </Text>
           </Flex>
           <Flex justifyContent="space-between">
             <Text fontWeight="bold" fontSize="sm">
               Участники:
             </Text>
-            <Text>{groupSize} человек</Text>
+            <Text fontWeight="500" color="gray.600">
+              {groupSize} человек
+            </Text>
           </Flex>
           <Flex justifyContent="space-between">
             <Text fontWeight="bold" fontSize="sm">
               Дистанция:
             </Text>
-            <Text>{distance} км</Text>
+            <Text fontWeight="500" color="gray.600">
+              {distance} км
+            </Text>
           </Flex>
           <Flex justifyContent="space-between">
             <Text fontWeight="bold" fontSize="sm">
               Транспорт:
             </Text>
-            <Text>{transportation}</Text>
+            <Text fontWeight="500" color="gray.600">
+              {transportation}
+            </Text>
           </Flex>
         </Stack>
         <Wrap mt="4">
