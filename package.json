@@ -16,6 +16,7 @@
     "@emotion/styled": "^11.0.0",
     "@sendgrid/mail": "^7.2.6",
     "cloudinary": "^1.23.0",
+    "downshift": "^6.0.6",
     "feedback-fish": "^0.2.3",
     "framer-motion": "^2.9.4",
     "mongodb": "^3.6.2",

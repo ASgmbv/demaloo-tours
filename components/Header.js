@@ -9,12 +9,8 @@ import {
 } from "@chakra-ui/react";
 import LogoIcon from "../icons/Logo";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { jsx, css, keyframes } from "@emotion/core";
+import { keyframes } from "@emotion/core";
 import Link from "next/link";
-
-const MButton = (params) => {
-  return <IconButton icon={<SunIcon />} />;
-};
 
 const Header = React.forwardRef(({ isVisible = false, ...props }, ref) => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -39,7 +35,7 @@ const Header = React.forwardRef(({ isVisible = false, ...props }, ref) => {
         position: "sticky",
         top: 0,
         // TODO these may lead to unexpected bugs, research
-        zIndex: 10000,
+        zIndex: 100,
         bg: colorMode === "dark" ? "#1A202C" : "white",
         // marginBottom: "-65px",
       }}

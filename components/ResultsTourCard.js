@@ -10,8 +10,9 @@ import {
   WrapItem,
   AspectRatio,
   useColorMode,
+  Img,
 } from "@chakra-ui/react";
-// import Image from "next/image";
+import NextImage from "next/image";
 import { monthsMap } from "../utils/data";
 
 const ResultsTourCard = ({
@@ -46,25 +47,16 @@ const ResultsTourCard = ({
       <Box position="relative">
         <Box sx={{ clipPath: "polygon(0 0, 100% 0%, 100% 100%, 0% 75%)" }}>
           <AspectRatio ratio={5 / 2}>
-            <Image
+            <Img
               borderTopRadius="10px"
               alt={name}
               src={image}
               w="100%"
               objectFit="cover"
+              fallbackSrc="/demaloo_bg.jpeg"
+              fallback="/demaloo_bg.jpeg"
             />
           </AspectRatio>
-          {/* <Image
-            alt={name}
-            src={image}
-            responsive="responsive"
-            style={{
-              // objectFit: "cover",
-              borderTopRadius: "10px",
-            }}
-            layout='fill'
-            objectFit='cover'
-          /> */}
         </Box>
         <Flex
           justifyContent="space-between"
@@ -75,7 +67,13 @@ const ResultsTourCard = ({
           w="100%"
           px="1rem"
         >
-          <Text as="span" border="1px solid #1D3774" borderRadius="5px" px="1">
+          <Text
+            as="span"
+            border="1px solid #1D3774"
+            borderRadius="5px"
+            px="2"
+            fontSize="sm"
+          >
             {dateStr}
           </Text>
           <Flex
@@ -88,43 +86,60 @@ const ResultsTourCard = ({
             bg="white"
             color="black"
           >
-            <Text as="span" fontWeight="bold" fontSize="xl">
+            <Text as="span" fontWeight="700" fontSize="xl">
               {price} с
             </Text>
           </Flex>
         </Flex>
       </Box>
-      <Flex w="100%" flexDir="column" p="4" mt="45px" flex="1">
+      <Flex w="100%" flexDir="column" p="4" mt="25px" flex="1">
         <Heading size="md" fontWeight="bold">
           {name}
         </Heading>
-        <Text my="4" h="120px">
+        <Text my="4" h="60px" fontSize="sm">
           {description}
         </Text>
         <Stack>
           <Flex justifyContent="space-between">
-            <Text fontWeight="bold">Длительность:</Text>
+            <Text fontWeight="bold" fontSize="sm">
+              Длительность:
+            </Text>
             <Text>{duration} день</Text>
           </Flex>
           <Flex justifyContent="space-between">
-            <Text fontWeight="bold">Количество участников:</Text>
+            <Text fontWeight="bold" fontSize="sm">
+              Участники:
+            </Text>
             <Text>{groupSize} человек</Text>
           </Flex>
           <Flex justifyContent="space-between">
-            <Text fontWeight="bold">Дистанция:</Text>
+            <Text fontWeight="bold" fontSize="sm">
+              Дистанция:
+            </Text>
             <Text>{distance} км</Text>
           </Flex>
           <Flex justifyContent="space-between">
-            <Text fontWeight="bold">Транспорт:</Text>
+            <Text fontWeight="bold" fontSize="sm">
+              Транспорт:
+            </Text>
             <Text>{transportation}</Text>
           </Flex>
         </Stack>
         <Wrap mt="4">
           {categories.map((item, index) => (
             <WrapItem key={index}>
-              <Tag variant="solid" colorScheme="teal">
+              {/* <Tag variant="solid" colorScheme="teal" size="sm">
+                {item}{item}
+              </Tag> */}
+              <Text
+                fontSize="sm"
+                color="white"
+                bg="#20C4CE"
+                borderRadius="40px"
+                px="2"
+              >
                 {item}
-              </Tag>
+              </Text>
             </WrapItem>
           ))}
         </Wrap>

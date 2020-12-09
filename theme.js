@@ -5,8 +5,8 @@ import { extendTheme } from "@chakra-ui/react";
 
 const customTheme = extendTheme({
   fonts: {
-    body: "Comfortaa, sans-serif",
-    heading: "Comfortaa, sans-serif",
+    body: "Raleway, sans-serif",
+    heading: "Raleway, sans-serif",
   },
   colors: {
     primary: {
@@ -26,7 +26,7 @@ const customTheme = extendTheme({
     global: {
       ".blog-content": {
         p: {
-          fontFamily: "Comfortaa, sans-serif",
+          fontFamily: "Raleway, sans-serif",
           fontSize: "18px",
           lineHeight: "32px",
           paddingBottom: "30px",

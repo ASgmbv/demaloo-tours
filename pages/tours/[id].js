@@ -269,7 +269,7 @@ const Main = ({
                   </Flex>
                   <Flex sx={{ flexDirection: "column", flex: 1 }}>
                     <Heading as="h4" sx={{ mb: 4, fontSize: ["md", "lg"] }}>
-                      Занятия
+                      Дополнительно
                     </Heading>
                     <List spacing="3">
                       {activities.map((item, index) => (
