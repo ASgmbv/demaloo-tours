@@ -25,7 +25,7 @@ const ResultsTourCard = ({
   distance = 0,
   transportation = "",
   categories = [],
-  image = "/demaloo_bg.jpeg",
+  image = "/winter.jpeg",
 }) => {
   const { colorMode } = useColorMode();
 

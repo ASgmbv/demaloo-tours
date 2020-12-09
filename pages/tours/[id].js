@@ -146,7 +146,7 @@ const Main = ({
           >
             <Flex sx={{ flex: 1, alignItems: "center" }}>
               <Carousel
-                photos={photos.length === 0 ? ["/batken.jpg"] : photos}
+                photos={photos.length === 0 ? ["/winter.jpeg"] : photos}
                 name={name}
               />
             </Flex>
@@ -160,7 +160,7 @@ const Main = ({
                 <Wrap>
                   {categories.map((category, index) => (
                     <WrapItem key={index}>
-                      <Tag variant="solid" colorScheme="teal" size="lg">
+                      <Tag variant="solid" colorScheme="teal">
                         {/* {categoriesMap[category]} */}
                         {category}
                       </Tag>
@@ -168,28 +168,28 @@ const Main = ({
                   ))}
                   {duration === undefined ? null : (
                     <WrapItem>
-                      <Tag variant="solid" colorScheme="green" size="lg">
+                      <Tag variant="solid" colorScheme="green">
                         {`${duration} ${daysRus(duration)}`}
                       </Tag>
                     </WrapItem>
                   )}
                   {maxGroupCount === undefined ? null : (
                     <WrapItem>
-                      <Tag variant="solid" colorScheme="yellow" size="lg">
+                      <Tag variant="solid" colorScheme="yellow">
                         {`${maxGroupCount} чел`}
                       </Tag>
                     </WrapItem>
                   )}
                   {distance === undefined ? null : (
                     <WrapItem>
-                      <Tag variant="solid" colorScheme="orange" size="lg">
+                      <Tag variant="solid" colorScheme="orange">
                         {`${distance} км`}
                       </Tag>
                     </WrapItem>
                   )}
                   {transportation === undefined ? null : (
                     <WrapItem>
-                      <Tag variant="solid" colorScheme="blue" size="lg">
+                      <Tag variant="solid" colorScheme="blue">
                         {transportation}
                       </Tag>
                     </WrapItem>

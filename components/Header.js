@@ -40,7 +40,7 @@ const Header = React.forwardRef(({ isVisible = false, ...props }, ref) => {
         // marginBottom: "-65px",
       }}
     >
-      <Container maxW="lg">
+      <Container maxW="xl">
         <Flex
           sx={{
             d: "grid",
