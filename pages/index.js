@@ -122,7 +122,7 @@ const ResultsPage = ({ tours }) => {
   return (
     <>
       <Header />
-      <Container maxW="xl">
+      <Container maxW="7xl">
         <Heading
           as="span"
           color={colorMode === "light" ? "#444547" : "gray.50"}

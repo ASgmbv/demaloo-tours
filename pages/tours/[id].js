@@ -116,7 +116,7 @@ const Main = ({
         }}
       >
         <Container
-          maxW="xl"
+          maxW="7xl"
           centerContent
           sx={{
             p: [4, 6],
@@ -131,7 +131,7 @@ const Main = ({
         </Container>
 
         <Container
-          maxW="xl"
+          maxW="7xl"
           sx={{
             p: [4, 10],
             mt: 4,
@@ -235,7 +235,7 @@ const Main = ({
           </Stack>
         </Container>
 
-        <Container maxW="xl" mt="4" p="0">
+        <Container maxW="7xl" mt="4" p="0">
           <Grid templateColumns={["1fr", null, null, "1fr auto"]} gap="4">
             <Section>
               <Stack spacing={["4", "8"]}>
@@ -402,7 +402,7 @@ const Main = ({
           </Grid>
         </Container>
 
-        <Container maxW="xl" centerContent sx={{ mt: "50px", mb: "20px" }}>
+        <Container maxW="7xl" centerContent sx={{ mt: "50px", mb: "20px" }}>
           Demaloo 2020
         </Container>
 
