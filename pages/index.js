@@ -124,7 +124,7 @@ const ResultsPage = ({ tours }) => {
       <Flex
         w="full"
         backgroundColor="rgba(0, 0, 0, 0.5)"
-        backgroundImage="url('/heroes/hero1.jpg')"
+        backgroundImage="url('/heroes/herofinal.jpg')"
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
         backgroundSize="cover"

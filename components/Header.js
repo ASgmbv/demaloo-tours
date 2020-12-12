@@ -6,6 +6,7 @@ import {
   useColorMode,
   IconButton,
   Button,
+  Text,
 } from "@chakra-ui/react";
 import LogoIcon from "../icons/Logo";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
@@ -40,15 +41,12 @@ const Header = React.forwardRef(({ isVisible = false, ...props }, ref) => {
         // marginBottom: "-65px",
       }}
     >
-      <Container maxW="xl">
+      <Container maxW="7xl">
         <Flex
           sx={{
-            d: "grid",
             width: "100%",
             height: "64px",
-            gridTemplateColumns: isVisible
-              ? "repeat(3, 1fr)"
-              : "repeat(2, 1fr)",
+            justifyContent: "space-between",
             alignItems: "center",
           }}
         >
@@ -60,26 +58,15 @@ const Header = React.forwardRef(({ isVisible = false, ...props }, ref) => {
             />
           </ChakraLink>
 
-          {isVisible ? (
-            <Link href="/search" passHref>
-              <Button
-                as="a"
-                colorScheme="orange"
-                size="lg"
-                borderRadius="10px"
-                width="100%"
-                border="2px solid #fff"
-                sx={{
-                  animation: `${button}`,
-                  animationDuration: `${0.1}s`,
-                  animationTimingFunction: "linear",
-                  animationFillMode: "forwards",
-                }}
-              >
-                Все туры
-              </Button>
-            </Link>
-          ) : null}
+          <Text
+            flex="1"
+            textAlign="end"
+            px="3"
+            href="https://wa.me/+996500100901?text=Здравствуйте"
+            as="a"
+          >
+            0500 100 901 (WhatsApp)
+          </Text>
 
           <IconButton
             sx={{
