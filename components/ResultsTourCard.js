@@ -44,6 +44,9 @@ const ResultsTourCard = ({
       flexDir="column"
       border="1px solid"
       borderColor={colorMode === "light" ? "gray.200" : "gray.50"}
+      _hover={{
+        boxShadow: "2xl",
+      }}
     >
       <Box position="relative">
         <Box sx={{ clipPath: "polygon(0 0, 100% 0%, 100% 100%, 0% 75%)" }}>
@@ -94,10 +97,10 @@ const ResultsTourCard = ({
         </Flex>
       </Box>
       <Flex w="100%" flexDir="column" p="4" mt="25px" flex="1">
-        <Heading size="md" fontWeight="bold">
+        <Heading size="md" fontWeight="bold" mb="4" h="50px">
           {name}
         </Heading>
-        <Text
+        {/* <Text
           my="4"
           h="80px"
           fontSize="sm"
@@ -105,7 +108,7 @@ const ResultsTourCard = ({
           color={colorMode === "light" ? "gray.600" : "gray.200"}
         >
           {description}
-        </Text>
+        </Text> */}
         <Stack spacing="4px">
           <Flex justifyContent="space-between">
             <Text fontWeight="bold" fontSize="sm">

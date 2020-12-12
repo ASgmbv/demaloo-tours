@@ -21,14 +21,6 @@ const flame = keyframes`
 const Hero = React.forwardRef(({ ...props }, ref) => {
   const { colorMode } = useColorMode();
 
-  // const heroLight = useBreakpointValue({
-  //   base: "/heroes/herolight_hqxmj7_c_scale,w_687.png", // 0
-  //   sm: "/heroes/herolight_hqxmj7_c_scale,w_946.png", // 750
-  //   md: "/heroes/herolight_hqxmj7_c_scale,w_1174.png", // 960
-  //   lg: "/heroes/herolight_hqxmj7_c_scale,w_1277.png", // 1200
-  //   xl: "/heroes/herolight_hqxmj7_c_scale,w_1400.png",
-  // });
-
   return (
     <Box
       ref={ref}

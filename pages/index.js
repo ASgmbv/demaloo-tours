@@ -37,6 +37,7 @@ import { RichText } from "prismic-reactjs";
 import Link from "next/link";
 import { useState, useRef } from "react";
 import Head from "next/head";
+import Hero from "../components/Hero";
 
 const ctgrs = [
   "Приватный",
@@ -120,6 +121,60 @@ const ResultsPage = ({ tours }) => {
         <title>Demaloo - Быстрый поиск туров по всему Кыргызстану</title>
       </Head>
       <Header />
+      <Flex
+        w="full"
+        backgroundColor="rgba(0, 0, 0, 0.5)"
+        backgroundImage="url('/heroes/hero1.jpg')"
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
+        backgroundSize="cover"
+        height={["350px", "400px", "450px"]}
+        position="relative"
+      >
+        <Flex
+          position="absolute"
+          sx={{
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            alignItems: "flex-start",
+            justifyContent: "center",
+            flexDirection: "column",
+            bg: [
+              "rgba(1,34,102,0.2)",
+              null,
+              "linear-gradient(90deg, rgba(1,34,102,0.5956757703081232) 0%, rgba(0,0,0,0) 58%)",
+            ],
+            p: [0, null, "70px"],
+          }}
+        >
+          <Heading
+            fontSize={["3xl", null, "5xl"]}
+            textAlign={["center", null, "start"]}
+            w="100%"
+            as="h1"
+            color="white"
+            mb="4"
+          >
+            Быстрый поиск туров <br />
+            по всему Кыргызстану
+          </Heading>
+          <Text
+            color="white"
+            w="100%"
+            textAlign={["center", null, "start"]}
+            fontWeight="bold"
+            fontSize={["md", null, "xl"]}
+          >
+            Те же цены что и у турагенств.
+            <br />
+            Сотрудничаем с более 25 турфирмами
+            <br />
+            Приятного отдыха!
+          </Text>
+        </Flex>
+      </Flex>
       <Container maxW="7xl">
         <Heading
           as="span"
