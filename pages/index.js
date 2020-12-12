@@ -15,6 +15,7 @@ import {
   VStack,
   Checkbox,
   CheckboxGroup,
+  Text,
   Wrap,
   WrapItem,
   Tag,
@@ -24,6 +25,9 @@ import {
   useRadio,
   useRadioGroup,
   HStack,
+  RadioGroup,
+  Stack,
+  Radio,
 } from "@chakra-ui/react";
 import Header from "../components/Header";
 import ResultsTourCard from "../components/ResultsTourCard";
@@ -90,7 +94,7 @@ const ResultsPage = ({ tours }) => {
   const group = getRootProps();
 
   let filteredTours = React.useMemo(() => {
-    // filter by categories
+    // categories
     let temp =
       selectedCategories.length !== 0
         ? tours.filter((t) => {
@@ -104,20 +108,8 @@ const ResultsPage = ({ tours }) => {
           })
         : tours;
 
-    // // filter by date
-    // temp.filter((item) => {
-    //   let currentDate = new Date()
-    //   let dates = item.data.dates;
-    //   let ok = false;
-    //   dates.forEach((d) => {
-    //     if () {
-
-    //     }
-    //   })
-    // });
-
-    // filter by preferences
-    temp.sort(filterBy === options[0] ? sortByDate : sortByPrice);
+    // filters
+    temp = temp.sort(filterBy === options[0] ? sortByDate : sortByPrice);
 
     return temp;
   }, [tours, selectedCategories, filterBy]);
@@ -141,7 +133,7 @@ const ResultsPage = ({ tours }) => {
         </Heading>
 
         <Box w="full" mb="6">
-          <Flex justifyContent="space-between">
+          <Flex justifyContent="space-between" d={["flex", null, "none"]}>
             <Button ref={btnRef} onClick={onOpen}>
               Фильтровать
             </Button>
@@ -198,7 +190,7 @@ const ResultsPage = ({ tours }) => {
             </DrawerOverlay>
           </Drawer>
 
-          <Wrap pt="6">
+          <Wrap pt="6" d={["flex", null, "none"]}>
             {selectedCategories.map((item, index) => (
               <WrapItem key={index}>
                 <Tag colorScheme="green">
@@ -217,57 +209,118 @@ const ResultsPage = ({ tours }) => {
           </Wrap>
         </Box>
 
-        <Grid
-          templateColumns={[
-            "repeat(1, 1fr)",
-            null,
-            "repeat(2, 1fr)",
-            "repeat(3, 1fr)",
-          ]}
-          gap={10}
-        >
-          {filteredTours.map(({ data, id }) => {
-            // latest data
-            let date = data.dates[0].date;
+        <Flex>
+          <Box
+            // bg="gray.50"
+            bg={colorMode === "light" ? "gray.50" : "gray.700"}
+            w="250px"
+            mr="6"
+            py="4"
+            pl="4"
+            d={["none", null, "block"]}
+          >
+            {/* <Heading size="md">Фильтры</Heading> */}
+            <Heading size="sm" mb="6">
+              Сортировать
+            </Heading>
+            <RadioGroup
+              value={filterBy}
+              mb="6"
+              onChange={(e) => {
+                setFilterBy(e);
+                console.log(e);
+              }}
+            >
+              <Stack spacing="3">
+                <Radio value={options[0]}>{options[0]}</Radio>
+                <Radio value={options[1]}>{options[1]}</Radio>
+              </Stack>
+            </RadioGroup>
 
-            let categories = data.categories.map((item) => item.category);
+            <Heading size="sm" mb="6">
+              Категории
+            </Heading>
+            <CheckboxGroup
+              onChange={(items) => {
+                setSelectedCategories([...items]);
+              }}
+              value={selectedCategories}
+            >
+              <VStack align="flex-start" spacing="3">
+                {ctgrs.map((item, index) => (
+                  <Checkbox value={item} key={index}>
+                    {item}
+                  </Checkbox>
+                ))}
+              </VStack>
+            </CheckboxGroup>
+          </Box>
 
-            // selected categories
+          {filteredTours.length === 0 ? (
+            <Flex flex="1">
+              <Text textAlign="center" w="100%" my="10">
+                Не удалось найти подходящие туры
+              </Text>
+            </Flex>
+          ) : (
+            <Grid
+              flex="1"
+              templateColumns={[
+                "repeat(1, 1fr)",
+                null,
+                "repeat(2, 1fr)",
+                "repeat(3, 1fr)",
+              ]}
+              gap={4}
+            >
+              {filteredTours.map(({ data, id }) => {
+                // latest data
+                let date = data.dates[0].date;
 
-            let DESC_LIMIT = 130;
-            let description = RichText.asText(data.description);
-            let limited = description.substring(0, DESC_LIMIT);
-            if (description.length > DESC_LIMIT) {
-              limited = `${limited.substring(0, limited.lastIndexOf(" "))}...`;
-            }
+                let categories = data.categories.map((item) => item.category);
 
-            let image;
-            let dataImage = data.images[0]?.image;
-            if (dataImage?.link_type === "Web") {
-              image = dataImage.url;
-            }
+                // selected categories
 
-            return (
-              <Link href={"/tours/" + id} key={id} passHref>
-                <a>
-                  <ResultsTourCard
-                    key={id}
-                    name={RichText.asText(data.name)}
-                    description={limited}
-                    price={data.price}
-                    duration={data.duration}
-                    groupSize={data.maxgroupcount}
-                    transportation={RichText.asText(data.transportation)}
-                    categories={categories}
-                    distance={data.distance}
-                    date={date}
-                    image={image}
-                  />
-                </a>
-              </Link>
-            );
-          })}
-        </Grid>
+                let DESC_LIMIT = 130;
+                let description = RichText.asText(data.description);
+                let limited = description.substring(0, DESC_LIMIT);
+                if (description.length > DESC_LIMIT) {
+                  limited = `${limited.substring(
+                    0,
+                    limited.lastIndexOf(" ")
+                  )}...`;
+                }
+
+                let image;
+                let dataImage = data.images[0]?.image;
+                if (dataImage?.link_type === "Web") {
+                  image = dataImage.url;
+                }
+
+                return (
+                  <Link href={"/tours/" + id} key={id} passHref>
+                    <a>
+                      <ResultsTourCard
+                        key={id}
+                        name={RichText.asText(data.name)}
+                        description={limited}
+                        price={data.price}
+                        duration={data.duration}
+                        groupSize={data.maxgroupcount}
+                        transportation={RichText.asText(data.transportation)}
+                        categories={categories}
+                        distance={data.distance}
+                        date={date}
+                        image={image}
+                      />
+                    </a>
+                  </Link>
+                );
+              })}
+            </Grid>
+          )}
+        </Flex>
+
         {/* <pre>{JSON.stringify(tours, null, 2)}</pre> */}
         <Box h="100px"></Box>
       </Container>
@@ -300,8 +353,7 @@ function RadioCard(props) {
         _focus={{
           boxShadow: "outline",
         }}
-        px={2}
-        py={2}
+        p="1"
       >
         {props.children}
       </Box>

@@ -39,7 +39,8 @@ const ResultsTourCard = ({
       position="relative"
       w="100%"
       h="100%"
-      boxShadow="6px 6px 6px #CEC1C1"
+      // boxShadow="6px 6px 6px #CEC1C1"
+      boxShadow="xl"
       flexDir="column"
       border="1px solid"
       borderColor={colorMode === "light" ? "gray.200" : "gray.50"}
@@ -77,8 +78,8 @@ const ResultsTourCard = ({
             {dateStr}
           </Text>
           <Flex
-            h="90px"
-            w="90px"
+            h="85px"
+            w="85px"
             border="5px solid #4BBADE"
             borderRadius="50%"
             alignItems="center"
@@ -96,7 +97,13 @@ const ResultsTourCard = ({
         <Heading size="md" fontWeight="bold">
           {name}
         </Heading>
-        <Text my="4" h="60px" fontSize="sm" color="gray.600" fontWeight="500">
+        <Text
+          my="4"
+          h="80px"
+          fontSize="sm"
+          fontWeight="500"
+          color={colorMode === "light" ? "gray.600" : "gray.200"}
+        >
           {description}
         </Text>
         <Stack spacing="4px">
@@ -104,7 +111,10 @@ const ResultsTourCard = ({
             <Text fontWeight="bold" fontSize="sm">
               Длительность:
             </Text>
-            <Text fontWeight="500" color="gray.600">
+            <Text
+              fontWeight="500"
+              color={colorMode === "light" ? "gray.600" : "gray.200"}
+            >
               {duration} день
             </Text>
           </Flex>
@@ -112,7 +122,10 @@ const ResultsTourCard = ({
             <Text fontWeight="bold" fontSize="sm">
               Участники:
             </Text>
-            <Text fontWeight="500" color="gray.600">
+            <Text
+              fontWeight="500"
+              color={colorMode === "light" ? "gray.600" : "gray.200"}
+            >
               {groupSize} человек
             </Text>
           </Flex>
@@ -120,7 +133,10 @@ const ResultsTourCard = ({
             <Text fontWeight="bold" fontSize="sm">
               Дистанция:
             </Text>
-            <Text fontWeight="500" color="gray.600">
+            <Text
+              fontWeight="500"
+              color={colorMode === "light" ? "gray.600" : "gray.200"}
+            >
               {distance} км
             </Text>
           </Flex>
@@ -128,7 +144,10 @@ const ResultsTourCard = ({
             <Text fontWeight="bold" fontSize="sm">
               Транспорт:
             </Text>
-            <Text fontWeight="500" color="gray.600">
+            <Text
+              fontWeight="500"
+              color={colorMode === "light" ? "gray.600" : "gray.200"}
+            >
               {transportation}
             </Text>
           </Flex>
@@ -136,9 +155,6 @@ const ResultsTourCard = ({
         <Wrap mt="4">
           {categories.map((item, index) => (
             <WrapItem key={index}>
-              {/* <Tag variant="solid" colorScheme="teal" size="sm">
-                {item}{item}
-              </Tag> */}
               <Text
                 fontSize="sm"
                 color="white"
