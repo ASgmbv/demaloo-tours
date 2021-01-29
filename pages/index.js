@@ -146,7 +146,7 @@ const ResultsPage = ({ tours }) => {
               null,
               "linear-gradient(90deg, rgba(1,34,102,0.5956757703081232) 0%, rgba(0,0,0,0) 58%)",
             ],
-            p: [0, null, "70px"],
+            px: [0, null, "70px"],
           }}
         >
           <Heading
@@ -160,12 +160,13 @@ const ResultsPage = ({ tours }) => {
             Быстрый поиск туров <br />
             по всему Кыргызстану
           </Heading>
-          <Text
+          {/* <Text
             color="white"
             w="100%"
             textAlign={["center", null, "start"]}
             fontWeight="bold"
             fontSize={["md", null, "xl"]}
+            mb="4"
           >
             Те же цены что и у турагенств.
             <br />
@@ -173,6 +174,7 @@ const ResultsPage = ({ tours }) => {
             <br />
             Приятного отдыха!
           </Text>
+          <Button>Отзывы</Button> */}
         </Flex>
       </Flex>
       <Container maxW="7xl">
@@ -266,7 +268,6 @@ const ResultsPage = ({ tours }) => {
 
         <Flex>
           <Box
-            // bg="gray.50"
             bg={colorMode === "light" ? "gray.50" : "gray.700"}
             w="250px"
             mr="6"
@@ -328,7 +329,7 @@ const ResultsPage = ({ tours }) => {
               ]}
               gap={4}
             >
-              {filteredTours.map(({ data, id }) => {
+              {filteredTours.map(({ data, id }, index) => {
                 // latest data
                 let date = data.dates[0].date;
 
@@ -351,6 +352,10 @@ const ResultsPage = ({ tours }) => {
                 if (dataImage?.link_type === "Web") {
                   image = dataImage.url;
                 }
+
+                // if (index != 0) {
+                //   return null;
+                // }
 
                 return (
                   <Link href={"/tours/" + id} key={id} passHref>
@@ -375,8 +380,6 @@ const ResultsPage = ({ tours }) => {
             </Grid>
           )}
         </Flex>
-
-        {/* <pre>{JSON.stringify(tours, null, 2)}</pre> */}
         <Box h="100px"></Box>
       </Container>
     </>
