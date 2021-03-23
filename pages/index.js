@@ -38,6 +38,7 @@ import Link from "next/link";
 import { useState, useRef } from "react";
 import Head from "next/head";
 import Hero from "../components/Hero";
+import Footer from "../components/Footer";
 
 const ctgrs = [
   "Приватный",
@@ -381,6 +382,7 @@ const ResultsPage = ({ tours }) => {
           )}
         </Flex>
         <Box h="100px"></Box>
+        <Footer />
       </Container>
     </>
   );

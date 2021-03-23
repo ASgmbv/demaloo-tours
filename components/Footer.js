@@ -32,7 +32,7 @@ const FeedbackFishButton = (props) => {
 
 const Footer = () => {
   return (
-    <Box as="footer" sx={{ width: "100%", bg: "#20C4CE" }}>
+    <Box as="footer" sx={{ width: "100%", bg: "blue.600" }}>
       <Container
         maxW="xl"
         sx={{
@@ -48,21 +48,13 @@ const Footer = () => {
             flexDirection: ["column", "row"],
           }}
         >
-          {/* <Image
-            src="/logo/logo_white.png"
-            objectFit="contain"
-            width={["100px", "130px"]}
-            mb={["20px", 0]}
-            alt="demaloo logo"
-          /> */}
-
           <LogoIcon
             width={["100px", "130px"]}
             height={["40px"]}
             color={"#fff"}
             mb={["20px", 0]}
           />
-
+          {/* 
           <Button
             as="a"
             target="_blank"
@@ -74,12 +66,12 @@ const Footer = () => {
             borderRadius="10px"
           >
             СОТРУДНИЧЕСТВО
-          </Button>
+          </Button> */}
 
-          <FeedbackForm
+          {/* <FeedbackForm
             projectId={"9c2cf5932ba675"}
             triggerComponent={FeedbackFishButton}
-          />
+          /> */}
         </Flex>
         <Flex
           sx={{
@@ -127,13 +119,21 @@ const Footer = () => {
             <Text sx={{ color: "white", fontSize: "lg" }}>СОЦИАЛЬНЫЕ СЕТИ</Text>
             <List spacing="5px">
               <ListItem>
-                <ChakraLink href="/" target="_blank" color="white">
-                  FACEBOOK
+                <ChakraLink
+                  href="https://docs.google.com/document/d/1p4FYzcMEnk2GlJRbZNEk85sUJTK9m7_w2mEak_6ILXk/edit?usp=sharing"
+                  isExternal
+                  color="white"
+                >
+                  Публичная оферта
                 </ChakraLink>
               </ListItem>
               <ListItem>
-                <ChakraLink href="/" target="_blank" color="white">
-                  TWITTER
+                <ChakraLink
+                  href="https://docs.google.com/document/d/1CGGiSYGTTu-gc7DktnD1WXW2tn-F-_tAH6A4KsptmmI/edit?usp=sharing"
+                  isExternal
+                  color="white"
+                >
+                  Политика конфиденциальности
                 </ChakraLink>
               </ListItem>
             </List>
